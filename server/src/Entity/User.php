@@ -33,10 +33,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
-    #[ORM\Column(length: 255, unique: true)]
+    #[ORM\Column(length: 150, unique: true)]
     private ?string $username = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 200)]
     private ?string $profile_picture = null;
 
     #[ORM\Column]
@@ -60,8 +60,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: UserFollows::class, mappedBy: 'follower', orphanRemoval: true)]
     private Collection $userFollows;
 
-    #[ORM\Column(length: 255)]
-    private ?string $display_user = null;
+    #[ORM\Column(length: 150)]
+    private ?string $display_username = null;
 
     public function __construct()
     {
@@ -277,14 +277,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getDisplayUser(): ?string
+    public function getDisplayUsername(): ?string
     {
-        return $this->display_user;
+        return $this->display_username;
     }
 
-    public function setDisplayUser(string $display_user): static
+    public function setDisplayUser(string $display_username): static
     {
-        $this->display_user = $display_user;
+        $this->display_username = $display_username;
 
         return $this;
     }

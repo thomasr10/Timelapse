@@ -5,7 +5,7 @@ namespace App\Entity;
 use App\Repository\MediaRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\UniqueConstraint(fileds: ['tmdb_id', 'type'])]
+#[ORM\UniqueConstraint(fields: ['tmdb_id', 'type'])]
 #[ORM\Entity(repositoryClass: MediaRepository::class)]
 class Media
 {
@@ -17,7 +17,7 @@ class Media
     #[ORM\Column]
     private ?int $tmdb_id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 150)]
     private ?string $type = null;
 
     #[ORM\Column]
