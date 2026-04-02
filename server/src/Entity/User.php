@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
@@ -19,6 +20,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[ORM\Column(length: 180)]
+    #[Assert\NotBlank]
+    #[Assert\Email(message:'Veuillez saisir une adresse email valide')]
     private ?string $email = null;
 
     /**
@@ -31,8 +34,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string The hashed password
      */
     #[ORM\Column]
+    #[Assert\NotBlank]
     private ?string $password = null;
 
+    #[Assert\NotBlank]
+    #[Assert\Regex(
+        pattern: '/^[a-z0-9_-]{3,15}$/',
+        message: 'Votre nom d\'utilisateur doit contenir entre 3 et 15 caractères et ne peut contenir de caractère spécial',
+    )]
     #[ORM\Column(length: 150, unique: true)]
     private ?string $username = null;
 
@@ -60,6 +69,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: UserFollows::class, mappedBy: 'follower', orphanRemoval: true)]
     private Collection $userFollows;
 
+    #[Assert\NotBlank]
+    #[Assert\Length(
+        min: 1,
+        max: 15,
+        minMessage: 'Votre nom d\'utilisateur doit contenir au moins 1 caractères',
+        maxMessage: 'Votre nom d\'utilisateur ne doit pas dépasser {{ limit }} caractères'
+    )]
     #[ORM\Column(length: 150)]
     private ?string $display_username = null;
 
@@ -289,7 +305,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->display_username;
     }
 
-    public function setDisplayUser(string $display_username): static
+    public function setDisplayUsername(string $display_username): static
     {
         $this->display_username = $display_username;
 
