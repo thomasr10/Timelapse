@@ -1,0 +1,49 @@
+// Colors
+$main-color: #0A0F1F;
+$secondary-color: #111726;
+$accent-color: #D7263D;
+$main-text-color: #E6ECF5;
+$secondary-text-color: #A9B4C6;
+$border-color: #262522;
+
+// Fonts
+$inter-regular: 'Inter-Regular';
+$sora-bold: 'Sora-Bold';
+$sora-semiBold: 'Sora-SemiBold';
+
+// Font size
+$font-size-xxl: 3rem;
+$font-size-xl: 1.5rem;
+$font-size-large: 1.25rem;
+$font-size-medium: 1rem;
+$font-size-small: .88rem;
+$font-size-xs: .75rem;
+
+// Screen width
+$mobile-width: 340px;
+$large-mobile-width: 576px;
+$tablet-width: 768px;
+$large-tablet-width: 992px;
+$desktop-width: 1200px;
+$large-desktop-width: 1440px;
+
+// Mixins responsive (mobile-first)
+@mixin large-mobile {
+  @media (min-width: #{$large-mobile-width}) { @content; }
+}
+
+@mixin tablet {
+  @media (min-width: #{$tablet-width}) { @content; }
+}
+
+@mixin large-tablet {
+  @media (min-width: #{$large-tablet-width}) { @content; }
+}
+
+@mixin desktop {
+  @media (min-width: #{$desktop-width}) { @content; }
+}
+
+@mixin large-desktop {
+  @media (min-width: #{$large-desktop-width}) { @content; }
+}
