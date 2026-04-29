@@ -69,6 +69,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: UserFollows::class, mappedBy: 'follower', orphanRemoval: true)]
     private Collection $userFollows;
 
+    /**
+     * @var Collection<int, UserFollows>
+     */
+    #[ORM\OneToMany(targetEntity: UserFollows::class, mappedBy: 'following', orphanRemoval: true)]
+    private Collection $following;
+
     #[Assert\NotBlank]
     #[Assert\Length(
         min: 1,
