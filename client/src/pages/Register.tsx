@@ -3,9 +3,9 @@ import type { FormikHelpers } from 'formik';
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toFormikValidationSchema } from "zod-formik-adapter";
-import { registerUser } from "../../api/auth";
-import type { RegisterFormType } from "../../types/auth";
-import { registerSchema } from "../../types/auth";
+import { registerUser } from "../api/auth";
+import type { RegisterFormType } from "../types/auth";
+import { registerSchema } from "../types/auth";
 
 const initialValues: RegisterFormType = {
     username: "",
@@ -24,10 +24,10 @@ export default function Register() {
 
         try {
 
-            const { response, data} = await registerUser(values);
+            const { response, data } = await registerUser(values);
 
             if (!response.ok) {
-                if(data.field) {
+                if (data.field) {
                     setErrors({ [data.field]: data.message })
                 } else {
                     setError(data.message);
@@ -36,7 +36,7 @@ export default function Register() {
             } else {
                 navigate('/login');
             }
-            
+
         } catch (e) {
             setError("Une erreur réseau est survenue, veuillez réessayer.");
             console.error(e);
@@ -47,13 +47,6 @@ export default function Register() {
         <>
             <h1>Bienvenue sur Timelapse</h1>
             <main>
-                {
-                    error && (
-                        <div className="form-error-message">
-                            <p>{error}</p>
-                        </div>
-                    )
-                }
                 <Formik<RegisterFormType>
                     initialValues={initialValues}
                     validationSchema={toFormikValidationSchema(registerSchema)}
@@ -63,6 +56,13 @@ export default function Register() {
                 >
                     {({ isSubmitting }) => (
                         <Form>
+                            {
+                                error && (
+                                    <div className="form-error-message">
+                                        <p>{error}</p>
+                                    </div>
+                                )
+                            }
                             <div className="input-container">
                                 <label htmlFor="username">Nom d'utilisateur</label>
                                 <Field
