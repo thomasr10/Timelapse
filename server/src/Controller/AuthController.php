@@ -20,38 +20,42 @@ final class AuthController extends AbstractController
 
         if(!$data) {
             return $this->json([
-                'success' => false,
-                'error' => 'Tous les champs sont nécessaires'
+                'message' => 'Tous les champs sont nécessaires'
             ], 400);
         }
 
         if (!isset($data['username'], $data['email'], $data['password'])) {
             return $this->json([
-                'success' => false,
-                'error' => 'Tous les champs sont nécessaires'
+                'message' => 'Tous les champs sont nécessaires'
             ], 400);            
         }
 
         try {
             $this->authService->register($data);
         } catch (UniqueConstraintViolationException $e) {
+            
+            if(str_contains($e->getMessage(), 'user.UNIQ_IDENTIFIER_EMAIL')) {
 
-            $message = str_contains($e->getMessage(), 'user.UNIQ_IDENTIFIER_EMAIL') ? 'Adresse email déjà utilisé' : 'Nom d\'utilisateur déjà utilisé';
+                return $this->json([
+                    'field' => 'email',
+                    'message' => 'Adresse email déjà utilisée'
+                ], 400);
 
-            return $this->json([
-                'success' => false,
-                'message' => $message
-            ], 409);
+            } else {
+
+                return $this->json([
+                    'field' => 'username',
+                    'message' => 'Nom d\'utilisateur déjà utilisée'
+                ], 400);
+            }
 
         } catch(\InvalidArgumentException $e) {
             return $this->json([
-                'success' => false,
                 'message' => $e->getMessage()
-            ]);
+            ], 400);
         }
 
         return $this->json([
-            'success' => true,
             'message' => 'Utilisateur créé avec succès'
         ]);
     }
