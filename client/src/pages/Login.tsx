@@ -4,6 +4,7 @@ import { loginSchema } from "../types/auth";
 import type { LoginFormType } from "../types/auth";
 import { login } from "../api/auth";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const initialValues: LoginFormType = {
     email: "",
@@ -12,7 +13,8 @@ const initialValues: LoginFormType = {
 
 export default function Login() {
 
-    const [error, setError] = useState< string | null >(null)
+    const [error, setError] = useState< string | null >(null);
+    const navigate = useNavigate();
 
     const onSubmit = async (values: LoginFormType) => {
         setError(null);
@@ -24,9 +26,9 @@ export default function Login() {
                 setError(data.message);
                 console.error(`Erreur lors de la connexion: ${response.status} => ${data.message}`);
             } else {
-                alert('connecté');
+                navigate('/');
             }
-            
+
         } catch(e) {
             setError("Une erreur réseau est survenue, veuillez réessayer.");
             console.error(e);

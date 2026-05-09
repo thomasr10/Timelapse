@@ -14,3 +14,16 @@ export const loginSchema = z.object({
 });
 
 export type LoginFormType = z.infer<typeof loginSchema>;
+
+export type User = {
+    id: number,
+    email: string,
+    username: string,
+    display_name: string,
+    profile_picture: string
+}
+
+export type AuthContextType = {
+    isAuth: boolean,
+    user: User | null
+}
