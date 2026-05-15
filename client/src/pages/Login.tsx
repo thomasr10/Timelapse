@@ -5,6 +5,7 @@ import type { LoginFormType } from "../types/auth";
 import { login } from "../api/auth";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Button from "../components/Button";
 
 const initialValues: LoginFormType = {
     email: "",
@@ -84,9 +85,9 @@ export default function Login() {
                                 />
                             </div>
                             <div className="submit-container">
-                                <button type="submit" disabled={isSubmitting}>
+                                <Button className="main-btn full-btn" type="submit" disabled={isSubmitting}>
                                     Se connecter
-                                </button>
+                                </Button>
                             </div>
                         </Form>
                     )}

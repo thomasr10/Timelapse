@@ -3,6 +3,10 @@
   src: url("/fonts/Inter-Regular.ttf");
 }
 @font-face {
+  font-family: "Inter-ExtraBold";
+  src: url("/fonts/Inter-ExtraBold.ttf");
+}
+@font-face {
   font-family: "Sora-Bold";
   src: url("/fonts/Sora-Bold.ttf");
 }
@@ -101,8 +105,9 @@ h1 {
 }
 
 form {
+  max-width: 740px;
   width: 100%;
-  margin-top: 2rem;
+  margin: 2rem auto;
 }
 form .input-container {
   display: flex;
@@ -119,7 +124,7 @@ form .input-container input {
   height: 1.75rem;
   padding: 0.5rem;
   font-family: "Inter-Regular";
-  border-radius: 0.5rem;
+  border-radius: 0.75rem;
   outline: none;
   border: 2px solid #0A0F1F;
   transition: border-color ease 0.3s;
@@ -138,4 +143,23 @@ form .submit-container {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.main-btn {
+  background-color: #D7263D;
+  border: none;
+  color: #E6ECF5;
+  font-family: "Inter-ExtraBold";
+  padding: 1rem 0 1rem 0;
+  border-radius: 0.75rem;
+  font-size: 1rem;
+  transition: background-color ease 0.25s;
+}
+.main-btn:hover {
+  cursor: pointer;
+  background-color: #B51E30;
+}
+
+.full-btn {
+  width: 100%;
 }/*# sourceMappingURL=main.css.map */

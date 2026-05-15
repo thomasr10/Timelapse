@@ -6,6 +6,7 @@ import { toFormikValidationSchema } from "zod-formik-adapter";
 import { registerUser } from "../api/auth";
 import type { RegisterFormType } from "../types/auth";
 import { registerSchema } from "../types/auth";
+import Button from "../components/Button";
 
 const initialValues: RegisterFormType = {
     username: "",
@@ -109,9 +110,9 @@ export default function Register() {
                                 />
                             </div>
                             <div className="submit-container">
-                                <button type="submit" disabled={isSubmitting}>
-                                    Commencer votre aventure
-                                </button>
+                                <Button className="main-btn full-btn" type="submit" disabled={isSubmitting}>
+                                    Commencez votre aventure
+                                </Button>
                             </div>
                         </Form>
                     )}
