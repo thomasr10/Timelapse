@@ -45,8 +45,8 @@ export default function Register() {
 
     return (
         <>
-            <h1>Bienvenue sur Timelapse</h1>
-            <main>
+            <h1>Bienvenue sur Time<span className="accent">lapse</span></h1>
+            <main className="section-container">
                 <Formik<RegisterFormType>
                     initialValues={initialValues}
                     validationSchema={toFormikValidationSchema(registerSchema)}
@@ -69,6 +69,7 @@ export default function Register() {
                                     name="username"
                                     type="text"
                                     placeholder="JohnDoe"
+                                    id="username"
                                 />
                                 <ErrorMessage
                                     name="username"
@@ -82,6 +83,7 @@ export default function Register() {
                                     name="email"
                                     type="email"
                                     placeholder="john.doe@mail.com"
+                                    id="email"
                                 />
                                 <ErrorMessage
                                     name="email"
@@ -95,6 +97,7 @@ export default function Register() {
                                     name="password"
                                     type="password"
                                     placeholder="Votre mot de passe"
+                                    id="password"
                                 />
                                 <div className="password-information">
                                     <p>Le mot de passe doit contenir au moins 12 caractères, une majuscule, une minuscule et un caractère spécial.</p>

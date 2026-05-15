@@ -37,8 +37,8 @@ export default function Login() {
 
     return (
         <>
-            <h1>Bon retour parmi nous !</h1>
-            <main>
+            <h1>Bon retour parmi <span className="accent">nous&nbsp;!</span></h1>
+            <main className="section-container">
                 <Formik<LoginFormType>
                     initialValues={initialValues}
                     validationSchema={toFormikValidationSchema(loginSchema)}
@@ -61,6 +61,7 @@ export default function Login() {
                                     name="email"
                                     type="text"
                                     placeholder="john.doe@mail.com"
+                                    id="email"
                                 />
                                 <ErrorMessage
                                     name="email"
@@ -74,6 +75,7 @@ export default function Login() {
                                     name="password"
                                     type="password"
                                     placeholder="Votre mot de passe"
+                                    id="password"
                                 />
                                 <ErrorMessage
                                     name="password"

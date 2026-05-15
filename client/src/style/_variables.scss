@@ -12,7 +12,8 @@ $sora-bold: 'Sora-Bold';
 $sora-semiBold: 'Sora-SemiBold';
 
 // Font size
-$font-size-xxl: 3rem;
+$font-size-xxxl: 3rem;
+$font-size-xxl: 2rem;
 $font-size-xl: 1.5rem;
 $font-size-large: 1.25rem;
 $font-size-medium: 1rem;
@@ -27,7 +28,7 @@ $large-tablet-width: 992px;
 $desktop-width: 1200px;
 $large-desktop-width: 1440px;
 
-// Mixins responsive (mobile-first)
+// Mixins
 @mixin large-mobile {
   @media (min-width: #{$large-mobile-width}) { @content; }
 }

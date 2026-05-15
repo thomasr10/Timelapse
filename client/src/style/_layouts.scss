@@ -1,0 +1,17 @@
+@use 'variables.scss' as *;
+
+.section-container {
+    width: 100%;
+    max-width: $mobile-width;
+    margin: 0 auto;
+    gap: 2rem;
+
+    @include tablet {
+        gap: 2.5rem;
+        max-width: $tablet-width;
+    }
+    @include desktop {
+        gap: 3rem;
+        max-width: $desktop-width;
+    }
+}
