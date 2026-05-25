@@ -7,6 +7,7 @@ import { registerUser } from "../api/auth";
 import type { RegisterFormType } from "../types/auth";
 import { registerSchema } from "../types/auth";
 import Button from "../components/Button";
+import { Info } from "lucide-react";
 
 const initialValues: RegisterFormType = {
     username: "",
@@ -101,6 +102,7 @@ export default function Register() {
                                     id="password"
                                 />
                                 <div className="password-information">
+                                    <Info className="icon"/>
                                     <p>Le mot de passe doit contenir au moins 12 caractères, une majuscule, une minuscule et un caractère spécial.</p>
                                 </div>
                                 <ErrorMessage

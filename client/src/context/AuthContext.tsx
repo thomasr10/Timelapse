@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { me, logout } from "../api/auth";
 import type { User, AuthContextType } from "../types/auth";
 import { useNavigate } from "react-router-dom";
@@ -19,13 +19,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                     if(data === null) {
                         setUser(null);
                         setIsAuth(false);
-
-                        try {
-                            logout();
-                            navigate('/');
-                        } catch(e) {
-                            console.error(e)
-                        }
+                        logout();
+                        navigate('/');
+                        return;
                     }
                     setUser(data);
                     setIsAuth(true);
@@ -44,4 +40,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         </AuthContext.Provider>
     )
 
+}
+
+export function useAuth() {
+    return useContext(AuthContext);
 }

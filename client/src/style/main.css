@@ -14,6 +14,14 @@
   font-family: "Sora-SemiBold";
   src: url("/fonts/Sora-SemiBold.ttf");
 }
+@font-face {
+  font-family: "Sora-ExtraBold";
+  src: url("/fonts/Sora-ExtraBold.ttf");
+}
+@font-face {
+  font-family: "Sora-Regular";
+  src: url("/fonts/Sora-Regular.ttf");
+}
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -64,6 +72,10 @@ table {
   border-spacing: 0;
 }
 
+a {
+  text-decoration: none;
+}
+
 body {
   background-color: #0A0F1F;
 }
@@ -109,6 +121,22 @@ form {
   width: 100%;
   margin: 2rem auto;
 }
+form .form-error-message {
+  width: 100%;
+  max-width: 700px;
+  padding: 1rem;
+  background-color: rgba(236, 74, 74, 0.719);
+  border: solid 2px #D7263D;
+  border-radius: 0.75rem;
+}
+form .form-error-message p {
+  font-family: "Inter-Regular";
+  color: #E6ECF5;
+}
+form .input-error-message {
+  color: rgba(255, 0, 0, 0.887);
+  font-family: "Inter-Regular";
+}
 form .input-container {
   display: flex;
   flex-direction: column;
@@ -133,7 +161,13 @@ form .input-container input {
 form .input-container input:focus {
   border: 2px solid #A9B4C6;
 }
+form .input-container .password-information .icon {
+  height: 16px;
+}
 form .input-container .password-information {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
   color: #A9B4C6;
   font-family: "Inter-Regular";
   font-size: 0.75rem;
@@ -162,4 +196,167 @@ form .submit-container {
 
 .full-btn {
   width: 100%;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  height: 3.75rem;
+  align-items: center;
+  padding: 0 1.5rem;
+  gap: 1rem;
+}
+.header .logo-container a {
+  color: #E6ECF5;
+  font-family: "Sora-Bold";
+  font-size: 1.5rem;
+}
+.header .search-container {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  display: none;
+}
+@media (min-width: 768px) {
+  .header .search-container {
+    display: flex;
+  }
+}
+.header .search-container .search-icon {
+  color: #A9B4C6;
+  height: 1rem;
+  position: absolute;
+  left: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  transition: left ease 0.25s;
+}
+.header .search-container .search-icon.focused {
+  left: calc(100% - 2rem);
+}
+.header .search-container input {
+  height: 30px;
+  background-color: #111726;
+  border: none;
+  border-radius: 0.5rem;
+  padding-left: 2.25rem;
+  color: #A9B4C6;
+  width: 100%;
+}
+.header .search-container input:focus {
+  padding: 0 1.75rem 0 0.5rem;
+}
+.header .search-container input::-moz-placeholder {
+  color: #A9B4C6;
+}
+.header .search-container input::placeholder {
+  color: #A9B4C6;
+}
+.header .burger-container {
+  position: relative;
+}
+.header .burger-icon {
+  color: #D7263D;
+}
+@media (min-width: 768px) {
+  .header .burger-icon {
+    display: none;
+  }
+}
+.header .burger-icon:hover {
+  color: #B51E30;
+}
+.header .burger-menu {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+  position: absolute;
+  top: 100%;
+  margin-top: 0.5rem;
+  right: 0;
+  width: 120px;
+  background-color: #111726;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+}
+.header .burger-menu .burger-connected-link {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  color: #E6ECF5;
+  font-family: "Sora-Regular";
+}
+.header .burger-menu.open {
+  display: flex;
+}
+.header .burger-menu .separator {
+  width: 100%;
+  margin: 0 auto;
+  height: 1px;
+  background-color: #A9B4C6;
+}
+.header .burger-menu a {
+  color: #E6ECF5;
+  font-family: "Sora-Regular";
+  font-size: 0.88rem;
+}
+.header .burger-menu a:hover {
+  color: #D7263D;
+}
+.header .header-link {
+  color: #E6ECF5;
+  display: none;
+  align-items: center;
+  gap: 0.5rem;
+}
+@media (min-width: 768px) {
+  .header .header-link {
+    display: flex;
+  }
+}
+.header .header-link a {
+  color: #E6ECF5;
+  font-size: 0.88rem;
+  font-family: "Sora-Regular";
+  transition: all ease 0.25s;
+  position: relative;
+}
+.header .header-link a::before {
+  content: "";
+  position: absolute;
+  display: block;
+  height: 2px;
+  width: 0;
+  background-color: #D7263D;
+  bottom: -4px;
+  transition: width ease 0.25s;
+}
+.header .header-link a:hover {
+  color: #D7263D;
+  font-family: "Sora-SemiBold";
+}
+.header .header-link a:hover::before {
+  width: 100%;
+}
+.header .header-connected-link {
+  display: none;
+  align-items: center;
+  gap: 1.5rem;
+}
+@media (min-width: 768px) {
+  .header .header-connected-link {
+    display: flex;
+  }
+}
+.header .header-connected-link a, .header .header-connected-link svg {
+  color: #E6ECF5;
+  font-size: 0.88rem;
+  font-family: "Sora-Regular";
+  transition: all ease 0.25s;
+}
+.header .header-connected-link a:hover, .header .header-connected-link svg:hover {
+  cursor: pointer;
+  color: #D7263D;
 }/*# sourceMappingURL=main.css.map */

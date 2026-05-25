@@ -4,6 +4,26 @@ form {
     max-width: 740px;
     width: 100%;
     margin: 2rem auto;
+
+    .form-error-message {
+        width: 100%;
+        max-width: 700px;
+        padding: 1rem;
+        background-color: rgba(236, 74, 74, 0.719);
+        border: solid 2px $accent-color;
+        border-radius: .75rem;
+
+        p {
+            font-family: $inter-regular;
+            color: $main-text-color;
+        }
+    }
+
+    .input-error-message {
+        color: rgba(255, 0, 0, 0.887);
+        font-family: $inter-regular;
+    }
+
     .input-container {
         display: flex;
         flex-direction: column;
@@ -32,12 +52,21 @@ form {
         }
 
         .password-information {
+
+            .icon {
+                height: 16px;
+            }
+
+            display: flex;
+            gap: .5rem;
+            align-items: center;
             color: $secondary-text-color;
             font-family: $inter-regular;
             font-size: $font-size-xs;
         }
 
     }
+
     .submit-container {
         margin-top: 2rem;
         display: flex;
@@ -64,4 +93,191 @@ form {
 
 .full-btn {
     width: 100%;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    height: 3.75rem;
+    align-items: center;
+    padding: 0 1.5rem;
+    gap: 1rem;
+
+    .logo-container {
+        a {
+            color: $main-text-color;
+            font-family: $sora-bold;
+            font-size: $font-size-xl;
+        }
+    }
+
+    .search-container {
+        position: relative;
+        width: 100%;
+        max-width: 800px;
+        display: none;
+
+        @include tablet {
+            display: flex;
+        }
+
+        .search-icon {
+            color: $secondary-text-color;
+            height: 1rem;
+            position: absolute;
+            left: .5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+            transition: left ease .25s;
+
+
+            &.focused {
+                left: calc(100% - 2rem);
+            }
+        }
+
+        input {
+            height: 30px;
+            background-color: $secondary-color;
+            border: none;
+            border-radius: .5rem;
+            padding-left: 2.25rem;
+            color: $secondary-text-color;
+            width: 100%;
+
+            &:focus {
+                padding: 0 1.75rem 0 .5rem;
+            }
+
+            &::placeholder {
+                color: $secondary-text-color;
+            }
+        }
+
+    }
+
+    .burger-container {
+        position: relative;
+    }
+
+    .burger-icon {
+        color: $accent-color;
+
+        @include tablet {
+            display: none;
+        }
+
+        &:hover {
+            color: $hover-color;
+        }
+    }
+    
+    .burger-menu {
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        gap: 1rem;
+        position: absolute;
+        top: 100%;
+        margin-top: .5rem;
+        right: 0;
+        width: 120px;
+        background-color: $secondary-color;
+        padding: .5rem 1rem;
+        border-radius: 8px;
+
+        .burger-connected-link {
+            display: flex;
+            gap: 4px;
+            align-items: center;
+            color: $main-text-color;
+            font-family: $sora-regular;
+
+        }
+
+        &.open {
+            display: flex;
+        }
+
+        .separator {
+            width: 100%;
+            margin: 0 auto;
+            height: 1px;
+            background-color: $secondary-text-color;
+        }
+
+        a {
+            color: $main-text-color;
+            font-family: $sora-regular;
+            font-size: $font-size-small;
+
+            &:hover {
+                color: $accent-color;
+            }
+        }
+    }
+
+    .header-link {
+        color: $main-text-color;
+        display: none;
+        align-items: center;
+        gap: .5rem;
+
+        @include tablet {
+            display: flex;
+        }
+
+        a {
+            color: $main-text-color;
+            font-size: $font-size-small;
+            font-family: $sora-regular;
+            transition: all ease .25s;
+            position: relative;
+
+            &::before {
+                content: "";
+                position: absolute;
+                display: block;
+                height: 2px;
+                width: 0;
+                background-color: $accent-color;
+                bottom: -4px;
+                transition: width ease .25s;
+            }
+
+            &:hover {
+                color: $accent-color;
+                font-family: $sora-semiBold;
+
+                &::before {
+                    width: 100%;
+                }
+            }
+        }
+    }
+
+    .header-connected-link {
+        display: none;
+        align-items: center;
+        gap: 1.5rem;
+
+        @include tablet {
+            display: flex;
+        }
+
+        a, svg {
+            color: $main-text-color;
+            font-size: $font-size-small;
+            font-family: $sora-regular;
+            transition: all ease .25s;
+
+            &:hover {
+                cursor: pointer;
+                color: $accent-color;
+            }
+        }
+
+    }
+
 }

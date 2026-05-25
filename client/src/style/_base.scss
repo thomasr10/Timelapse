@@ -19,6 +19,14 @@
     font-family: 'Sora-SemiBold';
     src: url('/fonts/Sora-SemiBold.ttf');
 }
+@font-face {
+    font-family: 'Sora-ExtraBold';
+    src: url('/fonts/Sora-ExtraBold.ttf');
+}
+@font-face {
+    font-family: 'Sora-Regular';
+    src: url('/fonts/Sora-Regular.ttf');
+}
 
 // reset CSS
 
@@ -64,6 +72,9 @@ q:before, q:after {
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
+}
+a {
+	text-decoration: none;
 }
 
 body {
