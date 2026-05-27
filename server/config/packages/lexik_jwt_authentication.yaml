@@ -2,13 +2,20 @@ lexik_jwt_authentication:
     secret_key: '%env(resolve:JWT_SECRET_KEY)%'
     public_key: '%env(resolve:JWT_PUBLIC_KEY)%'
     pass_phrase: '%env(JWT_PASSPHRASE)%'
+    # pour avoir l'email dans le token car provider cherche par email
+    user_id_claim: email
     token_ttl: 3600
 
     set_cookies:
         token:
             lifetime: 3600
-            samesite: strict
+            samesite: lax
             path: /
             domain: ~
             httpOnly: true
-            secure: true
+            secure: false
+    
+    token_extractors:
+        cookie:
+            enabled: true
+            name: token
