@@ -1,3 +1,5 @@
+import type { Genre } from "../types/tmdb";
+
 export const fetchUpcomingMovies = async () => {
 
     try {
@@ -18,5 +20,35 @@ export const fetchUpcomingMovies = async () => {
 
     } catch (e) {
         console.error(e);
+    }
+}
+
+// cache genre
+
+let cacheGenre : Genre[] | null = null;
+
+export const fetchGenres = async () => {
+
+    try {
+        const response = await fetch(`${import.meta.env.VITE_TMDB_BASE_URL}/genre/movie/list?${import.meta.env.VITE_API_LANGUAGE_PARAM}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${import.meta.env.VITE_TMDB_API_KEY}`
+            }
+        });
+
+        if (!response.ok) {
+            console.error(`Error while fetching genres - status : ${response.status}`);
+        }
+
+        const data = await response.json();
+        cacheGenre = data.genres;
+
+        return cacheGenre;
+
+    } catch(e) {
+        console.error(e);
+        return [];
     }
 }

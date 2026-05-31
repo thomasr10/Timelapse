@@ -350,13 +350,15 @@ form .submit-container {
     display: flex;
   }
 }
-.header .header-connected-link a, .header .header-connected-link svg {
+.header .header-connected-link a,
+.header .header-connected-link svg {
   color: #E6ECF5;
   font-size: 0.88rem;
   font-family: "Sora-Regular";
   transition: all ease 0.25s;
 }
-.header .header-connected-link a:hover, .header .header-connected-link svg:hover {
+.header .header-connected-link a:hover,
+.header .header-connected-link svg:hover {
   cursor: pointer;
   color: #D7263D;
 }
@@ -378,4 +380,106 @@ form .submit-container {
 }
 .not-found-page a:hover {
   text-decoration: underline;
+}
+
+.home-connected {
+  margin-top: 32px;
+}
+.home-connected .section-title {
+  text-align: center;
+}
+@media (min-width: 1200px) {
+  .home-connected .section-title {
+    text-align: left;
+  }
+}
+.home-connected .section-title h2 {
+  position: relative;
+  color: #FFFFFF;
+  font-size: 1.5rem;
+  font-family: "Sora-Bold";
+  display: inline-block;
+}
+@media (min-width: 1200px) {
+  .home-connected .section-title h2 {
+    font-size: 2rem;
+  }
+}
+.home-connected .section-title h2::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background-color: #D7263D;
+  border-radius: 8px;
+}
+
+.media-slider-section {
+  margin-top: 32px;
+}
+.media-slider-section h3 {
+  color: #FFFFFF;
+  font-family: "Sora-SemiBold";
+  font-size: 1.25rem;
+}
+@media (min-width: 1200px) {
+  .media-slider-section h3 {
+    font-size: 1.5rem;
+  }
+}
+
+.media-card-slider {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+  overflow: hidden;
+}
+
+.media-card img {
+  width: 100px;
+  height: 160px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+@media (min-width: 768px) {
+  .media-card img {
+    width: 130px;
+    height: 195px;
+  }
+}
+@media (min-width: 1200px) {
+  .media-card img {
+    width: 160px;
+    height: 240px;
+  }
+}
+@media (min-width: 1440px) {
+  .media-card img {
+    width: 200px;
+    height: 300px;
+  }
+}
+.media-card .info-container {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.media-card .title {
+  color: #E6ECF5;
+}
+.media-card .genre {
+  color: #A9B4C6;
+}
+.media-card .title,
+.media-card .genre {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 1.1rem;
+  font-family: "Inter-Regular";
+  font-size: 0.88rem;
 }/*# sourceMappingURL=main.css.map */
