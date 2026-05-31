@@ -10,7 +10,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     const [user, setUser] = useState<User | null>(null);
     const [isAuth, setIsAuth] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
     const navigate = useNavigate();
+
+    const refreshUser = async() => {
+        try {
+            const data = await me();
+            setUser(data);
+        } catch(e) {
+            console.error(e);
+        }
+    }
 
     useEffect(() => {
         try {
@@ -27,6 +37,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                     setIsAuth(true);
                 })
                 .catch((e) => console.error(e))
+                .finally(() => setIsLoading(false))
 
         } catch (e) {
             console.error(e)
@@ -35,13 +46,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }, []);
 
     return (
-        <AuthContext.Provider value={{ isAuth, user }}>
+        <AuthContext.Provider value={{ isAuth, user, isLoading, refreshUser }}>
             { children }
         </AuthContext.Provider>
     )
 
 }
 
-export function useAuth() {
-    return useContext(AuthContext);
+export function useAuth(): AuthContextType {
+
+    const context = useContext(AuthContext);
+    if(!context) throw new Error('useAuth must be used within AuthProvider');
+
+    return context;
 }

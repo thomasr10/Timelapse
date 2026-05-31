@@ -1,13 +1,8 @@
-import { useAuth } from "../context/AuthContext";
+import AuthSwitch from "../components/AuthSwitch";
 import HomepageConnected from "./HomepageConnected";
 import HomepageDisconnected from "./HomepageDisconnected";
 
 export default function Homepage() {
-
-    const auth = useAuth();
-    if (!auth) return null;
-    const { isAuth } = auth;
-
-    return isAuth ? <HomepageConnected/> : <HomepageDisconnected/>
-
+    
+    return <AuthSwitch connected={<HomepageConnected/>} disconnected={<HomepageDisconnected/>}/>
 }

@@ -6,6 +6,7 @@ import { login } from "../api/auth";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../components/Button";
+import { useAuth } from "../context/AuthContext";
 
 const initialValues: LoginFormType = {
     email: "",
@@ -16,6 +17,7 @@ export default function Login() {
 
     const [error, setError] = useState< string | null >(null);
     const navigate = useNavigate();
+    const { refreshUser } = useAuth();
 
     const onSubmit = async (values: LoginFormType) => {
         setError(null);
@@ -27,6 +29,7 @@ export default function Login() {
                 setError(data.message);
                 console.error(`Erreur lors de la connexion: ${response.status} => ${data.message}`);
             } else {
+                await refreshUser();
                 navigate('/');
             }
 

@@ -1,12 +1,8 @@
-import { useAuth } from "../context/AuthContext";
+import AuthSwitch from "./AuthSwitch";
 import HeaderConnected from "./HeaderConnected";
 import HeaderDisconnected from "./HeaderDisconnected";
 
 export default function Header() {
 
-    const auth = useAuth();
-    if(!auth) return null;
-    const { isAuth } = auth;
-
-    return isAuth ? <HeaderConnected/> : <HeaderDisconnected/>;
+    return <AuthSwitch connected={<HeaderConnected/>} disconnected={<HeaderDisconnected/>}/>
 }

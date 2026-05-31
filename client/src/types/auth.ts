@@ -25,5 +25,7 @@ export type User = {
 
 export type AuthContextType = {
     isAuth: boolean,
-    user: User | null
+    user: User | null,
+    isLoading: boolean,
+    refreshUser: () => void
 }
