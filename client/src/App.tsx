@@ -4,6 +4,7 @@ import Login from "./pages/Login"
 import './style/main.css';
 import Header from "./components/Header";
 import { AuthProvider } from "./context/AuthContext";
+import Homepage from "./pages/Homepage";
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
         <Routes>
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/" element={<Homepage />} />
         </Routes>
       </AuthProvider>
     </>
