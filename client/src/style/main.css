@@ -359,4 +359,23 @@ form .submit-container {
 .header .header-connected-link a:hover, .header .header-connected-link svg:hover {
   cursor: pointer;
   color: #D7263D;
+}
+
+.not-found-page p {
+  color: #A9B4C6;
+  font-size: 1.25rem;
+  font-family: "Inter-Regular";
+  text-align: center;
+  margin-top: 2rem;
+}
+.not-found-page a {
+  color: #D7263D;
+  font-family: "Sora-SemiBold";
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+  padding: 1rem 0.5rem;
+}
+.not-found-page a:hover {
+  text-decoration: underline;
 }/*# sourceMappingURL=main.css.map */

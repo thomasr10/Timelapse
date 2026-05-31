@@ -281,3 +281,26 @@ form {
     }
 
 }
+
+.not-found-page {
+    p {
+        color: $secondary-text-color;
+        font-size: $font-size-large ;
+        font-family: $inter-regular;
+        text-align: center;
+        margin-top: 2rem;
+    }
+
+    a {
+        color: $accent-color;
+        font-family: $sora-semiBold;
+        display: flex;
+        justify-content: center;
+        margin-top: 2rem;
+        padding: 1rem 0.5rem;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
