@@ -524,10 +524,116 @@ form {
     .icon {
         width: 14px;
         height: 14px;
+        stroke-width: 3;
     }
 
     &:hover {
         background-color: $hover-color;
         cursor: pointer;
     }
+}
+
+.interact-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.btn-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.is-viewed-btn,
+.is-liked-btn {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .icon {
+        width: 24px;
+        height: 24px;
+        stroke-width: 2.5;
+    }
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.is-viewed-btn {
+    background-color: $secondary-color;
+
+    .icon {
+        color: #FFFFFF;
+    }
+}
+
+.is-liked-btn {
+    background-color: #FFFFFF;
+
+    .icon {
+        color: $accent-color;
+    }
+}
+
+.rate {
+    display: flex;
+    gap: 8px;
+    color: $rating-color;
+
+    .icon {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+.media-infos-container {
+    background-color: $secondary-color;
+    padding: 2rem;
+    border-radius: 16px;
+    margin-top: 2rem;
+
+    h2 {
+        color: #FFFFFF;
+        font-family: $sora-semiBold;
+        font-size: $font-size-medium;
+    }
+
+    .media-info-row {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 2rem;
+
+        dt {
+            color: $secondary-text-color;
+            font-family: $inter-regular;
+        }
+
+        dd {
+            color: #FFFFFF;
+            font-family: $inter-semibold;
+        }
+
+        .revenue {
+            color: #21C45D;
+        }
+
+        dt,
+        dd {
+            font-size: $font-size-small;
+        }
+    }
+}
+
+.row {
+    width: 100%;
+    margin: 0 auto;
+    height: 1px;
+    background-color: $border-color;
+    margin-top: .5rem;
 }

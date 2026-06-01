@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom"
 import { fetchMedia, fetchMediaCredits } from "../api/tmdb";
 import type { CastMember, CrewMember, Genre } from "../types/tmdb";
 import MediaHero from "../components/MediaHero";
+import MediaInfo from "../components/MediaInfo";
 
 interface FullInfoMedia {
     id: number,
@@ -14,7 +15,7 @@ interface FullInfoMedia {
     budget: number,
     revenue: number,
     backdrop_path: string,
-    director: CrewMember,
+    director: string,
     cast: CastMember[],
     release_date: string,
     runtime: number
@@ -45,7 +46,9 @@ export default function MediaPage() {
             <section className="section-container">
                 <MediaHero title={mediaInfos?.title} poster_path={mediaInfos?.poster_path} release_date={mediaInfos?.release_date} genres={mediaInfos?.genres} runtime={mediaInfos?.runtime} />
             </section>
-
+            <section className="section-container">
+                <MediaInfo director={mediaInfos?.director} release_date={mediaInfos?.release_date} budget={mediaInfos?.budget} revenue={mediaInfos?.revenue}/>
+            </section>
         </main>
     )
 }

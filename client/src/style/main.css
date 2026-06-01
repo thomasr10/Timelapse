@@ -3,6 +3,10 @@
   src: url("/fonts/Inter-Regular.ttf");
 }
 @font-face {
+  font-family: "Inter-SemiBold";
+  src: url("/fonts/Inter-SemiBold.ttf");
+}
+@font-face {
   font-family: "Inter-Bold";
   src: url("/fonts/Inter-Bold.ttf");
 }
@@ -596,8 +600,105 @@ form .submit-container {
 .add-watchlist-btn .icon {
   width: 14px;
   height: 14px;
+  stroke-width: 3;
 }
 .add-watchlist-btn:hover {
   background-color: #B51E30;
   cursor: pointer;
+}
+
+.interact-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.is-viewed-btn,
+.is-liked-btn {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.is-viewed-btn .icon,
+.is-liked-btn .icon {
+  width: 24px;
+  height: 24px;
+  stroke-width: 2.5;
+}
+.is-viewed-btn:hover,
+.is-liked-btn:hover {
+  cursor: pointer;
+}
+
+.is-viewed-btn {
+  background-color: #111726;
+}
+.is-viewed-btn .icon {
+  color: #FFFFFF;
+}
+
+.is-liked-btn {
+  background-color: #FFFFFF;
+}
+.is-liked-btn .icon {
+  color: #D7263D;
+}
+
+.rate {
+  display: flex;
+  gap: 8px;
+  color: #FFC107;
+}
+.rate .icon {
+  width: 20px;
+  height: 20px;
+}
+
+.media-infos-container {
+  background-color: #111726;
+  padding: 2rem;
+  border-radius: 16px;
+  margin-top: 2rem;
+}
+.media-infos-container h2 {
+  color: #FFFFFF;
+  font-family: "Sora-SemiBold";
+  font-size: 1rem;
+}
+.media-infos-container .media-info-row {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+}
+.media-infos-container .media-info-row dt {
+  color: #A9B4C6;
+  font-family: "Inter-Regular";
+}
+.media-infos-container .media-info-row dd {
+  color: #FFFFFF;
+  font-family: "Inter-SemiBold";
+}
+.media-infos-container .media-info-row .revenue {
+  color: #21C45D;
+}
+.media-infos-container .media-info-row dt,
+.media-infos-container .media-info-row dd {
+  font-size: 0.88rem;
+}
+
+.row {
+  width: 100%;
+  margin: 0 auto;
+  height: 1px;
+  background-color: #262522;
+  margin-top: 0.5rem;
 }/*# sourceMappingURL=main.css.map */

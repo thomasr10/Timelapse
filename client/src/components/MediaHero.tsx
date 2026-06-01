@@ -1,7 +1,7 @@
 import type { Genre } from "../types/tmdb"
 import { formatDate } from "../utils/formatDate"
 import Button from "./Button"
-import { Dot, Star, CirclePlus } from 'lucide-react'
+import { Dot, Star, CirclePlus, Eye, Heart } from 'lucide-react'
 
 interface Props {
     poster_path: string | undefined,
@@ -12,7 +12,6 @@ interface Props {
 }
 
 export default function MediaHero({ poster_path, title, genres, release_date, runtime }: Props) {
-    console.log(genres)
     return (
         <section className="media-hero">
             <figure>
@@ -22,25 +21,33 @@ export default function MediaHero({ poster_path, title, genres, release_date, ru
                 <p className="title">{title}</p>
                 <div className="sub-infos-container">
                     <div className="rate-container">
-                        <Star className="rating-star"/>
+                        <Star className="rating-star" />
                         <p>5</p>
                     </div>
-                    <Dot className="dot-separator"/>
-                    <p className="sub-info">{ genres?.slice(0,3)?.map((g, index) => (
+                    <Dot className="dot-separator" />
+                    <p className="sub-info">{genres?.slice(0, 3)?.map((g, index) => (
                         (index === 2) ? `${g.name}` : `${g.name} / `
-                    )) }</p>
-                    <Dot className="dot-separator"/>
-                    <p className="sub-info">{ formatDate(release_date)?.getFullYear() }</p>
-                    <Dot className="dot-separator"/>
-                    <p className="sub-info">{ runtime }</p>
+                    ))}</p>
+                    <Dot className="dot-separator" />
+                    <p className="sub-info">{formatDate(release_date)?.getFullYear()}</p>
+                    <Dot className="dot-separator" />
+                    <p className="sub-info">{runtime}</p>
                 </div>
                 <Button className="add-watchlist-btn" type="button" disabled={false}>
-                    Ajouter à une Watchlist<CirclePlus className="icon"/>
+                    Ajouter à une Watchlist<CirclePlus className="icon" />
                 </Button>
                 <div className="interact-container">
-                    View
-                    Like
-                    Stars
+                    <div className="btn-wrapper">
+                        <div className="is-viewed-btn">
+                            <Eye className="icon" />
+                        </div>
+                        <div className="is-liked-btn">
+                            <Heart className="icon" />
+                        </div>
+                    </div>
+                    <div className="rate">
+                        <Star className="icon"/><Star className="icon"/><Star className="icon"/><Star className="icon"/><Star className="icon"/>
+                    </div>
                 </div>
             </div>
         </section>
