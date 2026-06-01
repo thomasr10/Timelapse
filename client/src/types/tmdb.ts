@@ -3,14 +3,14 @@ export type Genre = {
     name: string
 }
 
-export interface CrewMember {
+export type CrewMember = {
     id: number,
     name: string,
     job: string,
     department: string
 }
 
-export interface CastMember {
+export type CastMember = {
     id: number,
     name: string,
     character: string,
