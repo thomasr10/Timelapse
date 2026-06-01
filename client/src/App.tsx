@@ -7,6 +7,8 @@ import { AuthProvider } from "./context/AuthContext";
 import Homepage from "./pages/Homepage";
 import NotFound from "./pages/NotFound";
 import PublicRoutes from "./router/PublicRoutes";
+import MediaPage from "./pages/MediaPage";
+import ProtectedRoutes from "./router/ProtectedRoutes";
 
 
 function App() {
@@ -41,6 +43,14 @@ function App() {
           <Route
             path="*"
             element={<NotFound />}
+          />
+          <Route
+            path="/media/:type/:id"
+            element={
+              <ProtectedRoutes>
+                <MediaPage />
+              </ProtectedRoutes>
+            }
           />
         </Routes>
       </AuthProvider>

@@ -44,7 +44,7 @@ export default function HomepageConnected() {
                     {
                         upcomingMovies && (
                             upcomingMovies.map((m) => (
-                                <MediaCard key={m.id} id={m.id} title={m.title} poster_path={`${import.meta.env.VITE_API_IMAGE_BASE_URL}/w500${m.poster_path}`} genre_ids={m.genre_ids} genres={genres} />
+                                <MediaCard key={m.id} id={m.id} title={m.title} poster_path={`${import.meta.env.VITE_API_IMAGE_BASE_URL}/w500${m.poster_path}`} genre_ids={m.genre_ids} genres={genres} type="movie"/>
                             ))
                         )
                     }

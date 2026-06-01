@@ -1,7 +1,9 @@
+import type { ReactNode } from "react"
+
 interface ButtonProps {
     type: "submit" | "reset" | "button",
     disabled: boolean,
-    children: string,
+    children: ReactNode,
     className: string
 }
 
