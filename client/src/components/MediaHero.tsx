@@ -27,7 +27,7 @@ export default function MediaHero({ poster_path, title, genres, release_date, ru
                     </div>
                     <Dot className="dot-separator" />
                     <p className="sub-info">{genres?.slice(0, 3)?.map((g, index) => (
-                        (index === 2) ? `${g.name}` : `${g.name} / `
+                        (index < genres.length -1) ? `${g.name} / ` : `${g.name}`
                     ))}</p>
                     <Dot className="dot-separator" />
                     <p className="sub-info">{formatDate(release_date)?.getFullYear()}</p>

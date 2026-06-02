@@ -27,7 +27,7 @@ export default function MediaPage() {
     const { type, id } = useParams();
     const [mediaInfos, setMediaInfos] = useState<FullInfoMedia | null>(null);
     const [maxSlice, setMaxSlice] = useState<number | undefined>(5);
-    const [castBtnText, setCastBtnText] = useState("Voir tout le cast");
+    const [castBtnText, setCastBtnText] = useState("Voir plus");
 
     useEffect(() => {
         if (!type || !id) return;
@@ -44,13 +44,22 @@ export default function MediaPage() {
     }, [type, id]);
 
     const displayAllCast = () => {
+        if (!maxSlice || !mediaInfos) return;
 
-        if (maxSlice === 5) {
-            setCastBtnText("Voir moins")
-            setMaxSlice(mediaInfos?.cast.length);
+        const total = mediaInfos.cast.length;
+
+        if (maxSlice < total) {
+            const remaining = total - maxSlice;
+            if (total - maxSlice >= 5) {
+               setMaxSlice(prev => (prev ?? 0) + 5); 
+            } else {
+                setMaxSlice(total);
+                setCastBtnText("Voir moins");
+            }
+            
         } else {
-            setCastBtnText("Voir tout le cast");
             setMaxSlice(5);
+            setCastBtnText("Voir plus");
         }
     }
 
