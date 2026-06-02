@@ -12,7 +12,7 @@ export default function MediaInfo({ director, release_date, budget, revenue }: P
 
     return (
         <div className="media-infos-container">
-            <h2>Infos générales</h2>
+            <h2 className="media-detail-h2">Infos générales</h2>
             <dl>
                 <div className="media-info-row">
                     <dt>Réalisateur</dt>

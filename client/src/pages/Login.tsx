@@ -88,7 +88,7 @@ export default function Login() {
                                 />
                             </div>
                             <div className="submit-container">
-                                <Button className="main-btn full-btn" type="submit" disabled={isSubmitting}>
+                                <Button className="form-btn full-btn" type="submit" disabled={isSubmitting}>
                                     Se connecter
                                 </Button>
                             </div>

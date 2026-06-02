@@ -1,5 +1,6 @@
 import type { Genre } from "../types/tmdb"
 import { formatDate } from "../utils/formatDate"
+import { formatTime } from "../utils/formatTime"
 import Button from "./Button"
 import { Dot, Star, CirclePlus, Eye, Heart } from 'lucide-react'
 
@@ -31,9 +32,9 @@ export default function MediaHero({ poster_path, title, genres, release_date, ru
                     <Dot className="dot-separator" />
                     <p className="sub-info">{formatDate(release_date)?.getFullYear()}</p>
                     <Dot className="dot-separator" />
-                    <p className="sub-info">{runtime}</p>
+                    <p className="sub-info">{formatTime(runtime)}</p>
                 </div>
-                <Button className="add-watchlist-btn" type="button" disabled={false}>
+                <Button className="main-btn red-btn full-btn" type="button" disabled={false}>
                     Ajouter à une Watchlist<CirclePlus className="icon" />
                 </Button>
                 <div className="interact-container">
