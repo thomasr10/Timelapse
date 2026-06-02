@@ -19,14 +19,14 @@ interface FullInfoMedia {
     director: string,
     cast: CastMember[],
     release_date: string,
-    runtime: number
+    runtime: number,
 }
 
 export default function MediaPage() {
 
     const { type, id } = useParams();
     const [mediaInfos, setMediaInfos] = useState<FullInfoMedia | null>(null);
-    const [maxSlice, setMaxSlice] = useState<number | undefined>(5);
+    const [maxSlice, setMaxSlice] = useState(5);
     const [castBtnText, setCastBtnText] = useState("Voir plus");
 
     useEffect(() => {
@@ -44,41 +44,44 @@ export default function MediaPage() {
     }, [type, id]);
 
     const displayAllCast = () => {
-        if (!maxSlice || !mediaInfos) return;
+        if (!mediaInfos) return;
 
         const total = mediaInfos.cast.length;
+        const remaining = total - maxSlice;
 
-        if (maxSlice < total) {
-            const remaining = total - maxSlice;
-            if (total - maxSlice >= 5) {
-               setMaxSlice(prev => (prev ?? 0) + 5); 
-            } else {
-                setMaxSlice(total);
-                setCastBtnText("Voir moins");
-            }
-            
+        if (remaining >= 5) {
+            const newSlice = maxSlice + 5;
+            setMaxSlice(newSlice);
+            setCastBtnText(newSlice >= total ? "Voir moins" : "Voir plus");
         } else {
-            setMaxSlice(5);
             setCastBtnText("Voir plus");
+            setMaxSlice(5);
         }
     }
 
-    useEffect(() => { console.log(mediaInfos?.cast) }, [mediaInfos])
-
     return (
-        <main>
-            <img className="backdrop-image" src={`${import.meta.env.VITE_API_IMAGE_BASE_URL}w1280${mediaInfos?.backdrop_path}`} alt="" />
-            <section className="section-container">
-                <MediaHero
-                    title={mediaInfos?.title}
-                    poster_path={mediaInfos?.poster_path}
-                    release_date={mediaInfos?.release_date}
-                    genres={mediaInfos?.genres}
-                    runtime={mediaInfos?.runtime}
-                />
-            </section>
-            <section className="media-info-section section-container">
-                <section>
+        <>  
+            {
+                mediaInfos?.backdrop_path
+                
+                ? 
+                    <img className="backdrop-image"
+                        src={`${import.meta.env.VITE_API_IMAGE_BASE_URL}w1280${mediaInfos?.backdrop_path}`} alt={`Image de fond de ${mediaInfos?.title}`}
+                    />
+                : <div className="backdrop-image-replacement"></div>
+            }
+            <main className="section-container media-page">
+                <section className="section-media-hero">
+                    <MediaHero
+                        title={mediaInfos?.title}
+                        poster_path={mediaInfos?.poster_path}
+                        release_date={mediaInfos?.release_date}
+                        genres={mediaInfos?.genres}
+                        runtime={mediaInfos?.runtime}
+                        overview={mediaInfos?.overview}
+                    />
+                </section>
+                <section className="section-media-info">
                     <MediaInfo
                         director={mediaInfos?.director}
                         release_date={mediaInfos?.release_date}
@@ -86,7 +89,7 @@ export default function MediaPage() {
                         revenue={mediaInfos?.revenue}
                     />
                 </section>
-                <section style={{ marginTop: "2rem" }}>
+                <section className="section-cast-info">
                     <h2 className="media-detail-h2">Casting</h2>
                     <div className="media-cast-container">
                         {
@@ -107,7 +110,9 @@ export default function MediaPage() {
                         </button>
                     </div>
                 </section>
-            </section>
-        </main>
+                <section className="section-review">
+                </section>
+            </main>
+        </>
     )
 }
