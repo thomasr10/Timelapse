@@ -25,7 +25,7 @@ export const fetchUpcomingMovies = async () => {
 
 // cache genre
 
-let cacheGenre : Genre[] | null = null;
+let cacheGenre: Genre[] | null = null;
 
 export const fetchGenres = async () => {
 
@@ -47,13 +47,13 @@ export const fetchGenres = async () => {
 
         return cacheGenre;
 
-    } catch(e) {
+    } catch (e) {
         console.error(e);
         return [];
     }
 }
 
-export const fetchMedia = async(type: string, id: number) => {
+export const fetchMedia = async (type: string, id: number) => {
 
     try {
         const response = await fetch(`${import.meta.env.VITE_TMDB_BASE_URL}/${type}/${id}?${import.meta.env.VITE_API_LANGUAGE_PARAM}&${import.meta.env.VITE_API_REGION_PARAM}`, {
@@ -77,7 +77,7 @@ export const fetchMedia = async(type: string, id: number) => {
     }
 }
 
-export const fetchMediaCredits = async(type: string, id: number) => {
+export const fetchMediaCredits = async (type: string, id: number) => {
 
     try {
         const response = await fetch(`${import.meta.env.VITE_TMDB_BASE_URL}/${type}/${id}/credits?${import.meta.env.VITE_API_LANGUAGE_PARAM}&${import.meta.env.VITE_API_REGION_PARAM}`, {
@@ -98,5 +98,27 @@ export const fetchMediaCredits = async(type: string, id: number) => {
     } catch (e) {
         console.error(e);
         return {};
+    }
+}
+
+export const fetchTrendingMovies = async () => {
+    try {
+        const response = await fetch(`${import.meta.env.VITE_TMDB_BASE_URL}trending/movie/week?${import.meta.env.VITE_API_LANGUAGE_PARAM}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${import.meta.env.VITE_TMDB_API_KEY}`
+            }
+        });
+
+        if (!response.ok) {
+            console.error(`Error while fetching data from API - status : ${response.status}`);
+        }
+
+        const data = await response.json();
+        return data;
+
+    } catch (e) {
+        console.error(e);
     }
 }
