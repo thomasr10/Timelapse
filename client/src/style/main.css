@@ -448,11 +448,54 @@ form .submit-container {
   }
 }
 
-.media-card-slider {
+.slider-container {
+  position: relative;
+}
+.slider-container .arrows-container .arrow-left {
+  position: absolute;
+  left: 0.5rem;
+}
+.slider-container .arrows-container .arrow-right {
+  position: absolute;
+  right: 0.5rem;
+}
+.slider-container .arrows-container .arrow-left,
+.slider-container .arrows-container .arrow-right {
+  opacity: 0.4;
+  transition: all 0.25s ease;
+  color: #0A0F1F;
+  fill: none;
+  z-index: 999999999;
+  width: 32px;
+  height: 32px;
+  top: 40%;
+  transform: translateY(-40%);
+}
+@media (min-width: 1200px) {
+  .slider-container .arrows-container .arrow-left,
+  .slider-container .arrows-container .arrow-right {
+    width: 32px;
+    height: 32px;
+  }
+}
+.slider-container .arrows-container .arrow-left:hover,
+.slider-container .arrows-container .arrow-right:hover {
+  opacity: 1;
+  cursor: pointer;
+  fill: #0A0F1F;
+  color: #D7263D;
+}
+
+.slider-container {
+  overflow: hidden;
+}
+
+.media-card-container {
   display: flex;
   gap: 1rem;
   margin-top: 1rem;
-  overflow: hidden;
+  overflow: visible;
+  transition: transform 0.5s ease;
 }
 
 .media-card {

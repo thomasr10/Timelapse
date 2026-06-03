@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react"
 import { fetchGenres, fetchUpcomingMovies } from "../api/tmdb";
-import MediaCard from "../components/MediaCard";
 import type { Genre } from "../types/tmdb";
+import SliderMedia from "../components/SliderMedia"
 
 export interface Media {
     id: number,
-    title: string,
-    poster_path: string
+    title?: string | undefined,
+    name?: string | undefined,
+    poster_path: string,
     genre_ids: number[],
     genres: Genre[]
 }
@@ -20,7 +21,6 @@ export default function HomepageConnected() {
         fetchGenres()
             .then((data) => {
                 if (data === null) return;
-                console.log(data)
                 setGenres(data);
             });
     }, []);
@@ -28,7 +28,7 @@ export default function HomepageConnected() {
     useEffect(() => {
         fetchUpcomingMovies()
             .then((data) => {
-                console.log(data);
+                console.log(data.results)
                 setUpcomingMovies(data.results);
             })
     }, []);
@@ -38,17 +38,9 @@ export default function HomepageConnected() {
             <div className="section-title">
                 <h2>Films</h2>
             </div>
-            <section className="media-slider-section">
+            <section className="upcoming-movies media-slider-section">
                 <h3>Les prochaines sorties</h3>
-                <div className="media-card-slider">
-                    {
-                        upcomingMovies && (
-                            upcomingMovies.map((m) => (
-                                <MediaCard key={m.id} id={m.id} title={m.title} poster_path={`${import.meta.env.VITE_API_IMAGE_BASE_URL}/w500${m.poster_path}`} genre_ids={m.genre_ids} genres={genres} type="movie"/>
-                            ))
-                        )
-                    }
-                </div>
+                <SliderMedia media={upcomingMovies} genres={genres} />
             </section>
         </main>
     )

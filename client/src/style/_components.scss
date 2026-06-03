@@ -364,11 +364,58 @@ form {
     }
 }
 
-.media-card-slider {
+.slider-container {
+    position: relative;
+
+    .arrows-container {
+
+        .arrow-left {
+            position: absolute;
+            left: .5rem;
+        }
+
+        .arrow-right {
+            position: absolute;
+            right: .5rem;
+        }
+
+        .arrow-left,
+        .arrow-right {
+            opacity: .4;
+            transition: all .25s ease;
+            color: $main-color;
+            fill: none;
+            z-index: 999999999;
+            width: 32px;
+            height: 32px;
+            top: 40%;
+            transform: translateY(-40%);
+
+            @include desktop {
+                width: 32px;
+                height: 32px;
+            }
+
+            &:hover {
+                opacity: 1;
+                cursor: pointer;
+                fill: $main-color;
+                color: $accent-color;
+            }
+        }
+    }
+}
+
+.slider-container {
+    overflow: hidden;
+}
+
+.media-card-container {
     display: flex;
     gap: 1rem;
     margin-top: 1rem;
-    overflow: hidden;
+    overflow: visible;
+    transition: transform .5s ease;
 }
 
 .media-card {
