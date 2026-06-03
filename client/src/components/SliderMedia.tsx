@@ -22,13 +22,12 @@ export default function SliderMedia({ media, genres }: Props) {
     }
 
     const clickArrowRight = () => {
-        if (!cardRef.current) return;
-        if(!sliderRef.current) return;
+        if (!cardRef.current || !sliderRef.current) return;
 
-        const containerVisibleWidht = sliderRef.current.getBoundingClientRect().width;
-
-        const cardWidth = cardRef.current.children[0].getBoundingClientRect().width + 16;
-        const maxOffset = -(media.length * cardWidth - containerVisibleWidht);
+        const firstCard = cardRef.current.children[0] as HTMLElement;
+        const cardWidth = firstCard.getBoundingClientRect().width + 16;
+        const containerVisibleWidth = sliderRef.current.getBoundingClientRect().width;
+        const maxOffset = -(media.length * cardWidth - containerVisibleWidth);
 
         if (offset <= maxOffset) return;
         setOffset(prev => prev - cardWidth);
@@ -40,10 +39,10 @@ export default function SliderMedia({ media, genres }: Props) {
                 <CircleArrowLeft className="arrow-left" onClick={(offset === 0) ? undefined : () => clickArrowLeft()} />
                 <CircleArrowRight className="arrow-right" onClick={() => clickArrowRight()} />
             </div>
-            <div className="media-card-container" style={{ transform: `translateX(${offset}px)` }}>
+            <div ref={cardRef} className="media-card-container" style={{ transform: `translateX(${offset}px)` }}>
                 {
                     media.map(m => (
-                        <MediaCard cardRef={cardRef} key={m.id} id={m.id} title={m.title ?? m.name} poster_path={`${import.meta.env.VITE_API_IMAGE_BASE_URL}/w500${m.poster_path}`} genre_ids={m.genre_ids} genres={genres} type={m.title ? 'movie' : 'tv'} />
+                        <MediaCard key={m.id} id={m.id} title={m.title ?? m.name} poster_path={`${import.meta.env.VITE_API_IMAGE_BASE_URL}/w500${m.poster_path}`} genre_ids={m.genre_ids} genres={genres} type={m.title ? 'movie' : 'tv'} />
                     ))
                 }
             </div>

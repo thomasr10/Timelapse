@@ -68,12 +68,14 @@ export default function HomepageConnected() {
                     <SliderMedia media={trendingMovies} genres={genres} />
                 </section>
             </section>
-            <div className="section-title mt-32">
-                <h2>Séries</h2>
-            </div>
-            <section className="media-slider-section mt-24">
-                <h3>Les tendances</h3>
-                <SliderMedia media={trendingSeries} genres={genres} />
+            <section className="serie-section">
+                <div className="section-title mt-32">
+                    <h2>Séries</h2>
+                </div>
+                <section className="media-slider-section mt-24">
+                    <h3>Les tendances</h3>
+                    <SliderMedia media={trendingSeries} genres={genres} />
+                </section>
             </section>
         </main>
     )
