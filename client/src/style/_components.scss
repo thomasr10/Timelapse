@@ -623,6 +623,7 @@ form {
         gap: 2rem;
         min-width: 1000px;
         max-width: 1190px;
+        min-height: 500px;
 
         img {
             width: 280px;
@@ -892,7 +893,7 @@ form {
 .section-media-hero {
     @include desktop {
         position: absolute;
-        top: 30%;
+        top: 25%;
         left: 2rem;
     }
 }

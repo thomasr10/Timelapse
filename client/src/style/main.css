@@ -691,6 +691,7 @@ form .submit-container {
     gap: 2rem;
     min-width: 1000px;
     max-width: 1190px;
+    min-height: 500px;
   }
   .media-hero img {
     width: 280px;
@@ -930,7 +931,7 @@ form .submit-container {
 @media (min-width: 1200px) {
   .section-media-hero {
     position: absolute;
-    top: 30%;
+    top: 25%;
     left: 2rem;
   }
 }
