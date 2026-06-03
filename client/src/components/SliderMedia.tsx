@@ -43,7 +43,7 @@ export default function SliderMedia({ media, genres }: Props) {
             <div className="media-card-container" style={{ transform: `translateX(${offset}px)` }}>
                 {
                     media.map(m => (
-                        <MediaCard cardRef={cardRef} key={m.id} id={m.id} title={m.title ?? m.name} poster_path={`${import.meta.env.VITE_API_IMAGE_BASE_URL}/w500${m.poster_path}`} genre_ids={m.genre_ids} genres={genres} type="movie" />
+                        <MediaCard cardRef={cardRef} key={m.id} id={m.id} title={m.title ?? m.name} poster_path={`${import.meta.env.VITE_API_IMAGE_BASE_URL}/w500${m.poster_path}`} genre_ids={m.genre_ids} genres={genres} type={m.title ? 'movie' : 'tv'} />
                     ))
                 }
             </div>

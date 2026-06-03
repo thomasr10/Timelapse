@@ -9,6 +9,7 @@ import MediaCastInfo from "../components/MediaCastInfo";
 interface FullInfoMedia {
     id: number,
     title: string,
+    name: string,
     genre_ids: number[],
     genres: Genre[] | undefined,
     overview: string,
@@ -73,7 +74,7 @@ export default function MediaPage() {
             <main className="section-container media-page">
                 <section className="section-media-hero">
                     <MediaHero
-                        title={mediaInfos?.title}
+                        title={mediaInfos?.title ?? mediaInfos?.name}
                         poster_path={mediaInfos?.poster_path}
                         release_date={mediaInfos?.release_date}
                         genres={mediaInfos?.genres}

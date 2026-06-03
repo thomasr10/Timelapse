@@ -483,8 +483,8 @@ form .submit-container {
     height: 32px;
   }
 }
-.slider-container .arrows-container .arrow-left:hover,
-.slider-container .arrows-container .arrow-right:hover {
+.slider-container:hover .arrow-left,
+.slider-container:hover .arrow-right {
   opacity: 1;
   cursor: pointer;
   fill: #0A0F1F;

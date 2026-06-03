@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { fetchGenres, fetchTrendingMovies, fetchUpcomingMovies } from "../api/tmdb";
+import { fetchGenres, fetchTrendingMovies, fetchTrendingSeries, fetchUpcomingMovies } from "../api/tmdb";
 import type { Genre } from "../types/tmdb";
 import SliderMedia from "../components/SliderMedia"
 
@@ -17,6 +17,7 @@ export default function HomepageConnected() {
     const [upcomingMovies, setUpcomingMovies] = useState<Media[]>([]);
     const [genres, setGenres] = useState<Genre[]>([]);
     const [trendingMovies, setTrendingMovies] = useState<Media[]>([]);
+    const [trendingSeries, setTrendingSeries] = useState<Media[]>([]);
 
     // FETCH GENRES
     useEffect(() => {
@@ -43,6 +44,14 @@ export default function HomepageConnected() {
             })
     }, [trendingMovies]);
 
+    useEffect(() => {
+        fetchTrendingSeries()
+            .then((data) => {
+                console.log(data.results)
+                setTrendingSeries(data.results);
+            })
+    }, [])
+
 
     return (
         <main className="section-container home-connected">
@@ -50,7 +59,7 @@ export default function HomepageConnected() {
                 <div className="section-title">
                     <h2>Films</h2>
                 </div>
-                <section className="upcoming-movies media-slider-section mt-32">
+                <section className="upcoming-movies media-slider-section mt-24">
                     <h3>Les prochaines sorties</h3>
                     <SliderMedia media={upcomingMovies} genres={genres} />
                 </section>
@@ -58,6 +67,13 @@ export default function HomepageConnected() {
                     <h3>Les tendances</h3>
                     <SliderMedia media={trendingMovies} genres={genres} />
                 </section>
+            </section>
+            <div className="section-title mt-32">
+                <h2>Séries</h2>
+            </div>
+            <section className="media-slider-section mt-24">
+                <h3>Les tendances</h3>
+                <SliderMedia media={trendingSeries} genres={genres} />
             </section>
         </main>
     )

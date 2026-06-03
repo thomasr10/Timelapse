@@ -403,12 +403,22 @@ form {
                 height: 32px;
             }
 
-            &:hover {
-                opacity: 1;
-                cursor: pointer;
-                fill: $main-color;
-                color: $accent-color;
-            }
+            // &:hover {
+            //     opacity: 1;
+            //     cursor: pointer;
+            //     fill: $main-color;
+            //     color: $accent-color;
+            // }
+        }
+    }
+
+    &:hover {
+        .arrow-left,
+        .arrow-right {
+            opacity: 1;
+            cursor: pointer;
+            fill: $main-color;
+            color: $accent-color;
         }
     }
 }

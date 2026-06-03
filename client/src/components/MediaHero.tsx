@@ -6,14 +6,15 @@ import { Dot, Star, CirclePlus, Eye, Heart } from 'lucide-react'
 
 interface Props {
     poster_path: string | undefined,
-    title: string | undefined,
+    title?: string | undefined,
+    name?: string | undefined,
     genres: Genre[] | undefined,
     release_date: string | undefined,
     runtime: number | undefined,
     overview: string | undefined
 }
 
-export default function MediaHero({ poster_path, title, genres, release_date, runtime, overview }: Props) {
+export default function MediaHero({ poster_path, title, genres, release_date, runtime, overview, name }: Props) {
     return (
         <section className="media-hero">
             <figure>
@@ -21,7 +22,11 @@ export default function MediaHero({ poster_path, title, genres, release_date, ru
             </figure>
             <div className="infos-container">
                 <div className="main-info">
-                    <p className="title">{title}</p>
+                    <p className="title">
+                        {
+                            title ? title : name
+                        }
+                    </p>
                     <p className="description">{overview}</p>
                 </div>
                 <div className="sub-infos-container">
