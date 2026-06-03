@@ -25,10 +25,37 @@ export const fetchUpcomingMovies = async () => {
 
 // cache genre
 
-let cacheGenre: Genre[] | null = null;
+let cacheMovieGenre: Genre[] | null = null;
 
-export const fetchGenres = async () => {
+export const fetchMovieGenres = async () => {
 
+    try {
+        const response = await fetch(`${import.meta.env.VITE_TMDB_BASE_URL}/genre/tv/list?${import.meta.env.VITE_API_LANGUAGE_PARAM}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${import.meta.env.VITE_TMDB_API_KEY}`
+            }
+        });
+
+        if (!response.ok) {
+            console.error(`Error while fetching genres - status : ${response.status}`);
+        }
+
+        const data = await response.json();
+        cacheTVGenres = data.genres;
+
+        return cacheTVGenres;
+
+    } catch (e) {
+        console.error(e);
+        return [];
+    }
+}
+
+let cacheTVGenres: Genre[] | null = null;
+
+export const fetchTVGenre = async () => {
     try {
         const response = await fetch(`${import.meta.env.VITE_TMDB_BASE_URL}/genre/movie/list?${import.meta.env.VITE_API_LANGUAGE_PARAM}`, {
             method: 'GET',
@@ -43,9 +70,9 @@ export const fetchGenres = async () => {
         }
 
         const data = await response.json();
-        cacheGenre = data.genres;
+        cacheMovieGenre = data.genres;
 
-        return cacheGenre;
+        return cacheMovieGenre;
 
     } catch (e) {
         console.error(e);
@@ -124,7 +151,7 @@ export const fetchTrendingMovies = async () => {
 }
 
 export const fetchTrendingSeries = async () => {
-        try {
+    try {
         const response = await fetch(`${import.meta.env.VITE_TMDB_BASE_URL}trending/tv/week?${import.meta.env.VITE_API_LANGUAGE_PARAM}`, {
             method: 'GET',
             headers: {

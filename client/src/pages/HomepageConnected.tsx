@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { fetchGenres, fetchTrendingMovies, fetchTrendingSeries, fetchUpcomingMovies } from "../api/tmdb";
+import { fetchMovieGenres, fetchTrendingMovies, fetchTrendingSeries, fetchTVGenre, fetchUpcomingMovies } from "../api/tmdb";
 import type { Genre } from "../types/tmdb";
 import SliderMedia from "../components/SliderMedia"
 
@@ -9,24 +9,34 @@ export interface Media {
     name?: string | undefined,
     poster_path: string,
     genre_ids: number[],
-    genres: Genre[]
+    genres: Genre[],
+    media_type: string
 }
 
 export default function HomepageConnected() {
 
     const [upcomingMovies, setUpcomingMovies] = useState<Media[]>([]);
-    const [genres, setGenres] = useState<Genre[]>([]);
+    const [movieGenres, setMovieGenres] = useState<Genre[]>([]);
+    const [tvGenres, setTVGenres] = useState<Genre[]>([]);
     const [trendingMovies, setTrendingMovies] = useState<Media[]>([]);
     const [trendingSeries, setTrendingSeries] = useState<Media[]>([]);
 
     // FETCH GENRES
     useEffect(() => {
-        fetchGenres()
-            .then((data) => {
+        fetchMovieGenres()
+            .then(data => {
                 if (data === null) return;
-                setGenres(data);
+                setMovieGenres(data);
             });
     }, []);
+
+    useEffect(() => {
+        fetchTVGenre()
+            .then(data => {
+                if (data === null) return;
+                setTVGenres(data);
+            })
+    }, [])
 
     // FETCH MOVIES
     useEffect(() => {
@@ -39,6 +49,9 @@ export default function HomepageConnected() {
     useEffect(() => {
         fetchUpcomingMovies()
             .then((data) => {
+                data.results.forEach((movie: Media) => {
+                    movie.media_type = 'movie';
+                })
                 const trendingIds = trendingMovies.map(t => t.id);
                 setUpcomingMovies(data.results.filter((m: Media) => !trendingIds.includes(m.id)));
             })
@@ -50,8 +63,7 @@ export default function HomepageConnected() {
                 console.log(data.results)
                 setTrendingSeries(data.results);
             })
-    }, [])
-
+    }, []);
 
     return (
         <main className="section-container home-connected">
@@ -61,11 +73,11 @@ export default function HomepageConnected() {
                 </div>
                 <section className="upcoming-movies media-slider-section mt-24">
                     <h3>Les prochaines sorties</h3>
-                    <SliderMedia media={upcomingMovies} genres={genres} />
+                    <SliderMedia media={upcomingMovies} genres={movieGenres} />
                 </section>
                 <section className="trending-movies media-slider-section mt-24">
                     <h3>Les tendances</h3>
-                    <SliderMedia media={trendingMovies} genres={genres} />
+                    <SliderMedia media={trendingMovies} genres={movieGenres} />
                 </section>
             </section>
             <section className="serie-section">
@@ -74,7 +86,7 @@ export default function HomepageConnected() {
                 </div>
                 <section className="media-slider-section mt-24">
                     <h3>Les tendances</h3>
-                    <SliderMedia media={trendingSeries} genres={genres} />
+                    <SliderMedia media={trendingSeries} genres={tvGenres} />
                 </section>
             </section>
         </main>
