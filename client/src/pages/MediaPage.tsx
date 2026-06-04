@@ -67,7 +67,7 @@ export default function MediaPage() {
                 
                 ? 
                     <img className="backdrop-image"
-                        src={`${import.meta.env.VITE_API_IMAGE_BASE_URL}w1280${mediaInfos?.backdrop_path}`} alt={`Image de fond de ${mediaInfos?.title}`}
+                        src={`${import.meta.env.VITE_API_IMAGE_BASE_URL}original${mediaInfos?.backdrop_path}`} alt={`Image de fond de ${mediaInfos?.title}`}
                     />
                 : <div className="backdrop-image-replacement"></div>
             }

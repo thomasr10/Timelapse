@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { fetchMovieGenres, fetchTrendingMovies, fetchTrendingSeries, fetchTVGenre, fetchUpcomingMovies } from "../api/tmdb";
+import { fetchAiringSeries, fetchMovieGenres, fetchTrendingMovies, fetchTrendingSeries, fetchTVGenre, fetchUpcomingMovies } from "../api/tmdb";
 import type { Genre } from "../types/tmdb";
 import SliderMedia from "../components/SliderMedia"
 
@@ -20,6 +20,7 @@ export default function HomepageConnected() {
     const [tvGenres, setTVGenres] = useState<Genre[]>([]);
     const [trendingMovies, setTrendingMovies] = useState<Media[]>([]);
     const [trendingSeries, setTrendingSeries] = useState<Media[]>([]);
+    const [airingSeries, setAiringSeries] = useState<Media[]>([]);
 
     // FETCH GENRES
     useEffect(() => {
@@ -59,11 +60,23 @@ export default function HomepageConnected() {
 
     useEffect(() => {
         fetchTrendingSeries()
-            .then((data) => {
-                console.log(data.results)
+            .then(data => {
                 setTrendingSeries(data.results);
             })
     }, []);
+
+    useEffect(() => {
+        fetchAiringSeries(1)
+            .then(data => {
+                console.log(data.results);
+                data.results.forEach((serie: Media) => {
+                    serie.media_type = 'tv';
+                });
+
+                const trendingIds = trendingSeries.map(m => m.id);
+                setAiringSeries(data.results.filter((m: Media) => !trendingIds.includes(m.id)));
+            })
+    }, [trendingSeries])
 
     return (
         <main className="section-container home-connected">
@@ -84,6 +97,10 @@ export default function HomepageConnected() {
                 <div className="section-title mt-32">
                     <h2>Séries</h2>
                 </div>
+                <section className="media-slider-section mt-24">
+                    <h3>En diffusion</h3>
+                    <SliderMedia media={airingSeries} genres={tvGenres} />
+                </section>
                 <section className="media-slider-section mt-24">
                     <h3>Les tendances</h3>
                     <SliderMedia media={trendingSeries} genres={tvGenres} />
