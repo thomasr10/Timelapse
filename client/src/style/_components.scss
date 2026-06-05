@@ -119,52 +119,6 @@ form {
         }
     }
 
-    .search-container {
-        position: relative;
-        width: 100%;
-        max-width: 800px;
-        display: none;
-
-        @include tablet {
-            display: flex;
-        }
-
-        .search-icon {
-            color: $secondary-text-color;
-            height: 1rem;
-            position: absolute;
-            left: .5rem;
-            top: 50%;
-            transform: translateY(-50%);
-            pointer-events: none;
-            transition: left ease .25s;
-
-
-            &.focused {
-                left: calc(100% - 2rem);
-            }
-        }
-
-        input {
-            height: 30px;
-            background-color: $secondary-color;
-            border: none;
-            border-radius: .5rem;
-            padding-left: 2.25rem;
-            color: $secondary-text-color;
-            width: 100%;
-
-            &:focus {
-                padding: 0 1.75rem 0 .5rem;
-            }
-
-            &::placeholder {
-                color: $secondary-text-color;
-            }
-        }
-
-    }
-
     .burger-container {
         position: relative;
     }
@@ -190,7 +144,7 @@ form {
         top: 100%;
         margin-top: .5rem;
         right: 0;
-        width: 120px;
+        // width: 120px;
         background-color: $secondary-color;
         padding: .5rem 1rem;
         border-radius: 8px;
@@ -288,6 +242,113 @@ form {
             }
         }
 
+    }
+
+}
+
+.search-container {
+    display: none;
+    max-width: 800px;
+
+    @include tablet {
+        display: flex;
+    }
+}
+
+.search-mobile-container {
+    max-width: 340px;
+    display: flex;
+    margin-bottom: 2rem;
+}
+
+.search-container,
+.search-mobile-container {
+    position: relative;
+    width: 100%;
+
+    .search-icon {
+        color: $secondary-text-color;
+        height: 1rem;
+        position: absolute;
+        left: .5rem;
+        top: 50%;
+        transform: translateY(-50%);
+        pointer-events: none;
+        transition: left ease .25s;
+
+
+        &.focused {
+            left: calc(100% - 2rem);
+        }
+    }
+
+    input {
+        height: 30px;
+        background-color: $secondary-color;
+        border: none;
+        border-radius: .5rem;
+        padding-left: 2.25rem;
+        color: $secondary-text-color;
+        width: 100%;
+
+        &:focus {
+            padding: 0 1.75rem 0 .5rem;
+        }
+
+        &::placeholder {
+            color: $secondary-text-color;
+        }
+    }
+}
+
+.search-panel {
+    position: absolute;
+    top: 140%;
+    width: 100%;
+    z-index: 999999999999999;
+    background-color: $panel-color;
+    border-radius: 8px;
+    outline: 1px solid $panel-bordel-color;
+
+    .results-choice-container {
+        position: relative;
+        height: 48px;
+
+        .choice-container {
+            display: flex;
+            align-items: center;
+            height: 48px;
+            width: 100%;
+            
+
+            .search-choice-btn {
+                border: none;
+                color: #fff;
+                height: 100%;
+                background: none;
+                font-size: $font-size-small;
+                font-family: $inter-regular;
+                width: 100%;
+
+                &.focused-btn {
+                    background-color: $panel-bordel-color;
+                }
+            }
+        }
+
+        .results-container {
+            position: absolute;
+            height: 400px;
+            top: calc(100% + 1rem);
+            background-color: $panel-color;
+            z-index: 99999999999999999999999999;
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        .results-container {
+            outline: 1px solid $panel-bordel-color;
+        }
     }
 
 }
@@ -398,6 +459,7 @@ form {
     }
 
     &:hover {
+
         .arrow-left,
         .arrow-right {
             opacity: 1;
@@ -814,7 +876,8 @@ form {
 
         .revenue,
         .ended {
-            color: #21C45D;;
+            color: #21C45D;
+            ;
         }
 
         dt,

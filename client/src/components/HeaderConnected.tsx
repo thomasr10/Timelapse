@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
-import { Bell, CircleUserRound, Search, Menu, UsersRound } from 'lucide-react';
+import { Bell, CircleUserRound, Menu, UsersRound } from 'lucide-react';
 import { useState } from "react";
+import SearchBar from "./SearchBar";
 
 export default function HeaderConnected() {
-
-    const [focused, setFocused] = useState(false);
+    
     const [isOpen, setIsOpen] = useState(false);
 
     const handleBurgerMenu = () => {
@@ -29,17 +29,8 @@ export default function HeaderConnected() {
                 </nav>
             </div>
             {/* DESKTOP MENU */}
-            <div className="search-container">
-                <input
-                    type="text"
-                    name="search"
-                    id="search"
-                    placeholder="Rechercher un film, une série, un acteur ou un utilisateur..."
-                    onFocus={() => setFocused(true)}
-                    onBlur={() => setFocused(false)}
-                />
-                <Search className={`search-icon ${focused ? 'focused' : ''}`} />
-            </div>
+            <SearchBar className={"search-container"}/>
+
             <div className="header-connected-link">
                 <Link to={'/community'} className="community-icon"><UsersRound /></Link>
                 <Bell />

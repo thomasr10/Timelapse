@@ -2,6 +2,8 @@ import { useEffect, useState } from "react"
 import { fetchAiringSeries, fetchMovieGenres, fetchTrendingMovies, fetchTrendingSeries, fetchTVGenre, fetchUpcomingMovies } from "../api/tmdb";
 import type { Genre } from "../types/tmdb";
 import SliderMedia from "../components/SliderMedia"
+import UseViewportWidth from "../hooks/useviewportWidth";
+import SearchBar from "../components/SearchBar";
 
 export interface Media {
     id: number,
@@ -21,6 +23,8 @@ export default function HomepageConnected() {
     const [trendingMovies, setTrendingMovies] = useState<Media[]>([]);
     const [trendingSeries, setTrendingSeries] = useState<Media[]>([]);
     const [airingSeries, setAiringSeries] = useState<Media[]>([]);
+
+    const viewportWidth = UseViewportWidth();
 
     // FETCH GENRES
     useEffect(() => {
@@ -80,6 +84,11 @@ export default function HomepageConnected() {
 
     return (
         <main className="section-container home-connected">
+            {
+               viewportWidth  < 1200 && (
+                    <SearchBar className="search-mobile-container"/>   
+                )
+            }
             <section className="movie-section">
                 <div className="section-title">
                     <h2>Films</h2>
