@@ -562,8 +562,16 @@ form {
     .sub-infos-container {
 
         display: flex;
-        justify-content: space-between;
-        align-items: center;
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 1rem;
+
+        @include desktop {
+            align-items: center;
+            flex-direction: row;
+            gap: 0;
+            justify-content: space-between;
+        }
 
         .rate-container {
             display: flex;
@@ -593,11 +601,16 @@ form {
             width: 2px;
             height: 2px;
             background-color: $secondary-text-color;
+            display: none;
+
+            @include desktop {
+                display: block;
+            }
         }
 
         p {
             color: $secondary-text-color;
-            font-size: $font-size-xs;
+            font-size: $font-size-small;
             font-family: $inter-regular;
         }
 
