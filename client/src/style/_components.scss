@@ -526,7 +526,7 @@ form {
     .main-info {
         display: flex;
         flex-direction: column;
-        gap: 8px;
+        gap: 12px;
 
         .description {
             color: $secondary-text-color;
@@ -762,7 +762,7 @@ form {
 
 .rate {
     display: flex;
-    gap: 8px;
+    gap: 4px;
     color: $rating-color;
 
     .icon {
@@ -791,8 +791,17 @@ form {
             font-family: $inter-semibold;
         }
 
-        .revenue {
-            color: #21C45D;
+        .revenue,
+        .returning {
+            color: #1E90FF;
+        }
+
+        .canceled {
+            color: $accent-color;
+        }
+
+        .ended {
+            color: #21C45D;;
         }
 
         dt,

@@ -9,12 +9,14 @@ interface Props {
     title?: string | undefined,
     name?: string | undefined,
     genres: Genre[] | undefined,
-    release_date: string | undefined,
-    runtime: number | undefined,
+    release_date?: string | undefined,
+    runtime?: number | undefined,
+    number_of_seasons?: number | undefined,
     overview: string | undefined
 }
 
-export default function MediaHero({ poster_path, title, genres, release_date, runtime, overview, name }: Props) {
+export default function MediaHero({ poster_path, title, genres, release_date, runtime, overview, name,number_of_seasons }: Props) {
+
     return (
         <section className="media-hero">
             <figure>
@@ -35,13 +37,11 @@ export default function MediaHero({ poster_path, title, genres, release_date, ru
                         <p>5</p>
                     </div>
                     <Dot className="dot-separator" />
-                    <p className="sub-info">{genres?.slice(0, 3)?.map((g, index) => (
-                        (index < 2) ? `${g.name} / ` : `${g.name}`
-                    ))}</p>
+                    <p className="sub-info">{genres?.slice(0, 3).map(g => g.name).join(' / ')}</p>
                     <Dot className="dot-separator" />
                     <p className="sub-info">{formatDate(release_date)?.getFullYear()}</p>
                     <Dot className="dot-separator" />
-                    <p className="sub-info">{formatTime(runtime)}</p>
+                    <p className="sub-info">{runtime ? formatTime(runtime) : (number_of_seasons && number_of_seasons<= 1) ? `${number_of_seasons} saison` : `${number_of_seasons} saisons` }</p>
                 </div>
                 <div className="hero-btn-container">
                     <Button className="main-btn red-btn full-btn-resizable" type="button" disabled={false}>

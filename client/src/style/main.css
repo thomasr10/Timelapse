@@ -614,7 +614,7 @@ form .submit-container {
 .media-hero .main-info {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 12px;
 }
 .media-hero .main-info .description {
   color: #A9B4C6;
@@ -816,7 +816,7 @@ form .submit-container {
 
 .rate {
   display: flex;
-  gap: 8px;
+  gap: 4px;
   color: #FFC107;
 }
 .rate .icon {
@@ -842,7 +842,14 @@ form .submit-container {
   color: #FFFFFF;
   font-family: "Inter-SemiBold";
 }
-.media-infos-container .media-info-row .revenue {
+.media-infos-container .media-info-row .revenue,
+.media-infos-container .media-info-row .returning {
+  color: #1E90FF;
+}
+.media-infos-container .media-info-row .canceled {
+  color: #D7263D;
+}
+.media-infos-container .media-info-row .ended {
   color: #21C45D;
 }
 .media-infos-container .media-info-row dt,

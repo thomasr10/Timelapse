@@ -8,8 +8,8 @@ import MediaCastInfo from "../components/MediaCastInfo";
 
 interface FullInfoMedia {
     id: number,
-    title: string,
-    name: string,
+    title?: string,
+    name?: string,
     genre_ids: number[],
     genres: Genre[] | undefined,
     overview: string,
@@ -17,10 +17,13 @@ interface FullInfoMedia {
     budget: number,
     revenue: number,
     backdrop_path: string,
-    director: string,
+    director?: string,
     cast: CastMember[],
-    release_date: string,
-    runtime: number,
+    release_date?: string,
+    first_air_date?: string
+    runtime?: number,
+    number_of_seasons?: number,
+    status: string,
 }
 
 export default function MediaPage() {
@@ -32,13 +35,24 @@ export default function MediaPage() {
 
     useEffect(() => {
         if (!type || !id) return;
+        fetchMedia(type, Number(id))
+            .then(data => console.log(data))
+    }, []);
+
+    useEffect(() => {
+        if (!type || !id) return;
 
         const fetchMediaData = async () => {
             const [movie, credits] = await Promise.all([
                 fetchMedia(type, Number(id)),
                 fetchMediaCredits(type, Number(id))
             ]);
-            setMediaInfos({ ...movie, director: credits.crew.find((p: CrewMember) => p.job === "Director")?.name, cast: credits.cast });
+            setMediaInfos({
+                ...movie, director: type === 'movie' ?
+                    credits.crew.find((p: CrewMember) => p.job === "Director")?.name :
+                    movie.created_by[0]?.name
+                    ,cast: credits.cast
+            });
         };
 
         fetchMediaData();
@@ -61,33 +75,37 @@ export default function MediaPage() {
     }
 
     return (
-        <>  
+        <>
             {
                 mediaInfos?.backdrop_path
-                
-                ? 
+
+                    ?
                     <img className="backdrop-image"
                         src={`${import.meta.env.VITE_API_IMAGE_BASE_URL}original${mediaInfos?.backdrop_path}`} alt={`Image de fond de ${mediaInfos?.title}`}
                     />
-                : <div className="backdrop-image-replacement"></div>
+                    : <div className="backdrop-image-replacement"></div>
             }
             <main className="section-container media-page">
                 <section className="section-media-hero">
                     <MediaHero
                         title={mediaInfos?.title ?? mediaInfos?.name}
                         poster_path={mediaInfos?.poster_path}
-                        release_date={mediaInfos?.release_date}
+                        release_date={(mediaInfos?.release_date) ? mediaInfos.release_date : mediaInfos?.first_air_date}
                         genres={mediaInfos?.genres}
                         runtime={mediaInfos?.runtime}
+                        number_of_seasons={mediaInfos?.number_of_seasons}
                         overview={mediaInfos?.overview}
                     />
                 </section>
                 <section className="section-media-info">
                     <MediaInfo
                         director={mediaInfos?.director}
-                        release_date={mediaInfos?.release_date}
+                        release_date={(mediaInfos?.release_date) ? mediaInfos.release_date : mediaInfos?.first_air_date}
                         budget={mediaInfos?.budget}
                         revenue={mediaInfos?.revenue}
+                        type={type}
+                        status={mediaInfos?.status}
+                        number_of_seasons={mediaInfos?.number_of_seasons}
                     />
                 </section>
                 <section className="section-cast-info">
