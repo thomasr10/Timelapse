@@ -857,13 +857,13 @@ form .submit-container {
   color: #FFFFFF;
   font-family: "Inter-SemiBold";
 }
-.media-infos-container .media-info-row .revenue,
 .media-infos-container .media-info-row .returning {
   color: #1E90FF;
 }
 .media-infos-container .media-info-row .canceled {
   color: #D7263D;
 }
+.media-infos-container .media-info-row .revenue,
 .media-infos-container .media-info-row .ended {
   color: #21C45D;
 }
