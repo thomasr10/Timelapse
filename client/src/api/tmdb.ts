@@ -193,3 +193,26 @@ export const fetchAiringSeries = async (page: number) => {
         console.error(e);
     }
 }
+
+export const fetchMovieByTitle = async (value: string) => {
+
+    try {
+        const response = await fetch(`${import.meta.env.VITE_TMDB_BASE_URL}search/movie?query=${value}&${import.meta.env.VITE_API_LANGUAGE_PARAM}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${import.meta.env.VITE_TMDB_API_KEY}`
+            }
+        });
+
+        if (!response.ok) {
+            console.error(`Error while fetching data from API - status : ${response.status}`);
+        }
+
+        const data = await response.json();
+        return data;
+
+    } catch (e) {
+        console.error(e);
+    }
+}

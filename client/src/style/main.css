@@ -165,12 +165,6 @@ a {
   text-decoration: none;
 }
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
 body {
   background-color: #0A0F1F;
 }
