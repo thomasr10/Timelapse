@@ -14,7 +14,9 @@ export interface Media {
     genres: Genre[],
     media_type: string,
     release_date?: string,
-    first_air_date?: string
+    first_air_date?: string,
+    profile_path?: string,
+    popularity: number
 }
 
 export default function HomepageConnected() {

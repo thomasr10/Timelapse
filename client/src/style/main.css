@@ -574,6 +574,7 @@ form .submit-container {
 .search-panel .results-choice-container .panel-results-container .panel-media-card img {
   width: 60px;
   height: 90px;
+  flex-shrink: 0;
 }
 .search-panel .results-choice-container .panel-results-container .panel-media-card .infos {
   display: flex;

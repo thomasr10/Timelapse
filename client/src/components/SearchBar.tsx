@@ -1,8 +1,9 @@
 import { Search } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import SearchFilterPanel from "./SearchFilterPanel";
-import { fetchMovieByTitle, fetchSerieByTitle } from "../api/tmdb";
+import { fetchCastByName, fetchMovieByTitle, fetchSerieByTitle } from "../api/tmdb";
 import type { Media } from "../pages/HomepageConnected";
+import type { CastMember } from "../types/tmdb";
 
 export default function SearchBar({ className }: { className: string }) {
 
@@ -39,12 +40,20 @@ export default function SearchBar({ className }: { className: string }) {
         if (categorie === "movie") {
             await fetchMovieByTitle(value)
                 .then(data => {
-                    setMedias(data.results);
+                    const sortByPopularity = data.results.sort((a: Media, b: Media) => b.popularity - a.popularity);
+                    setMedias(sortByPopularity);
                 })
         } else if (categorie === "tv") {
             await fetchSerieByTitle(value)
                 .then(data => {
-                    setMedias(data.results);
+                    const sortByPopularity = data.results.sort((a: Media, b: Media) => b.popularity - a.popularity);
+                    setMedias(sortByPopularity);
+                })
+        } else if (categorie === "cast") {
+            await fetchCastByName(value)
+                .then(data => {
+                    const sortByPopularity = data.results.sort((a: CastMember, b: CastMember) => b.popularity - a.popularity);
+                    setMedias(sortByPopularity);
                 })
         }
     }
@@ -67,7 +76,7 @@ export default function SearchBar({ className }: { className: string }) {
                 autoComplete="off"
                 ref={inputRef}
             />
-            <Search className={`search-icon ${focused ? 'focused' : ''}`}/>
+            <Search className={`search-icon ${focused ? 'focused' : ''}`} />
             {focused && (
                 <SearchFilterPanel
                     categorie={categorie}
