@@ -35,8 +35,7 @@ export default function MediaPage() {
 
     useEffect(() => {
         if (!type || !id) return;
-        fetchMedia(type, Number(id))
-            .then(data => console.log(data))
+        fetchMedia(type, Number(id));
     }, []);
 
     useEffect(() => {

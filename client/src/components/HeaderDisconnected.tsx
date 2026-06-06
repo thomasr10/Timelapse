@@ -11,7 +11,7 @@ export default function HeaderDisconnected() {
     }
 
     return (
-        <header className="header">
+        <header className="header section-container">
             <div className="logo-container">
                 <Link to={'/'}>Time<span className="accent">lapse</span></Link>
             </div>

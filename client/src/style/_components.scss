@@ -108,7 +108,6 @@ form {
     justify-content: space-between;
     height: 3.75rem;
     align-items: center;
-    padding: 0 1.5rem;
     gap: 1rem;
 
     .logo-container {
@@ -329,6 +328,11 @@ form {
                 font-size: $font-size-small;
                 font-family: $inter-regular;
                 width: 100%;
+                transition: background-color .3s ease;
+
+                &:hover {
+                    cursor: pointer;
+                }
 
                 &.focused-btn {
                     background-color: $panel-bordel-color;
@@ -336,7 +340,7 @@ form {
             }
         }
 
-        .results-container {
+        .panel-results-container {
             position: absolute;
             height: 400px;
             top: calc(100% + 1rem);
@@ -344,11 +348,74 @@ form {
             z-index: 99999999999999999999999999;
             width: 100%;
             border-radius: 8px;
+            overflow-y: scroll;
+            display: flex;
+            flex-direction: column;
+            scrollbar-width: none;
+            outline: 1px solid $panel-bordel-color;
+
+            .no-result {
+                text-align: center;
+                color: $main-text-color;
+                line-height: 400px;
+                font-family: $inter-bold;
+                font-size: $font-size-large;
+
+                @include large-desktop {
+                    line-height: 500px;
+                }
+            }
+
+            @include large-desktop {
+                height: 500px;
+            }
+
+            .panel-media-card {
+                display: flex;
+                gap: 1rem;
+                align-items: center;
+                padding: 1rem;
+                border-bottom: solid 1px $panel-bordel-color;
+                transition: background-color .3s ease;
+
+                &:hover {
+                    cursor: pointer;
+                    background-color: $panel-bordel-color;
+                }
+
+                img {
+                    width: 60px;
+                    height: 90px;
+                }
+
+                .infos {
+                    display: flex;
+                    justify-content: space-between;
+                    width: 100%;
+                    align-items: center;
+
+                    .title {
+                        color: $main-text-color;
+                        font-family: $inter-semibold;
+                    }
+
+                    .date {
+                        color: $secondary-text-color;
+                        font-family: $inter-regular;
+                    }
+
+                    .title,
+                    .date {
+                        font-size: $font-size-small;
+
+                        @include desktop {
+                            font-size: $font-size-medium;
+                        }
+                    }
+                }
+            }
         }
 
-        .results-container {
-            outline: 1px solid $panel-bordel-color;
-        }
     }
 
 }

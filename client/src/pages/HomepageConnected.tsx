@@ -12,7 +12,9 @@ export interface Media {
     poster_path: string,
     genre_ids: number[],
     genres: Genre[],
-    media_type: string
+    media_type: string,
+    release_date?: string,
+    first_air_date?: string
 }
 
 export default function HomepageConnected() {
@@ -72,7 +74,6 @@ export default function HomepageConnected() {
     useEffect(() => {
         fetchAiringSeries(1)
             .then(data => {
-                console.log(data.results);
                 data.results.forEach((serie: Media) => {
                     serie.media_type = 'tv';
                 });

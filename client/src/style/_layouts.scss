@@ -4,12 +4,21 @@
     width: 100%;
     max-width: $mobile-width;
     margin: 0 auto;
-    gap: 2rem;
+    // gap: 2rem;
+
+    @include large-mobile {
+        max-width: $large-mobile-width;
+    }
 
     @include tablet {
         gap: 2.5rem;
         max-width: $tablet-width;
     }
+
+    @include large-tablet {
+        max-width: $large-tablet-width;
+    }
+
     @include desktop {
         gap: 3rem;
         max-width: $desktop-width;

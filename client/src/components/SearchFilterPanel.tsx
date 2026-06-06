@@ -1,29 +1,34 @@
+import type React from "react"
+import type { Media } from "../pages/HomepageConnected"
+import PanelResults from "./PanelResults"
+
 interface Props {
     categorie: string,
-    setCategorie: React.Dispatch<React.SetStateAction<string>>
+    setCategorie: React.Dispatch<React.SetStateAction<string>>,
+    medias: Media[] | undefined,
+    onSelect: () => void,
+    inputRef: React.RefObject<HTMLInputElement | null>
 }
 
-export default function SearchFilterPanel({ categorie, setCategorie }: Props) {
-
-    
+export default function SearchFilterPanel({ categorie, setCategorie, medias, onSelect, inputRef }: Props) {
 
     return (
         <div className="search-panel">
             <div className="results-choice-container">
                 <div className="choice-container">
                     <button
-                        value="films"
+                        value="movie"
                         onMouseDown={(e) => e.preventDefault()}
                         onClick={(e) => setCategorie((e.target as HTMLButtonElement).value)}
-                        className={`search-choice-btn ${categorie === "films" ? "focused-btn" : ""}`}
+                        className={`search-choice-btn ${categorie === "movie" ? "focused-btn" : ""}`}
                     >
                         Films
                     </button>
                     <button
-                        value="series"
+                        value="tv"
                         onMouseDown={(e) => e.preventDefault()}
                         onClick={(e) => setCategorie((e.target as HTMLButtonElement).value)}
-                        className={`search-choice-btn ${categorie === "series" ? "focused-btn" : ""}`}
+                        className={`search-choice-btn ${categorie === "tv" ? "focused-btn" : ""}`}
                     >
                         Séries
                     </button>
@@ -44,7 +49,7 @@ export default function SearchFilterPanel({ categorie, setCategorie }: Props) {
                         Utilisateurs
                     </button>
                 </div>
-                <div className="results-container"></div>
+                <PanelResults medias={medias} categorie={categorie} onSelect={onSelect} inputRef={inputRef}/>
             </div>
         </div>
     )
