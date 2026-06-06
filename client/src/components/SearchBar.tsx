@@ -1,7 +1,7 @@
 import { Search } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import SearchFilterPanel from "./SearchFilterPanel";
-import { fetchMovieByTitle } from "../api/tmdb";
+import { fetchMovieByTitle, fetchSerieByTitle } from "../api/tmdb";
 import type { Media } from "../pages/HomepageConnected";
 
 export default function SearchBar({ className }: { className: string }) {
@@ -39,10 +39,21 @@ export default function SearchBar({ className }: { className: string }) {
         if (categorie === "movie") {
             await fetchMovieByTitle(value)
                 .then(data => {
-                    setMedias(data.results)
+                    setMedias(data.results);
+                })
+        } else if (categorie === "tv") {
+            await fetchSerieByTitle(value)
+                .then(data => {
+                    setMedias(data.results);
                 })
         }
     }
+
+    useEffect(() => {
+        if (inputRef.current) {
+            searchContent(inputRef.current?.value, categorie);
+        }
+    }, [categorie]);
 
     return (
         <div className={className} ref={containerRef}>
