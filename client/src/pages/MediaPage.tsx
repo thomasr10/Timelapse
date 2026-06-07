@@ -94,6 +94,8 @@ export default function MediaPage() {
                         runtime={mediaInfos?.runtime}
                         number_of_seasons={mediaInfos?.number_of_seasons}
                         overview={mediaInfos?.overview}
+                        type={type}
+                        id={Number(id)}
                     />
                 </section>
                 <section className="section-media-info">

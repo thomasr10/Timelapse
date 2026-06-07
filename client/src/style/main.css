@@ -1022,6 +1022,13 @@ form .submit-container {
   height: 24px;
   stroke-width: 2.5;
 }
+@media (min-width: 1200px) {
+  .is-viewed-btn .icon,
+  .is-liked-btn .icon {
+    width: 28px;
+    height: 28px;
+  }
+}
 .is-viewed-btn:hover,
 .is-liked-btn:hover {
   cursor: pointer;
@@ -1036,9 +1043,21 @@ form .submit-container {
 
 .is-liked-btn {
   background-color: #FFFFFF;
+  transition: all 0.3s ease;
 }
 .is-liked-btn .icon {
   color: #D7263D;
+  transition: all 0.3s ease;
+}
+.is-liked-btn:hover {
+  background-color: rgba(255, 255, 255, 0.8784313725);
+}
+.is-liked-btn:hover .icon {
+  fill: #D7263D;
+}
+
+.liked {
+  fill: #D7263D;
 }
 
 .rate {

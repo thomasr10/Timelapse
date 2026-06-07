@@ -880,6 +880,11 @@ form {
         width: 24px;
         height: 24px;
         stroke-width: 2.5;
+
+        @include desktop {
+            width: 28px;
+            height: 28px;
+        }
     }
 
     &:hover {
@@ -897,10 +902,23 @@ form {
 
 .is-liked-btn {
     background-color: #FFFFFF;
-
+    transition: all .3s ease;
+    
     .icon {
         color: $accent-color;
+        transition: all .3s ease;
     }
+
+    &:hover {
+        background-color: #ffffffe0;
+        .icon {
+            fill: $accent-color;
+        }
+    }
+}
+
+.liked {
+    fill: $accent-color;
 }
 
 .rate {
