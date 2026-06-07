@@ -92,7 +92,7 @@ class UserMedia
         return $this->rating;
     }
 
-    public function setRating(string $rating): static
+    public function setRating(?string $rating): static
     {
         $this->rating = $rating;
 

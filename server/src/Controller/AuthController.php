@@ -80,7 +80,13 @@ final class AuthController extends AbstractController
 
         return $this->json([
             'message' => 'Utilisateur récupéré',
-            'user' => $serializer->serialize($user, 'json', [AbstractNormalizer::IGNORED_ATTRIBUTES => ['age']])
+            'user' => [
+                'id' => $user->getId(),
+                'email' => $user->getEmail(),
+                'username' => $user->getUsername(),
+                'display_username' => $user->getDisplayUsername(),
+                'profile_picture' => $user->getProfilePicture(),
+            ]
         ]);
     }
 

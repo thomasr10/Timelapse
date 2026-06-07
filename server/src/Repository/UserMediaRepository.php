@@ -3,6 +3,8 @@
 namespace App\Repository;
 
 use App\Entity\UserMedia;
+use App\Entity\User;
+use App\Entity\Media;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -15,6 +17,33 @@ class UserMediaRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, UserMedia::class);
     }
+
+    /**
+     * @return Media or null
+     */
+    public function findByUserIdAndMediaId(User $user, Media $media): ?UserMedia
+       {
+           return $this->createQueryBuilder('um')
+               ->andWhere('um.user = :user')
+               ->andWhere('um.media = :media')
+               ->setParameter('user', $user)
+               ->setParameter('media', $media)
+               ->getQuery()
+               ->getOneOrNullResult()
+           ;
+       }
+
+    public function findUserMediaByUserTypeTmdb(User $user, Media $media): ?UserMedia
+       {
+           return $this->createQueryBuilder('um')
+               ->andWhere('um.user = :user')
+               ->andWhere('um.media = :media')
+               ->setParameter('user', $user)
+               ->setParameter('media', $media)
+               ->getQuery()
+               ->getOneOrNullResult()
+           ;
+       }
 
     //    /**
     //     * @return UserMedia[] Returns an array of UserMedia objects
@@ -31,13 +60,4 @@ class UserMediaRepository extends ServiceEntityRepository
     //        ;
     //    }
 
-    //    public function findOneBySomeField($value): ?UserMedia
-    //    {
-    //        return $this->createQueryBuilder('u')
-    //            ->andWhere('u.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
 }

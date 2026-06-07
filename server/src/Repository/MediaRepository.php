@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Media;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\App\Entity\User;
 
 /**
  * @extends ServiceEntityRepository<Media>
@@ -15,6 +16,20 @@ class MediaRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Media::class);
     }
+        /**
+         * @return Meida or null
+         */
+        public function findByTMDBIdAndType(int $media_id, string $type): ?Media
+        {
+            return $this->createQueryBuilder('m')
+                ->andWhere('m.tmdb_id = :media_id')
+                ->andWhere('m.type = :type')
+                ->setParameter('media_id', $media_id)
+                ->setParameter('type', $type)
+                ->getQuery()
+                ->getOneOrNullResult()
+            ;
+        }
 
     //    /**
     //     * @return Media[] Returns an array of Media objects
