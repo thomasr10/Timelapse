@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import type { Genre } from "../types/tmdb"
 import { formatDate } from "../utils/formatDate"
 import { formatTime } from "../utils/formatTime"
@@ -24,15 +24,22 @@ export default function MediaHero({ id, poster_path, title, genres, release_date
 
     const [isLiked, setIsLiked] = useState(false);
 
+    useEffect(() => {
+        if (!userMedia) return;
+        setIsLiked(userMedia.is_liked);
+    }, [])
+
     const handleLikeBtn = async () => {
-        if (!id) return;
+        if (!id || !type) return;
+
         const newLikedValue = !isLiked;
-        setIsLiked(!isLiked);
-        if (!type) return;
+        const previousLikedValue = isLiked;
+        setIsLiked(newLikedValue);
+
         try {
             await handleLike(newLikedValue, id, type);
         } catch {
-            setIsLiked(isLiked);
+            setIsLiked(previousLikedValue);
         }
     }
 
@@ -76,8 +83,7 @@ export default function MediaHero({ id, poster_path, title, genres, release_date
                             <Heart
                                 className="icon"
                                 fill={
-                                    isLiked ? "#D7263D" : userMedia?.is_liked ?
-                                        "#D7263D" : "transparent"
+                                    isLiked ? "#D7263D" : "transparent"
                                 }
                             />
                         </div>
