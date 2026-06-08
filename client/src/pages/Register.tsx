@@ -8,6 +8,8 @@ import type { RegisterFormType } from "../types/auth";
 import { registerSchema } from "../types/auth";
 import Button from "../components/Button";
 import { Info } from "lucide-react";
+import { useLoader } from "../context/LoaderContext";
+import Loader from "../components/Loader";
 
 const initialValues: RegisterFormType = {
     username: "",
@@ -19,11 +21,12 @@ export default function Register() {
 
     const [error, setError] = useState<string | null>(null);
     const navigate = useNavigate();
+    const { startFetch, endFetch, loadingCount } = useLoader();
 
     const onSubmit = async (values: RegisterFormType, { setErrors }: FormikHelpers<RegisterFormType>) => {
 
         setError(null);
-
+        startFetch();
         try {
 
             const { response, data } = await registerUser(values);
@@ -42,10 +45,12 @@ export default function Register() {
         } catch (e) {
             setError("Une erreur réseau est survenue, veuillez réessayer.");
             console.error(e);
+        } finally {
+            endFetch();
         }
     }
 
-    return (
+    return ( loadingCount > 0 ? <Loader /> :
         <>
             <h1>Bienvenue sur Time<span className="accent">lapse</span></h1>
             <main className="section-container">

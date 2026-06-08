@@ -7,6 +7,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 import { useAuth } from "../context/AuthContext";
+import { useLoader } from "../context/LoaderContext";
+import Loader from "../components/Loader";
 
 const initialValues: LoginFormType = {
     email: "",
@@ -15,17 +17,18 @@ const initialValues: LoginFormType = {
 
 export default function Login() {
 
-    const [error, setError] = useState< string | null >(null);
+    const [error, setError] = useState<string | null>(null);
     const navigate = useNavigate();
     const { refreshUser } = useAuth();
+    const { startFetch, endFetch, loadingCount } = useLoader();
 
     const onSubmit = async (values: LoginFormType) => {
         setError(null);
-
+        startFetch();
         try {
             const { response, data } = await login(values);
 
-            if(!response.ok) {
+            if (!response.ok) {
                 setError(data.message);
                 console.error(`Erreur lors de la connexion: ${response.status} => ${data.message}`);
             } else {
@@ -33,13 +36,15 @@ export default function Login() {
                 navigate('/');
             }
 
-        } catch(e) {
+        } catch (e) {
             setError("Une erreur réseau est survenue, veuillez réessayer.");
             console.error(e);
+        } finally {
+            endFetch();
         }
     }
 
-    return (
+    return (loadingCount > 0 ? <Loader /> :
         <>
             <h1>Bon retour parmi <span className="accent">nous&nbsp;!</span></h1>
             <main className="section-container">
@@ -55,7 +60,7 @@ export default function Login() {
                             {
                                 error && (
                                     <div className="form-error-message">
-                                        <p>{ error }</p>
+                                        <p>{error}</p>
                                     </div>
                                 )
                             }

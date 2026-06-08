@@ -33,7 +33,7 @@ final class UserMediaController extends AbstractController
             return $this->json([
                 'message' => 'Media non trouvé',
                 'results' => null
-            ], 404);
+            ],);
         }
 
         $user_media = $this->userMediaService->findUserMedia($user, $media);
@@ -42,7 +42,7 @@ final class UserMediaController extends AbstractController
             return $this->json([
                 'message' => 'L\'utilisateur n\'a pas d\'interaction avec le media',
                 'results' => null
-            ], 404);
+            ],);
         }
         
 

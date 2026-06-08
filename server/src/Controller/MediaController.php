@@ -29,7 +29,7 @@ final class MediaController extends AbstractController
         if (!$data["isLiked"] || !$data["idMedia"] || !$data["type"]) {
             return $this->json([
                 'message' => 'Données manquantes'
-            ]);
+            ],);
         }
 
         // FindOrCreateMedia(id_media)

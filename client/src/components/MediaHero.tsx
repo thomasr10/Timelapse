@@ -1,12 +1,11 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import type { Genre } from "../types/tmdb"
 import { formatDate } from "../utils/formatDate"
 import { formatTime } from "../utils/formatTime"
 import Button from "./Button"
 import { Dot, Star, CirclePlus, Eye, Heart } from 'lucide-react'
-import { fetchUserMediaData, handleLike } from "../api/api"
+import { handleLike } from "../api/api"
 import type { UserMedia } from "../types/api"
-
 interface Props {
     id?: number
     poster_path: string | undefined,
@@ -17,19 +16,13 @@ interface Props {
     runtime?: number | undefined,
     number_of_seasons?: number | undefined,
     overview: string | undefined,
-    type: string | undefined
+    type: string | undefined,
+    userMedia: UserMedia | null,
 }
 
-export default function MediaHero({ id, poster_path, title, genres, release_date, runtime, overview, name, number_of_seasons, type }: Props) {
+export default function MediaHero({ id, poster_path, title, genres, release_date, runtime, overview, name, number_of_seasons, type, userMedia }: Props) {
 
     const [isLiked, setIsLiked] = useState(false);
-    const [userMedia, setUserMedia] = useState<UserMedia | null>(null)
-
-    useEffect(() => {
-        if (!id || !type) return;
-        fetchUserMediaData(id, type)
-            .then(data => {console.log(data); setUserMedia(data.results)});
-    }, [id, type]);
 
     const handleLikeBtn = async () => {
         if (!id) return;

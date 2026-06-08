@@ -9,6 +9,8 @@ import NotFound from "./pages/NotFound";
 import PublicRoutes from "./router/PublicRoutes";
 import MediaPage from "./pages/MediaPage";
 import ProtectedRoutes from "./router/ProtectedRoutes";
+import Loader from "./components/Loader";
+import { LoaderProvider } from "./context/LoaderContext";
 
 
 function App() {
@@ -16,43 +18,53 @@ function App() {
   return (
     <>
       <AuthProvider>
-        <Header />
-        <Routes>
-          <Route
-            path="/register"
-            element={
-              <PublicRoutes>
-                <Register />
-              </PublicRoutes>
-            }
-          />
-          <Route
-            path="/login"
-            element={
-              <PublicRoutes>
-                <Login />
-              </PublicRoutes>
-            }
-          />
-          <Route
-            path="/"
-            element={
-              <Homepage />
-            }
-          />
-          <Route
-            path="*"
-            element={<NotFound />}
-          />
-          <Route
-            path="/media/:type/:id"
-            element={
-              <ProtectedRoutes>
-                <MediaPage />
-              </ProtectedRoutes>
-            }
-          />
-        </Routes>
+        <LoaderProvider>
+          <Header />
+          <Routes>
+            <Route
+              path="/register"
+              element={
+                <PublicRoutes>
+                  <Register />
+                </PublicRoutes>
+              }
+            />
+            <Route
+              path="/login"
+              element={
+                <PublicRoutes>
+                  <Login />
+                </PublicRoutes>
+              }
+            />
+            <Route
+              path="/"
+              element={
+                <Homepage />
+              }
+            />
+            <Route
+              path="*"
+              element={<NotFound />}
+            />
+            <Route
+              path="/media/:type/:id"
+              element={
+                <ProtectedRoutes>
+                  <MediaPage />
+                </ProtectedRoutes>
+              }
+            />
+            <Route
+              path="/loader"
+              element={
+                <ProtectedRoutes>
+                  <Loader />
+                </ProtectedRoutes>
+              }
+            />
+          </Routes>
+        </LoaderProvider>
       </AuthProvider>
     </>
   )
