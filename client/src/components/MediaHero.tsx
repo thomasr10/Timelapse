@@ -3,9 +3,10 @@ import type { Genre } from "../types/tmdb"
 import { formatDate } from "../utils/formatDate"
 import { formatTime } from "../utils/formatTime"
 import Button from "./Button"
-import { Dot, Star, CirclePlus, Eye, Heart } from 'lucide-react'
-import { handleLike } from "../api/api"
+import { Dot, Star, CirclePlus, Eye, Heart, EyeOff } from 'lucide-react'
+import { handleLike, handleWatch } from "../api/api"
 import type { UserMedia } from "../types/api"
+
 interface Props {
     id?: number
     poster_path: string | undefined,
@@ -23,10 +24,12 @@ interface Props {
 export default function MediaHero({ id, poster_path, title, genres, release_date, runtime, overview, name, number_of_seasons, type, userMedia }: Props) {
 
     const [isLiked, setIsLiked] = useState(false);
+    const [isWatched, setIsWatched] = useState(false);
 
     useEffect(() => {
         if (!userMedia) return;
         setIsLiked(userMedia.is_liked);
+        setIsWatched(userMedia.is_watched);
     }, [])
 
     const handleLikeBtn = async () => {
@@ -40,6 +43,20 @@ export default function MediaHero({ id, poster_path, title, genres, release_date
             await handleLike(newLikedValue, id, type);
         } catch {
             setIsLiked(previousLikedValue);
+        }
+    }
+
+    const handleWatchBtn = async () => {
+        if (!id || !type) return;
+
+        const newWatchdValue = !isWatched;
+        const previousWatchedValue = isWatched;
+        setIsWatched(newWatchdValue);
+
+        try {
+            await handleWatch(newWatchdValue, id, type);
+        } catch {
+            setIsWatched(previousWatchedValue);
         }
     }
 
@@ -76,8 +93,11 @@ export default function MediaHero({ id, poster_path, title, genres, release_date
                 </div>
                 <div className="interact-container">
                     <div className="btn-wrapper">
-                        <div className="is-viewed-btn">
-                            <Eye className="icon" />
+                        <div className="is-viewed-btn" onClick={() => handleWatchBtn()}>
+                            {
+                                isWatched ?
+                                    <Eye className="icon" /> : <EyeOff className="icon"/>
+                            }
                         </div>
                         <div className="is-liked-btn" onClick={() => handleLikeBtn()}>
                             <Heart

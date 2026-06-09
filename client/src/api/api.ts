@@ -23,6 +23,31 @@ export const handleLike = async (isLiked: boolean, tmdb: number, type: string) =
     }
 }
 
+export const handleWatch = async (isWatched: boolean, tmdb: number, type: string) => {
+
+    try {
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/media/watch`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            credentials: "include",
+            body: JSON.stringify({ isWatched, tmdb, type })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            console.error(`Error while handling watch action : ${response.status}`);
+            return data.message;
+        }
+
+        return;
+    } catch (e) {
+        console.error(e);
+    }
+}
+
 export const fetchUserMediaData = async (tmdb: number, type: string) => {
     try {
         const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/user_media/${type}/${tmdb}`, {

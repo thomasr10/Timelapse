@@ -35,6 +35,15 @@ class UserMediaService
     public function like(UserMedia $userMedia, bool $isLiked): void
     {
         $userMedia->setIsLiked($isLiked);
+        $userMedia->setIsWatched($isWatched);
+        $this->em->persist($userMedia);
+        $this->em->flush();
+        return;
+    }
+
+    public function watch(UserMedia $userMedia, bool $isWatched): void
+    {
+        $userMedia->setIsWatched($isWatched);
         $this->em->persist($userMedia);
         $this->em->flush();
         return;
