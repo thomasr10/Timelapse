@@ -39,6 +39,9 @@ export default function MediaHero({ id, poster_path, title, genres, release_date
         const previousLikedValue = isLiked;
         setIsLiked(newLikedValue);
 
+        if (newLikedValue) {
+            setIsWatched(newLikedValue);
+        }
         try {
             await handleLike(newLikedValue, id, type);
         } catch {

@@ -1,7 +1,7 @@
 export const handleLike = async (isLiked: boolean, tmdb: number, type: string) => {
 
     try {
-        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/media/like`, {
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/user_media/like`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -26,7 +26,7 @@ export const handleLike = async (isLiked: boolean, tmdb: number, type: string) =
 export const handleWatch = async (isWatched: boolean, tmdb: number, type: string) => {
 
     try {
-        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/media/watch`, {
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/user_media/watch`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
