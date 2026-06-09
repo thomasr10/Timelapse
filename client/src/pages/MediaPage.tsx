@@ -37,6 +37,7 @@ export default function MediaPage() {
     const [maxSlice, setMaxSlice] = useState(5);
     const [castBtnText, setCastBtnText] = useState("Voir plus");
     const [userMedia, setUserMedia] = useState<UserMedia | null>(null);
+    const [disabled, setDisabled] = useState(false);
 
     const { startFetch, endFetch, loadingCount } = useLoader();
 
@@ -62,19 +63,30 @@ export default function MediaPage() {
             .finally(() => endFetch());
     }, [type, id]);
 
+    useEffect(() => {
+        if (!mediaInfos) return;
+        const isDisabled = mediaInfos.cast.length > 5;
+        setDisabled(!isDisabled);
+    }, [mediaInfos]);
+
     const displayAllCast = () => {
         if (!mediaInfos) return;
 
         const total = mediaInfos.cast.length;
+        console.log(total);
         const remaining = total - maxSlice;
+        console.log(remaining);
 
-        if (remaining >= 5) {
+        if (remaining > 5) {
             const newSlice = maxSlice + 5;
             setMaxSlice(newSlice);
-            setCastBtnText(newSlice >= total ? "Voir moins" : "Voir plus");
+        } else if (remaining <= 5 && remaining > 0) {
+            setCastBtnText("Voir moins")
+            const newSlice = total;
+            setMaxSlice(newSlice);
         } else {
-            setCastBtnText("Voir plus");
             setMaxSlice(5);
+            setCastBtnText("Voir plus")
         }
     }
 
@@ -129,7 +141,11 @@ export default function MediaPage() {
                                 ))}
                             </div>
                             <div className="btn-container">
-                                <button className="main-btn blue-btn full-btn" onClick={() => displayAllCast()}>
+                                <button 
+                                    className="main-btn blue-btn full-btn" 
+                                    onClick={() => displayAllCast()}
+                                    disabled={disabled}
+                                >
                                     {castBtnText}
                                 </button>
                             </div>
