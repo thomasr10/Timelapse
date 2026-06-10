@@ -7,6 +7,9 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
 use App\Service\WatchlistService;
+use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Serializer\Exception\CircularReferenceException;
+use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 
 #[Route('/api/watchlist')]
 final class WatchlistController extends AbstractController
@@ -50,5 +53,41 @@ final class WatchlistController extends AbstractController
                 ]
             ],
         ]);
+    }
+
+    #[Route('/get-all', name: "app_watchlist_all", methods: ["GET"])]
+    public function getAllWatchlistOfUser(SerializerInterface $serializer): JsonResponse
+    {   
+        $user = $this->getUser();
+
+        if (!$user) {
+            return $this->json([
+                'message' => 'Utilisateur non trouvé',
+                'results' => null
+            ], 404);
+        }
+
+        $watchlists = $this->watchlistService->getAllWatchlistOfUser($user);
+
+        if ($watchlists === null) {
+            return $this->json([
+                'message' => 'Aucune watchlist trouvée',
+                'results' => null
+            ]);
+        }
+
+        $context = [
+            AbstractNormalizer::CIRCULAR_REFERENCE_HANDLER => function (object $obj, ?string $format, array $context): string {
+                if ($obj instanceof Watchlist) {
+                    return $obj->getName();
+                }
+                return "null";
+            },
+        ];
+
+        return $this->json([
+            'message' => 'Watchlists récupérées avec succès',
+            'results' => $serializer->serialize($watchlists, 'json', $context)
+        ], 200, [], $context);
     }
 }

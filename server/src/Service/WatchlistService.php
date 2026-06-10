@@ -4,11 +4,12 @@ namespace App\Service;
 
 use App\Entity\Watchlist;
 use App\Entity\User;
+use App\Repository\WatchlistRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
 class WatchlistService
 {   
-    public function __construct(private EntityManagerInterface $em){}
+    public function __construct(private EntityManagerInterface $em, private WatchlistRepository $watchlistRepository){}
 
     public function create(string $title, string $description, bool $is_public, User $user): Watchlist
     {
@@ -23,5 +24,12 @@ class WatchlistService
         $this->em->flush();
 
         return $watchlist;
+    }
+
+    public function getAllWatchlistOfUser(User $user): ?array
+    {
+        $watchlists = $this->watchlistRepository->findByUser($user);
+        
+        return $watchlists;
     }
 }
