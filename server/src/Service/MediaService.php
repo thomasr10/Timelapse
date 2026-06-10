@@ -27,10 +27,4 @@ class MediaService
 
         return $media_entity;
     }
-
-    public function findMedia(string $type, int $tmdb): ?Media
-    {
-        $media = $this->mediaRepository->findByTMDBIdAndType($tmdb, $type);
-        return $media;
-    }
 }

@@ -29,7 +29,12 @@ class WatchlistService
     public function getAllWatchlistOfUser(User $user): ?array
     {
         $watchlists = $this->watchlistRepository->findByUser($user);
-        
         return $watchlists;
     }
+
+    // public function findWatchlist(int $watchlist_id): ?Watchlist
+    // {
+    //     $watchlist = $this->watchlistRepository->findById($watchlist_id);
+    //     return $watchlist;
+    // }
 }

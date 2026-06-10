@@ -7,6 +7,9 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
 use App\Service\WatchlistService;
+use App\Service\MediaService;
+use App\Service\UserMediaService;
+use App\Service\WatchlistMediaService;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Serializer\Exception\CircularReferenceException;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
@@ -14,7 +17,12 @@ use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 #[Route('/api/watchlist')]
 final class WatchlistController extends AbstractController
 {
-    public function __construct(private WatchlistService $watchlistService){}
+    public function __construct(
+        private WatchlistService $watchlistService, 
+        private MediaService $mediaService, 
+        private WatchlistMediaService $watchlistMediaService, 
+        private userMediaService $userMediaService
+    ){}
 
     #[Route('/create', name: 'app_watchlist', methods: ["POST"])]
     public function create(Request $request): JsonResponse
@@ -64,7 +72,7 @@ final class WatchlistController extends AbstractController
             return $this->json([
                 'message' => 'Utilisateur non trouvé',
                 'results' => null
-            ], 404);
+            ], 400);
         }
 
         $watchlists = $this->watchlistService->getAllWatchlistOfUser($user);
@@ -89,5 +97,27 @@ final class WatchlistController extends AbstractController
             'message' => 'Watchlists récupérées avec succès',
             'results' => $serializer->serialize($watchlists, 'json', $context)
         ], 200, [], $context);
+    }
+
+    #[Route('/media/add', name: "app_watchlist_media_add", methods: ["POST"])]
+    public function addMediaToWatchlist(Request $request): JsonResponse
+    {
+        $user = $this->getUser();
+
+        $data = json_decode($request->getContent(), true);
+
+        if (!isset($data["tmdb"], $data["watchlist_id"], $data["type"])) {
+            return $this->json([
+                'message' => 'Données manquantes'
+            ], 400);
+        }
+
+        $media = $this->mediaService->findOrCreate($data["tmdb"], $data["type"]);
+        $userMedia = $this->userMediaService->findOrCreate($user, $media);
+        $this->watchlistMediaService->addMedia($media->getId(), $data["watchlist_id"]);
+
+        return $this->json([
+            'message' => 'Media ajouté à la watchlist'
+        ]);
     }
 }
