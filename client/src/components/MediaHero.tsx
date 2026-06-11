@@ -6,6 +6,7 @@ import Button from "./Button"
 import { Dot, Star, CirclePlus, Eye, Heart, EyeOff } from 'lucide-react'
 import { handleLike, handleWatch } from "../api/api"
 import type { UserMedia } from "../types/api"
+import { useLocation } from "react-router-dom"
 
 interface Props {
     id?: number
@@ -72,7 +73,7 @@ export default function MediaHero({ id, poster_path, title, genres, release_date
                 <div className="main-info">
                     <p className="title">
                         {
-                            title ? title : name
+                            type === "movie" ? title : name
                         }
                     </p>
                     <p className="description">{overview}</p>
@@ -87,7 +88,7 @@ export default function MediaHero({ id, poster_path, title, genres, release_date
                     <Dot className="dot-separator" />
                     <p className="sub-info">{formatDate(release_date)?.getFullYear()}</p>
                     <Dot className="dot-separator" />
-                    <p className="sub-info">{runtime ? formatTime(runtime) : (number_of_seasons && number_of_seasons <= 1) ? `${number_of_seasons} saison` : `${number_of_seasons} saisons`}</p>
+                    <p className="sub-info">{type === "movie" ? formatTime(runtime) : (number_of_seasons && number_of_seasons <= 1) ? `${number_of_seasons} saison` : `${number_of_seasons} saisons`}</p>
                 </div>
                 <div className="hero-btn-container">
                     <Button className="main-btn red-btn full-btn-resizable" type="button" disabled={false}>

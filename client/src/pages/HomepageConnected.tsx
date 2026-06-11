@@ -6,6 +6,7 @@ import UseViewportWidth from "../hooks/useviewportWidth";
 import SearchBar from "../components/SearchBar";
 import { useLoader } from "../context/LoaderContext";
 import Loader from "../components/Loader";
+import { startsWith } from "zod";
 
 export interface Media {
     id: number,
@@ -68,11 +69,14 @@ export default function HomepageConnected() {
         startFetch();
         fetchUpcomingMovies()
             .then((data) => {
+                console.log(data.results)
                 data.results.forEach((movie: Media) => {
                     movie.media_type = 'movie';
                 })
+                // filtre pour ne pas avoir un meme film dans les 2 sliders + enlever les film
+                // qui vont ressortir
                 const trendingIds = trendingMovies.map(t => t.id);
-                setUpcomingMovies(data.results.filter((m: Media) => !trendingIds.includes(m.id)));
+                setUpcomingMovies(data.results.filter((m: Media) => !trendingIds.includes(m.id) && m.release_date?.startsWith(new Date().getFullYear().toString())));
             })
             .finally(() => endFetch());
     }, [trendingMovies]);

@@ -130,7 +130,7 @@ export const fetchMediaCredits = async (type: string, id: number) => {
 
 export const fetchTrendingMovies = async () => {
     try {
-        const response = await fetch(`${import.meta.env.VITE_TMDB_BASE_URL}trending/movie/week?${import.meta.env.VITE_API_LANGUAGE_PARAM}`, {
+        const response = await fetch(`${import.meta.env.VITE_TMDB_BASE_URL}/trending/movie/week?${import.meta.env.VITE_API_LANGUAGE_PARAM}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -152,7 +152,7 @@ export const fetchTrendingMovies = async () => {
 
 export const fetchTrendingSeries = async () => {
     try {
-        const response = await fetch(`${import.meta.env.VITE_TMDB_BASE_URL}trending/tv/week?${import.meta.env.VITE_API_LANGUAGE_PARAM}`, {
+        const response = await fetch(`${import.meta.env.VITE_TMDB_BASE_URL}/trending/tv/week?${import.meta.env.VITE_API_LANGUAGE_PARAM}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -174,7 +174,7 @@ export const fetchTrendingSeries = async () => {
 
 export const fetchAiringSeries = async (page: number) => {
     try {
-        const response = await fetch(`${import.meta.env.VITE_TMDB_BASE_URL}discover/tv?${import.meta.env.VITE_API_LANGUAGE_PARAM}&sort_by=popularity.desc&with_status=0&page=${page}`, {
+        const response = await fetch(`${import.meta.env.VITE_TMDB_BASE_URL}/discover/tv?${import.meta.env.VITE_API_LANGUAGE_PARAM}&sort_by=popularity.desc&with_status=0&page=${page}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -197,7 +197,7 @@ export const fetchAiringSeries = async (page: number) => {
 export const fetchMovieByTitle = async (value: string) => {
 
     try {
-        const response = await fetch(`${import.meta.env.VITE_TMDB_BASE_URL}search/movie?query=${value}&${import.meta.env.VITE_API_LANGUAGE_PARAM}`, {
+        const response = await fetch(`${import.meta.env.VITE_TMDB_BASE_URL}/search/movie?query=${value}&${import.meta.env.VITE_API_LANGUAGE_PARAM}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -220,7 +220,7 @@ export const fetchMovieByTitle = async (value: string) => {
 export const fetchSerieByTitle = async (value: string) => {
 
     try {
-        const response = await fetch(`${import.meta.env.VITE_TMDB_BASE_URL}search/tv?query=${value}&${import.meta.env.VITE_API_LANGUAGE_PARAM}`, {
+        const response = await fetch(`${import.meta.env.VITE_TMDB_BASE_URL}/search/tv?query=${value}&${import.meta.env.VITE_API_LANGUAGE_PARAM}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -243,7 +243,7 @@ export const fetchSerieByTitle = async (value: string) => {
 export const fetchCastByName = async (value: string) => {
 
     try {
-        const response = await fetch(`${import.meta.env.VITE_TMDB_BASE_URL}search/person?query=${value}&${import.meta.env.VITE_API_LANGUAGE_PARAM}`, {
+        const response = await fetch(`${import.meta.env.VITE_TMDB_BASE_URL}/search/person?query=${value}&${import.meta.env.VITE_API_LANGUAGE_PARAM}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
