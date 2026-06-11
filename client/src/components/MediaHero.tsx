@@ -6,7 +6,6 @@ import Button from "./Button"
 import { Dot, Star, CirclePlus, Eye, Heart, EyeOff } from 'lucide-react'
 import { handleLike, handleWatch } from "../api/api"
 import type { UserMedia } from "../types/api"
-import { useLocation } from "react-router-dom"
 
 interface Props {
     id?: number

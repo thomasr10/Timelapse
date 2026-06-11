@@ -28,7 +28,7 @@ final class UserMediaController extends AbstractController
             ], 404);
         }
 
-        $media = $this->mediaService->findMedia($type, $tmdb);
+        $media = $this->mediaService->findMedia($tmdb, $type);
 
         if (!$media) {
             return $this->json([

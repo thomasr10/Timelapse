@@ -6,7 +6,6 @@ import UseViewportWidth from "../hooks/useviewportWidth";
 import SearchBar from "../components/SearchBar";
 import { useLoader } from "../context/LoaderContext";
 import Loader from "../components/Loader";
-import { startsWith } from "zod";
 
 export interface Media {
     id: number,
