@@ -120,4 +120,25 @@ final class WatchlistController extends AbstractController
             'message' => 'Media ajouté à la watchlist'
         ]);
     }
+    
+    #[Route('/media/delete', name: "app_watchlist_media_delete", methods: ["DELETE"])]
+    public function deleteMediaToWatchlist(Request $request): JsonResponse
+    {
+        $user = $this->getUser();
+        
+        $data = json_decode($request->getContent(), true);
+
+        if (!isset($data["tmdb"], $data["watchlist_id"], $data["type"])) {
+            return $this->json([
+                'message' => 'Données manquantes'
+            ], 400);
+        }
+
+        $media = $this->mediaService->findOrCreate($data["tmdb"], $data["type"]);
+        $this->watchlistMediaService->deleteMedia($media->getId(), $data["watchlist_id"]);
+
+        return $this->json([
+            'message' => 'Media supprimé de la watchlist'
+        ]);
+    }
 }

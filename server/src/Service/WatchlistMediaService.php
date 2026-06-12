@@ -16,4 +16,13 @@ class WatchlistMediaService
         ]);
         
     }
+
+    public function deleteMedia(int $media_id, int $watchlist_id)
+    {
+        $this->connection->delete('watchlist_media', [
+            'watchlist_id' => $watchlist_id,
+            'media_id' => $media_id
+        ]);
+        
+    }
 }
