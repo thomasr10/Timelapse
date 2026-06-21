@@ -112,6 +112,8 @@ export const addMovieToWatchlist = async (watchlist_id: number, tmdb: number, ty
             return data;
         }
 
+        return data;
+
     } catch (e) {
         console.error(e);
     }

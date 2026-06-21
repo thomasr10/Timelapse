@@ -115,7 +115,14 @@ final class WatchlistController extends AbstractController
 
         $media = $this->mediaService->findOrCreate($data["tmdb"], $data["type"]);
         $userMedia = $this->userMediaService->findOrCreate($user, $media);
-        $this->watchlistMediaService->addMedia($media->getId(), $data["watchlist_id"]);
+        $insert = $this->watchlistMediaService->addMedia($media->getId(), $data["watchlist_id"]);
+
+        if(gettype($insert) === 'string') {
+            return $this->json([
+                'message' => $insert,
+                'results' => null
+            ]);
+        }
 
         return $this->json([
             'message' => 'Media ajouté à la watchlist'

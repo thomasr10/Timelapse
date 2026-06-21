@@ -29,6 +29,8 @@ export default function MediaHero({ id, poster_path, title, genres, release_date
 
     // Watchlists modal
     const [addModalIsOpen, setAddModalIsOpen] = useState(false);
+    // create watchlist modal
+    const [createModalIsOpen, setCreateModalIsOpen] = useState(false);
 
     useEffect(() => {
         if (!userMedia) return;
@@ -71,14 +73,22 @@ export default function MediaHero({ id, poster_path, title, genres, release_date
     const handleAddMovie = () => {
         if (!selectedId || !id || !type) return;
         addMovieToWatchlist(selectedId, id, type)
-            .then((data) => alert(data.message));
+            .then((data) => {
+                onAddModalClose();
+                alert(data.message);
+            });
+    }
+
+    const onAddModalClose = () => {
+        setAddModalIsOpen(false);
+        setSelectedId(null);
     }
 
     return (
         <>
             {
                 addModalIsOpen && (
-                    <AddWatchlistModal watchlists={userWatchlists} onSelect={setSelectedId} selectedId={selectedId} onClose={setAddModalIsOpen} onValidate={() => handleAddMovie()}/>
+                    <AddWatchlistModal watchlists={userWatchlists} onSelect={setSelectedId} selectedId={selectedId} onClose={() => onAddModalClose()} onValidate={() => handleAddMovie()}/>
                 )
             }
             < section className="media-hero">

@@ -952,6 +952,9 @@ form .submit-container {
   background-color: #D7263D;
   color: #E6ECF5;
 }
+.red-btn.disabled {
+  opacity: 0.8;
+}
 .red-btn:hover {
   background-color: #B51E30;
   cursor: pointer;

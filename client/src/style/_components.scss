@@ -811,6 +811,10 @@ form {
 .red-btn {
     background-color: $accent-color;
     color: $main-text-color;
+    
+    &.disabled {
+        opacity: .8;
+    }
     &:hover {
         background-color: $hover-color;
         cursor: pointer;
