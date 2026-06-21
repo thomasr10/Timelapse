@@ -7,8 +7,8 @@ import MediaInfo from "../components/MediaInfo";
 import MediaCastInfo from "../components/MediaCastInfo";
 import { useLoader } from "../context/LoaderContext";
 import Loader from "../components/Loader";
-import type { UserMedia } from "../types/api";
-import { fetchUserMediaData } from "../api/api";
+import { type Watchlist, type UserMedia } from "../types/api";
+import { fetchUserMediaData, fetchUserWatchlists } from "../api/api";
 
 interface FullInfoMedia {
     id: number,
@@ -38,8 +38,15 @@ export default function MediaPage() {
     const [castBtnText, setCastBtnText] = useState("Voir plus");
     const [userMedia, setUserMedia] = useState<UserMedia | null>(null);
     const [disabled, setDisabled] = useState(false);
+    const [userWatchlists, setUserWatchlists] = useState<Watchlist[] | null>(null);
 
     const { startFetch, endFetch, loadingCount } = useLoader();
+
+    // Récupérer les watchlists du user
+    useEffect(() => {
+        fetchUserWatchlists()
+            .then((data) => setUserWatchlists(data.results));
+    }, []);
 
     useEffect(() => {
         if (!type || !id) return;
@@ -114,6 +121,7 @@ export default function MediaPage() {
                                 type={type}
                                 id={Number(id)}
                                 userMedia={userMedia}
+                                userWatchlists={userWatchlists}
                             />
                         </section>
                         <section className="section-media-info">

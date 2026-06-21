@@ -810,7 +810,7 @@ form {
 
 .red-btn {
     background-color: $accent-color;
-
+    color: $main-text-color;
     &:hover {
         background-color: $hover-color;
         cursor: pointer;
@@ -823,6 +823,14 @@ form {
     &:hover {
         cursor: pointer;
     }
+}
+
+.disabled {
+    background-color: #8a8585bf;
+}
+
+.grey-btn {
+    color: $main-color;
 }
 
 .main-btn {
@@ -1126,5 +1134,115 @@ form {
 
     100% {
         transform: rotate(360deg);
+    }
+}
+
+.modal-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, .4);
+    z-index: 999999999999999999999999;
+}
+
+.add-watchlist-modal {
+    max-width: 300px;
+    width: 100%;
+    background-color: $panel-color;
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: solid 1px $panel-bordel-color;
+
+    @include large-mobile {
+        max-width: 400px;
+    }
+
+    @include tablet {
+        max-width: 680px;
+    }
+
+    .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: $main-text-color;
+
+        p {
+            font-family: $inter-semibold;
+        }
+    }
+
+    .btn-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: $panel-color;
+        padding-top: 1rem;
+        gap: 1rem;
+    }
+}
+
+.small-btn {
+    font-size: $font-size-xs;
+    border: none;
+    border-radius: 4px;
+    font-family: $inter-bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: .5rem 1rem;
+
+    .icone {
+        width: 1rem;
+        height: 1rem;
+        stroke-width: 3;
+    }
+}
+
+.user-watchlists-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    max-height: 300px;
+    overflow-y: scroll;
+    scrollbar-width: none;
+
+    @include tablet {
+        max-height: 400px;
+    }
+
+    .watchlist-container {
+        padding: 1rem;
+        border: solid 1px $panel-bordel-color;
+        border-radius: 4px;
+        display: flex;
+        flex-direction: column;
+        gap: .88rem;
+        font-family: $inter-regular;
+
+        &:hover {
+            background-color: $panel-bordel-color;
+            cursor: pointer
+        }
+
+        &.selected {
+            background-color: $panel-bordel-color;
+        }
+
+        .title {
+            color: $main-text-color;
+            font-size: $font-size-medium;
+        }
+
+        .description {
+            color: $secondary-text-color;
+            font-size: $font-size-small;
+        }
     }
 }

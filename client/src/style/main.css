@@ -950,6 +950,7 @@ form .submit-container {
 
 .red-btn {
   background-color: #D7263D;
+  color: #E6ECF5;
 }
 .red-btn:hover {
   background-color: #B51E30;
@@ -961,6 +962,14 @@ form .submit-container {
 }
 .blue-btn:hover {
   cursor: pointer;
+}
+
+.disabled {
+  background-color: rgba(138, 133, 133, 0.7490196078);
+}
+
+.grey-btn {
+  color: #0A0F1F;
 }
 
 .main-btn {
@@ -1242,4 +1251,107 @@ form .submit-container {
   100% {
     transform: rotate(360deg);
   }
+}
+.modal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 1000000000000000000000000;
+}
+
+.add-watchlist-modal {
+  max-width: 300px;
+  width: 100%;
+  background-color: #0D1324;
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: solid 1px #1A2238;
+}
+@media (min-width: 576px) {
+  .add-watchlist-modal {
+    max-width: 400px;
+  }
+}
+@media (min-width: 768px) {
+  .add-watchlist-modal {
+    max-width: 680px;
+  }
+}
+.add-watchlist-modal .modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #E6ECF5;
+}
+.add-watchlist-modal .modal-header p {
+  font-family: "Inter-SemiBold";
+}
+.add-watchlist-modal .btn-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #0D1324;
+  padding-top: 1rem;
+  gap: 1rem;
+}
+
+.small-btn {
+  font-size: 0.75rem;
+  border: none;
+  border-radius: 4px;
+  font-family: "Inter-Bold";
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0.5rem 1rem;
+}
+.small-btn .icone {
+  width: 1rem;
+  height: 1rem;
+  stroke-width: 3;
+}
+
+.user-watchlists-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  max-height: 300px;
+  overflow-y: scroll;
+  scrollbar-width: none;
+}
+@media (min-width: 768px) {
+  .user-watchlists-container {
+    max-height: 400px;
+  }
+}
+.user-watchlists-container .watchlist-container {
+  padding: 1rem;
+  border: solid 1px #1A2238;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.88rem;
+  font-family: "Inter-Regular";
+}
+.user-watchlists-container .watchlist-container:hover {
+  background-color: #1A2238;
+  cursor: pointer;
+}
+.user-watchlists-container .watchlist-container.selected {
+  background-color: #1A2238;
+}
+.user-watchlists-container .watchlist-container .title {
+  color: #E6ECF5;
+  font-size: 1rem;
+}
+.user-watchlists-container .watchlist-container .description {
+  color: #A9B4C6;
+  font-size: 0.88rem;
 }/*# sourceMappingURL=main.css.map */

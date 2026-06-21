@@ -63,7 +63,7 @@ final class WatchlistController extends AbstractController
         ]);
     }
 
-    #[Route('/get-all', name: "app_watchlist_all", methods: ["GET"])]
+    #[Route('/all', name: "app_watchlist_all", methods: ["GET"])]
     public function getAllWatchlistOfUser(SerializerInterface $serializer): JsonResponse
     {   
         $user = $this->getUser();
@@ -84,19 +84,20 @@ final class WatchlistController extends AbstractController
             ]);
         }
 
-        $context = [
-            AbstractNormalizer::CIRCULAR_REFERENCE_HANDLER => function (object $obj, ?string $format, array $context): string {
-                if ($obj instanceof Watchlist) {
-                    return $obj->getName();
-                }
-                return "null";
-            },
-        ];
+        $watchlistArray = [];
+
+        foreach($watchlists as $watchlist) {
+            $watchlistArray[] = [
+                "id" => $watchlist->getId(),
+                "title" => $watchlist->getTitle(),
+                "description" => $watchlist->getDescription()
+            ];
+        }
 
         return $this->json([
             'message' => 'Watchlists récupérées avec succès',
-            'results' => $serializer->serialize($watchlists, 'json', $context)
-        ], 200, [], $context);
+            'results' => $watchlistArray
+        ]);
     }
 
     #[Route('/media/add', name: "app_watchlist_media_add", methods: ["POST"])]

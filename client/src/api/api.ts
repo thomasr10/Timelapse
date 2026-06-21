@@ -59,7 +59,7 @@ export const fetchUserMediaData = async (tmdb: number, type: string) => {
         });
 
         const data = await response.json();
-        
+
         if (!response.ok) {
             console.error(`Error while fetching User_Media : ${response.status}`);
             return data.message;
@@ -68,5 +68,51 @@ export const fetchUserMediaData = async (tmdb: number, type: string) => {
     } catch (e) {
         console.error(e);
         return;
+    }
+}
+
+// Récupérer watchlist
+export const fetchUserWatchlists = async () => {
+    try {
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/watchlist/all`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            credentials: "include"
+        });
+
+        const data = await response.json();
+        if (!response.ok) {
+            console.error(`Error while fetching user's watchlists : ${response.status}`);
+            return data.message;
+        }
+
+        return data;
+    } catch (e) {
+        console.error(e);
+    }
+}
+
+export const addMovieToWatchlist = async (watchlist_id: number, tmdb: number, type: string) => {
+    try {
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/watchlist/media/add`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({watchlist_id, tmdb, type}),
+            credentials: "include"
+        });
+
+        const data = await response.json();
+
+        if(!response.ok) {
+            console.error(`Error while adding media to the watchlist : ${response.status}`);
+            return data;
+        }
+
+    } catch (e) {
+        console.error(e);
     }
 }
