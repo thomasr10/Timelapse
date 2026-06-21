@@ -197,3 +197,50 @@ h1 {
 .accent {
 	color: $accent-color;
 }
+
+.flex-row {
+	display: flex;
+}
+
+.flex-col {
+	display: flex;
+	flex-direction: column;
+}
+
+.align-center {
+	align-items: center;
+}
+
+.justify-between {
+	justify-content: space-between;
+}
+
+.justify-center {
+	justify-content: center;
+}
+.gap-12 {
+	gap: .88rem;
+}
+
+.gap-4 {
+	gap: .25rem;
+}
+
+.gap-16 {
+	gap: 1rem;
+}
+
+.gap-32 {
+	gap: 3rem;
+}
+
+.padding-top-24 {
+	padding-top: 1.5rem;
+}
+
+.padding-bot-24 {
+	padding-bottom: 1.25rem;
+}
+.center {
+	margin: 0 auto;
+}

@@ -100,6 +100,7 @@ form {
 
     @include desktop {
         width: auto;
+        padding: .5rem 1rem;
     }
 }
 
@@ -835,11 +836,12 @@ form {
 
 .grey-btn {
     color: $main-color;
+    cursor: pointer;
 }
 
 .main-btn {
     border: none;
-    padding: .75rem 0;
+    padding: .5rem 1rem;
     border-radius: 6px;
     color: #FFFFFF;
     font-family: $inter-bold;
@@ -1247,6 +1249,89 @@ form {
         .description {
             color: $secondary-text-color;
             font-size: $font-size-small;
+        }
+    }
+}
+
+.add-review-btn {
+    background-color: transparent;
+    color: $accent-color;
+    gap: 4px;
+    font-family: $inter-semibold;
+    border: none;
+    font-size: $font-size-small;
+
+    @include large-tablet {
+        font-size: $font-size-medium
+    }
+
+    .icon {
+        stroke-width: 2.5;
+        width: 1rem;
+        height: 1rem;   
+    }
+}
+
+.review {
+    // largeur conteneur - padding review - scrollbar width
+    width: calc(100% - 2rem - 6px);
+    color: #fff;
+    padding: 1rem;
+    background-color: $secondary-color;
+    border: solid 1px $border-color;
+    border-radius: 12px;
+
+    img {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    .username {
+        color: $main-text-color;
+        font-size: $font-size-medium;
+        font-family: $inter-semibold;
+    }
+
+    .date {
+        color: $secondary-text-color;
+        font-family: $inter-regular;
+        font-size: $font-size-small;
+    }
+
+    .note {
+        color: $rating-color;
+        background-color: $border-color;
+        padding: .25rem .5rem;
+        border-radius: 4px;
+        
+        p {
+            font-size: $font-size-small;
+            font-family: $inter-bold;
+
+            .icon {
+                fill: $rating-color;
+                width: 14px;
+                height: 14px;
+            }
+        }
+    }
+
+    .content {
+        color: $secondary-text-color;
+        font-family: $inter-regular;
+        font-size: $font-size-medium;
+    }
+
+    .likes {
+        color: $secondary-text-color;
+        font-size: $font-size-small;
+        font-family: $inter-regular;
+        
+        .icon {
+            width: 14px;
+            height: 14px;
         }
     }
 }

@@ -7,8 +7,10 @@ import MediaInfo from "../components/MediaInfo";
 import MediaCastInfo from "../components/MediaCastInfo";
 import { useLoader } from "../context/LoaderContext";
 import Loader from "../components/Loader";
-import { type Watchlist, type UserMedia } from "../types/api";
+import { type Watchlist, type UserMedia, type Review } from "../types/api";
 import { fetchUserMediaData, fetchUserWatchlists } from "../api/api";
+import { CirclePlus } from "lucide-react";
+import ReviewCard from "../components/ReviewCard";
 
 interface FullInfoMedia {
     id: number,
@@ -39,6 +41,7 @@ export default function MediaPage() {
     const [userMedia, setUserMedia] = useState<UserMedia | null>(null);
     const [disabled, setDisabled] = useState(false);
     const [userWatchlists, setUserWatchlists] = useState<Watchlist[] | null>(null);
+    const [reviews, setReviews] = useState<Review | null>(null);
 
     const { startFetch, endFetch, loadingCount } = useLoader();
 
@@ -124,41 +127,56 @@ export default function MediaPage() {
                                 userWatchlists={userWatchlists}
                             />
                         </section>
-                        <section className="section-media-info">
-                            <MediaInfo
-                                director={mediaInfos?.director}
-                                release_date={(mediaInfos?.release_date) ? mediaInfos.release_date : mediaInfos?.first_air_date}
-                                budget={mediaInfos?.budget}
-                                revenue={mediaInfos?.revenue}
-                                type={type}
-                                status={mediaInfos?.status}
-                                number_of_seasons={mediaInfos?.number_of_seasons}
-                            />
-                        </section>
-                        <section className="section-cast-info">
-                            <h2 className="media-detail-h2">Casting</h2>
-                            <div className="media-cast-container">
-                                {mediaInfos?.cast.slice(0, maxSlice).map((c) => (
-                                    <MediaCastInfo
-                                        key={c.id}
-                                        id={c.id}
-                                        name={c.name}
-                                        character={c.character}
-                                        profile_path={c.profile_path}
-                                    />
-                                ))}
-                            </div>
-                            <div className="btn-container">
-                                <button 
-                                    className="main-btn blue-btn full-btn" 
-                                    onClick={() => displayAllCast()}
-                                    disabled={disabled}
-                                >
-                                    {castBtnText}
-                                </button>
-                            </div>
+                        <section className="flex-col gap-32">
+                            <section className="section-media-info">
+                                <MediaInfo
+                                    director={mediaInfos?.director}
+                                    release_date={(mediaInfos?.release_date) ? mediaInfos.release_date : mediaInfos?.first_air_date}
+                                    budget={mediaInfos?.budget}
+                                    revenue={mediaInfos?.revenue}
+                                    type={type}
+                                    status={mediaInfos?.status}
+                                    number_of_seasons={mediaInfos?.number_of_seasons}
+                                />
+                            </section>
+                            <section className="section-cast-info">
+                                <h2 className="media-detail-h2">Casting</h2>
+                                <div className="media-cast-container">
+                                    {mediaInfos?.cast.slice(0, maxSlice).map((c) => (
+                                        <MediaCastInfo
+                                            key={c.id}
+                                            id={c.id}
+                                            name={c.name}
+                                            character={c.character}
+                                            profile_path={c.profile_path}
+                                        />
+                                    ))}
+                                </div>
+                                <div className="btn-container">
+                                    <button
+                                        className="main-btn blue-btn full-btn"
+                                        onClick={() => displayAllCast()}
+                                        disabled={disabled}
+                                    >
+                                        {castBtnText}
+                                    </button>
+                                </div>
+                            </section>
                         </section>
                         <section className="section-review">
+                            <div className="flex-row justify-between align-center">
+                                <h2 className="media-detail-h2">Reviews</h2>
+                                <button
+                                    className="add-review-btn flex-row align-center">
+                                    Ajouter une review
+                                    <CirclePlus className="icon" />
+                                </button>
+                            </div>
+                            <div className="reviews-container padding-top-24 padding-bot-24 flex-col gap-16">
+                            </div>
+                            <div className="flex-row justify-center mt-24">
+                                <button className="red-btn main-btn full-btn-resizable">Voir plus</button>
+                            </div>
                         </section>
                     </main>
                 </>

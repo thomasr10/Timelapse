@@ -1,4 +1,5 @@
 import type { Media } from "../pages/HomepageConnected"
+import type { User } from "./auth"
 
 export type UserMedia = {
     id: number,
@@ -14,3 +15,11 @@ export type Watchlist = {
     description: string,
     medias: Media[]
 }
+
+export type Review = {
+    id: number,
+    content: string,
+    date: string,
+    media: Media,
+    user: User
+} 
