@@ -19,7 +19,7 @@ export type User = {
     id: number,
     email: string,
     username: string,
-    display_name: string,
+    display_username: string,
     profile_picture: string
 }
 

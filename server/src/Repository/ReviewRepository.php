@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Review;
+use App\Entity\Media;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -17,19 +18,20 @@ class ReviewRepository extends ServiceEntityRepository
     }
 
     //    /**
-    //     * @return Review[] Returns an array of Review objects
+    //     * @return Review[] Returns an array of Review objects or null
     //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('r')
-    //            ->andWhere('r.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('r.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+       public function findByMediaWithOffset(Media $media, int $offset): ?array
+       {
+           return $this->createQueryBuilder('r')
+               ->andWhere('r.media = :media')
+               ->setParameter('media', $media)
+               ->orderBy('r.id', 'ASC')
+               ->setFirstResult($offset)
+               ->setMaxResults(10)
+               ->getQuery()
+               ->getResult()
+           ;
+       }
 
     //    public function findOneBySomeField($value): ?Review
     //    {

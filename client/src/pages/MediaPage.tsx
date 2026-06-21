@@ -8,7 +8,7 @@ import MediaCastInfo from "../components/MediaCastInfo";
 import { useLoader } from "../context/LoaderContext";
 import Loader from "../components/Loader";
 import { type Watchlist, type UserMedia, type Review } from "../types/api";
-import { fetchUserMediaData, fetchUserWatchlists } from "../api/api";
+import { fetchReviews, fetchUserMediaData, fetchUserWatchlists } from "../api/api";
 import { CirclePlus } from "lucide-react";
 import ReviewCard from "../components/ReviewCard";
 
@@ -41,7 +41,8 @@ export default function MediaPage() {
     const [userMedia, setUserMedia] = useState<UserMedia | null>(null);
     const [disabled, setDisabled] = useState(false);
     const [userWatchlists, setUserWatchlists] = useState<Watchlist[] | null>(null);
-    const [reviews, setReviews] = useState<Review | null>(null);
+    const [reviews, setReviews] = useState<Review[] | null>(null);
+    const [offset, setOffset] = useState(0);
 
     const { startFetch, endFetch, loadingCount } = useLoader();
 
@@ -49,6 +50,13 @@ export default function MediaPage() {
     useEffect(() => {
         fetchUserWatchlists()
             .then((data) => setUserWatchlists(data.results));
+    }, []);
+
+    // Récupérer reviews
+    useEffect(() => {
+        if(!type || !id) return;
+        fetchReviews(type, Number(id), offset)
+            .then((data) => setReviews(data.results));
     }, []);
 
     useEffect(() => {
@@ -83,9 +91,7 @@ export default function MediaPage() {
         if (!mediaInfos) return;
 
         const total = mediaInfos.cast.length;
-        console.log(total);
         const remaining = total - maxSlice;
-        console.log(remaining);
 
         if (remaining > 5) {
             const newSlice = maxSlice + 5;
@@ -173,6 +179,14 @@ export default function MediaPage() {
                                 </button>
                             </div>
                             <div className="reviews-container padding-top-24 padding-bot-24 flex-col gap-16">
+                                {
+                                    reviews && (
+                                        reviews.map((r: Review, index: number) => (
+                                            <ReviewCard key={index} username={r.user.display_username} profile_picture={r.user.profile_picture} note={r.user_media.rating} date={r.created_at} content={r.content} likes={5.4}/>
+                                        ))
+                                    ) 
+
+                                }
                             </div>
                             <div className="flex-row justify-center mt-24">
                                 <button className="red-btn main-btn full-btn-resizable">Voir plus</button>

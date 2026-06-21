@@ -5,11 +5,12 @@ namespace App\Service;
 use App\Entity\Review;
 use App\Entity\Media;
 use App\Entity\User;
+use App\Repository\ReviewRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
 class ReviewService
 {
-    public function __construct(private EntityManagerInterface $em){}
+    public function __construct(private EntityManagerInterface $em, private ReviewRepository $reviewRepository){}
 
     public function create(string $content, Media $media, User $user): void
     {
@@ -23,5 +24,10 @@ class ReviewService
         $this->em->flush($review);
 
         return;
+    }
+
+    public function getReviews(Media $media, int $offset): array | null
+    {
+        return $this->reviewRepository->findByMediaWithOffset($media, $offset);
     }
 }

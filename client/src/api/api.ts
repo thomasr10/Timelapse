@@ -118,3 +118,27 @@ export const addMovieToWatchlist = async (watchlist_id: number, tmdb: number, ty
         console.error(e);
     }
 }
+
+export const fetchReviews = async (type: string, tmdb: number, offset: number) => {
+    try {
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/review/${type}/${tmdb}/${offset}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            credentials: "include"
+        });
+
+        const data = await response.json();
+
+        if(!response.ok) {
+            console.log(`Error while fetching media reviews : ${response.status}`);
+            return data;
+        }
+
+        return data;
+
+    } catch (e) {
+        console.error(e);
+    }
+}
