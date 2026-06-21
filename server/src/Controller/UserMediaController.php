@@ -59,7 +59,7 @@ final class UserMediaController extends AbstractController
         ]);
     }
 
-        #[Route('/like', name: 'app_like_media', methods: ["POST"])]
+    #[Route('/like', name: 'app_like_media', methods: ["POST"])]
     public function like(Request $request): JsonResponse
     {   
         $user = $this->getUser();

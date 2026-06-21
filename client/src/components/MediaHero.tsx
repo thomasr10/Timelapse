@@ -29,8 +29,6 @@ export default function MediaHero({ id, poster_path, title, genres, release_date
 
     // Watchlists modal
     const [addModalIsOpen, setAddModalIsOpen] = useState(false);
-    // create watchlist modal
-    const [createModalIsOpen, setCreateModalIsOpen] = useState(false);
 
     useEffect(() => {
         if (!userMedia) return;
