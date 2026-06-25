@@ -142,3 +142,28 @@ export const fetchReviews = async (type: string, tmdb: number, offset: number) =
         console.error(e);
     }
 }
+
+export const registerReview = async (content: string, tmdb: number, type: string) => {
+    try {
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/review/add`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({content, tmdb, type}),
+            credentials: "include"
+        });
+        
+        const data = await response.json();
+
+        if (!response.ok) {
+            console.error(`Error while posting review : ${response.status}`);
+            return data;
+        }
+
+        return data;
+
+    } catch (e) {
+        console.error(e);
+    }
+}

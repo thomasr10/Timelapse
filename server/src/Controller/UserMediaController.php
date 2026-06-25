@@ -74,7 +74,7 @@ final class UserMediaController extends AbstractController
         if (!isset($data["isLiked"], $data["tmdb"], $data["type"])) {
             return $this->json([
                 'message' => 'Données manquantes'
-            ]);
+            ], 400);
         }
 
         // FindOrCreateMedia(id_media)
@@ -104,7 +104,7 @@ final class UserMediaController extends AbstractController
         if (!isset($data["isWatched"], $data["tmdb"], $data["type"])) {
             return $this->json([
                 'message' => 'Données manquantes'
-            ]);            
+            ], 400);            
         }
 
         // FindOrCreateMedia(id_media)  

@@ -1339,7 +1339,8 @@ form .submit-container {
   z-index: 1000000000000000000000000;
 }
 
-.add-watchlist-modal {
+.add-watchlist-modal,
+.review-modal {
   max-width: 300px;
   width: 100%;
   background-color: #0D1324;
@@ -1348,15 +1349,44 @@ form .submit-container {
   border: solid 1px #1A2238;
 }
 @media (min-width: 576px) {
-  .add-watchlist-modal {
+  .add-watchlist-modal,
+  .review-modal {
     max-width: 400px;
   }
 }
 @media (min-width: 768px) {
-  .add-watchlist-modal {
+  .add-watchlist-modal,
+  .review-modal {
     max-width: 680px;
   }
 }
+
+.review-modal h3 {
+  font-family: "Inter-SemiBold";
+  font-size: 1.25rem;
+}
+.review-modal {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  color: #E6ECF5;
+  gap: 1rem;
+}
+.review-modal .input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.88rem;
+  font-family: "Inter-Regular";
+}
+.review-modal .input-container textarea {
+  width: 100%;
+  height: 80px;
+  resize: none;
+  padding: 0.5rem;
+  font-family: "Inter-Regular";
+  font-size: 0.88rem;
+}
+
 .add-watchlist-modal .modal-header {
   display: flex;
   justify-content: space-between;
@@ -1502,4 +1532,11 @@ form .submit-container {
 .review .likes .icon {
   width: 14px;
   height: 14px;
+}
+
+.no-review-txt {
+  color: #E6ECF5;
+  font-size: 1.25rem;
+  text-align: center;
+  font-family: "Inter-Bold";
 }/*# sourceMappingURL=main.css.map */

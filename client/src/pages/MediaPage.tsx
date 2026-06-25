@@ -8,9 +8,10 @@ import MediaCastInfo from "../components/MediaCastInfo";
 import { useLoader } from "../context/LoaderContext";
 import Loader from "../components/Loader";
 import { type Watchlist, type UserMedia, type Review } from "../types/api";
-import { fetchReviews, fetchUserMediaData, fetchUserWatchlists } from "../api/api";
+import { fetchReviews, fetchUserMediaData, fetchUserWatchlists, registerReview } from "../api/api";
 import { CirclePlus } from "lucide-react";
 import ReviewCard from "../components/ReviewCard";
+import ReviewModal from "../components/ReviewModal";
 
 interface FullInfoMedia {
     id: number,
@@ -43,8 +44,11 @@ export default function MediaPage() {
     const [userWatchlists, setUserWatchlists] = useState<Watchlist[] | null>(null);
     const [reviews, setReviews] = useState<Review[] | null>(null);
     const [offset, setOffset] = useState(0);
+    const [isOpenReviewModal, setIsOpenReviewModal] = useState(false);
+    const [reviewValue, setReviewValue] = useState("");
 
     const { startFetch, endFetch, loadingCount } = useLoader();
+
 
     // Récupérer les watchlists du user
     useEffect(() => {
@@ -54,9 +58,14 @@ export default function MediaPage() {
 
     // Récupérer reviews
     useEffect(() => {
-        if(!type || !id) return;
-        fetchReviews(type, Number(id), offset)
-            .then((data) => setReviews(data.results));
+        if (!type || !id) return;
+        if (offset === 1) {
+            fetchReviews(type, Number(id), offset)
+                .then((data) => { console.log(data); setReviews(data.results) });
+        } else {
+            fetchReviews(type, Number(id), offset)
+                .then((data) => { console.log(data); setReviews(prev => prev + data.results) });
+        }
     }, []);
 
     useEffect(() => {
@@ -106,10 +115,20 @@ export default function MediaPage() {
         }
     }
 
+    const postReview = async (review: string) => {
+        if (!review || !id || !type) return;
+        registerReview(review, Number(id), type);
+    }
+
     return (
         <>
             {loadingCount > 0 ? <Loader /> : (
                 <>
+                    {
+                        isOpenReviewModal && (
+                            <ReviewModal value={reviewValue} onchange={setReviewValue} onclick={() => postReview(reviewValue)} />
+                        )
+                    }
                     {mediaInfos?.backdrop_path
                         ? <img className="backdrop-image"
                             src={`${import.meta.env.VITE_API_IMAGE_BASE_URL}original${mediaInfos?.backdrop_path}`}
@@ -173,24 +192,33 @@ export default function MediaPage() {
                             <div className="flex-row justify-between align-center">
                                 <h2 className="media-detail-h2">Reviews</h2>
                                 <button
-                                    className="add-review-btn flex-row align-center">
+                                    className="add-review-btn flex-row align-center"
+                                    onClick={() => setIsOpenReviewModal(true)}
+                                >
                                     Ajouter une review
                                     <CirclePlus className="icon" />
                                 </button>
                             </div>
                             <div className="reviews-container padding-top-24 padding-bot-24 flex-col gap-16">
                                 {
-                                    reviews && (
+                                    reviews !== null ? (
                                         reviews.map((r: Review, index: number) => (
-                                            <ReviewCard key={index} username={r.user.display_username} profile_picture={r.user.profile_picture} note={r.user_media.rating} date={r.created_at} content={r.content} likes={5.4}/>
+                                            <ReviewCard key={index} username={r.user.display_username} profile_picture={r.user.profile_picture} note={r.user_media.rating} date={r.created_at} content={r.content} likes={5.4} />
                                         ))
-                                    ) 
+                                    ) :
+                                        <p className="no-review-txt">Aucune review</p>
 
                                 }
                             </div>
-                            <div className="flex-row justify-center mt-24">
-                                <button className="red-btn main-btn full-btn-resizable">Voir plus</button>
-                            </div>
+                            {
+                                reviews !== null && (
+                                    <div className="flex-row justify-center mt-24">
+                                        <button className="red-btn main-btn full-btn-resizable" onClick={() => setOffset(prev => prev + 1)}>
+                                            Voir plus
+                                        </button>
+                                    </div>
+                                )
+                            }
                         </section>
                     </main>
                 </>

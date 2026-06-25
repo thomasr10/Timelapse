@@ -30,7 +30,7 @@ final class ReviewController extends AbstractController
         if (!isset($data["content"], $data["tmdb"], $data["type"])) {
             return $this->json([
                 'message' => 'Données manquantes'
-            ]);
+            ], 400);
         }
 
         $media = $this->mediaService->findOrCreate($data["tmdb"], $data["type"]);
