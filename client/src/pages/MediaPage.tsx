@@ -31,6 +31,7 @@ interface FullInfoMedia {
     runtime?: number,
     number_of_seasons?: number,
     status: string,
+    vote_average: number | null
 }
 
 export default function MediaPage() {
@@ -61,10 +62,10 @@ export default function MediaPage() {
         if (!type || !id) return;
         if (offset === 0) {
             fetchReviews(type, Number(id), offset)
-                .then((data) => { console.log(data); setReviews(data.results) });
+                .then((data) => { setReviews(data.results) });
         } else {
             fetchReviews(type, Number(id), offset)
-                .then((data) => { console.log(data); setReviews(prev => prev + data.results) });
+                .then((data) => { setReviews(prev => prev + data.results) });
         }
     }, []);
 
@@ -83,7 +84,6 @@ export default function MediaPage() {
                     movie.created_by[0]?.name
                 , cast: credits.cast
             });
-            console.log(userMediaData)
             setUserMedia(userMediaData.results);
         };
 
@@ -155,6 +155,7 @@ export default function MediaPage() {
                                 id={Number(id)}
                                 userMedia={userMedia}
                                 userWatchlists={userWatchlists}
+                                vote_average={mediaInfos?.vote_average}
                             />
                         </section>
                         <section className="flex-col gap-32">

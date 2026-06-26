@@ -6,6 +6,7 @@ import { Dot, Star, CirclePlus, Eye, Heart, EyeOff, StarHalf } from 'lucide-reac
 import { addMovieToWatchlist, handleLike, handleWatch, rateMedia } from "../api/api"
 import type { UserMedia, Watchlist } from "../types/api"
 import AddWatchlistModal from "./AddWatchlistModal"
+import { formatTmdbRate } from "../utils/formatRate"
 
 interface Props {
     id?: number
@@ -18,10 +19,11 @@ interface Props {
     overview: string | undefined,
     type: string | undefined,
     userMedia: UserMedia | null,
-    userWatchlists: Watchlist[] | null
+    userWatchlists: Watchlist[] | null,
+    vote_average?: number | null
 }
 
-export default function MediaHero({ id, poster_path, title, genres, release_date, runtime, overview, number_of_seasons, type, userMedia, userWatchlists }: Props) {
+export default function MediaHero({ id, poster_path, title, genres, release_date, runtime, overview, number_of_seasons, type, userMedia, userWatchlists, vote_average }: Props) {
 
     const [isLiked, setIsLiked] = useState(false);
     const [isWatched, setIsWatched] = useState(false);
@@ -126,7 +128,7 @@ export default function MediaHero({ id, poster_path, title, genres, release_date
                     <div className="sub-infos-container">
                         <div className="rate-container">
                             <Star className="rating-star" />
-                            <p>5</p>
+                            <p>{formatTmdbRate(vote_average)}</p>
                         </div>
                         <Dot className="dot-separator" />
                         <p className="sub-info">{genres?.slice(0, 3).map(g => g.name).join(' / ')}</p>
