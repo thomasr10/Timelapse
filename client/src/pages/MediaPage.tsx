@@ -126,7 +126,7 @@ export default function MediaPage() {
                 <>
                     {
                         isOpenReviewModal && (
-                            <ReviewModal value={reviewValue} onchange={setReviewValue} onclick={() => postReview(reviewValue)} />
+                            <ReviewModal value={reviewValue} onchange={setReviewValue} onclick={() => postReview(reviewValue)} onclose={() => setIsOpenReviewModal(false)}/>
                         )
                     }
                     {mediaInfos?.backdrop_path

@@ -1187,6 +1187,13 @@ form {
     color: $main-text-color;
     gap: 1rem;
 
+    .btn-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+    }
+
     .input-container {
         display: flex;
         flex-direction: column;
