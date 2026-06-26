@@ -118,4 +118,35 @@ final class UserMediaController extends AbstractController
             "message" => "Action réalisée avec succès"
         ]);
     }
+
+    #[Route('/rate', name: 'app_user_media_rate', methods: ['POST'])]
+    public function rate(Request $request): JsonResponse
+    {
+        $user = $this->getUser();
+        
+        if (!$user) {
+            return $this->json([
+                'message' => 'Utilisateur non trouvé'
+            ]);  
+        }
+
+        $data = json_decode($request->getContent(), true);
+
+        if(!isset($data["tmdb"], $data["type"], $data["rate"])) {
+            return $this->json([
+                'message' => 'Données manquantes',
+                'results' => null
+            ], 400);
+        }
+
+        $media = $this->mediaService->findOrCreate($data["tmdb"], $data["type"]);
+        $userMedia = $this->userMediaService->findOrCreate($user, $media);
+
+        $this->userMediaService->rate($userMedia, $data["rate"]);
+
+        return $this->json([
+            'message' => 'Media noté avec succès',
+            'results' => null
+        ]);
+    }
 }

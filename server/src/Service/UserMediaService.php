@@ -54,4 +54,13 @@ class UserMediaService
         $user_media = $this->userMediaRepository->findUserMediaByUserTypeTmdb($user, $media);
         return $user_media;
     }
+
+    public function rate(UserMedia $userMedia, float $rate): void
+    {
+        $userMedia->setRating($rate);
+        $userMedia->setIsWatched(true);
+        $this->em->persist($userMedia);
+        $this->em->flush();
+        return;
+    }
 }

@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import type { Genre } from "../types/tmdb"
 import { formatDate } from "../utils/formatDate"
 import { formatTime } from "../utils/formatTime"
-import { Dot, Star, CirclePlus, Eye, Heart, EyeOff } from 'lucide-react'
-import { addMovieToWatchlist, handleLike, handleWatch } from "../api/api"
+import { Dot, Star, CirclePlus, Eye, Heart, EyeOff, StarHalf } from 'lucide-react'
+import { addMovieToWatchlist, handleLike, handleWatch, rateMedia } from "../api/api"
 import type { UserMedia, Watchlist } from "../types/api"
 import AddWatchlistModal from "./AddWatchlistModal"
 
@@ -27,6 +27,30 @@ export default function MediaHero({ id, poster_path, title, genres, release_date
     const [isWatched, setIsWatched] = useState(false);
     const [selectedId, setSelectedId] = useState<number | null>(null);
 
+    // rating
+    const [hoverValue, setHoverValue] = useState<number | null>(null);
+    const [rating, setRating] = useState<number | null>(null);
+
+    const handleRatingHover = (e: React.MouseEvent<HTMLDivElement>, index: number): void => {
+        const { left, width } = e.currentTarget.getBoundingClientRect();
+        const x = e.clientX - left;
+        setHoverValue(x < width / 2 ? index - 0.5 : index);
+    }
+
+    const getStarType = (index: number, value: number | null): string => {
+        if (!value) return 'empty';
+        if (value >= index) return 'full';
+        if (value >= index - 0.5) return 'half';
+        return 'empty';
+    }
+    
+    const rate = async (rate: number | null) => {
+        if (!type || !id || rate === null) return;
+        setRating(hoverValue);
+        setIsWatched(true);
+        rateMedia(Number(id), type, rate);        
+    } 
+
     // Watchlists modal
     const [addModalIsOpen, setAddModalIsOpen] = useState(false);
 
@@ -34,6 +58,7 @@ export default function MediaHero({ id, poster_path, title, genres, release_date
         if (!userMedia) return;
         setIsLiked(userMedia.is_liked);
         setIsWatched(userMedia.is_watched);
+        setRating(userMedia?.rating);
     }, [])
 
 
@@ -86,7 +111,7 @@ export default function MediaHero({ id, poster_path, title, genres, release_date
         <>
             {
                 addModalIsOpen && (
-                    <AddWatchlistModal watchlists={userWatchlists} onSelect={setSelectedId} selectedId={selectedId} onClose={() => onAddModalClose()} onValidate={() => handleAddMovie()}/>
+                    <AddWatchlistModal watchlists={userWatchlists} onSelect={setSelectedId} selectedId={selectedId} onClose={() => onAddModalClose()} onValidate={() => handleAddMovie()} />
                 )
             }
             < section className="media-hero">
@@ -95,7 +120,7 @@ export default function MediaHero({ id, poster_path, title, genres, release_date
                 </figure>
                 <div className="infos-container">
                     <div className="main-info">
-                        <p className="title">{ title }</p>
+                        <p className="title">{title}</p>
                         <p className="description">{overview}</p>
                     </div>
                     <div className="sub-infos-container">
@@ -137,7 +162,21 @@ export default function MediaHero({ id, poster_path, title, genres, release_date
                             </div>
                         </div>
                         <div className="rate">
-                            <Star className="icon" /><Star className="icon" /><Star className="icon" /><Star className="icon" /><Star className="icon" />
+                            {
+                                [1, 2, 3, 4, 5].map(index => (
+                                    <div
+                                        key={index}
+                                        className="icon"
+                                        onMouseMove={(e) => handleRatingHover(e, index)}
+                                        onMouseLeave={() => setHoverValue(null)}
+                                        onClick={() => rate(hoverValue)}
+                                    >
+                                        {getStarType(index, hoverValue ?? rating) === 'full' && <Star fill="#FFC107" />}
+                                        {getStarType(index, hoverValue ?? rating) === 'half' && <StarHalf fill="#FFC107" />}
+                                        {getStarType(index, hoverValue ?? rating) === 'empty' && <Star />}
+                                    </div>
+                                ))
+                            }
                         </div>
                     </div>
                 </div>

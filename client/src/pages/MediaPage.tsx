@@ -83,6 +83,7 @@ export default function MediaPage() {
                     movie.created_by[0]?.name
                 , cast: credits.cast
             });
+            console.log(userMediaData)
             setUserMedia(userMediaData.results);
         };
 
@@ -117,7 +118,11 @@ export default function MediaPage() {
 
     const postReview = async (review: string) => {
         if (!review || !id || !type) return;
-        registerReview(review, Number(id), type);
+        registerReview(review, Number(id), type)
+            .then(() => {
+                setIsOpenReviewModal(false);
+                window.location.reload();
+            })
     }
 
     return (

@@ -167,3 +167,29 @@ export const registerReview = async (content: string, tmdb: number, type: string
         console.error(e);
     }
 }
+
+export const rateMedia = async (tmdb: number, type: string, rate: number) => {
+    try {
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/user_media/rate`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({tmdb, type, rate}),
+            credentials: "include"
+        });
+        
+        const data = await response.json();
+
+        if (!response.ok) {
+            console.error(`Error while rating media : ${response.status}`);
+            return data;
+        }
+
+        return data;
+
+    } catch (e) {
+        console.error(e);
+    }
+}
+
