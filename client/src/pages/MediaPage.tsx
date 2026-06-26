@@ -59,7 +59,7 @@ export default function MediaPage() {
     // Récupérer reviews
     useEffect(() => {
         if (!type || !id) return;
-        if (offset === 1) {
+        if (offset === 0) {
             fetchReviews(type, Number(id), offset)
                 .then((data) => { console.log(data); setReviews(data.results) });
         } else {
