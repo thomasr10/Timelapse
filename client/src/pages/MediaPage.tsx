@@ -150,7 +150,6 @@ export default function MediaPage() {
                                 genres={mediaInfos?.genres}
                                 runtime={mediaInfos?.runtime}
                                 number_of_seasons={mediaInfos?.number_of_seasons}
-                                overview={mediaInfos?.overview}
                                 type={type}
                                 id={Number(id)}
                                 userMedia={userMedia}

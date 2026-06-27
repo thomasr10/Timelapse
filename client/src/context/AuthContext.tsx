@@ -34,7 +34,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                         navigate('/');
                         return;
                     }
-                    setUser(data);
+                    setUser(data.user);
                     setIsAuth(true);
                 })
                 .catch((e) => console.error(e))

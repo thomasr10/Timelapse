@@ -10,6 +10,7 @@ import PublicRoutes from "./router/PublicRoutes";
 import MediaPage from "./pages/MediaPage";
 import ProtectedRoutes from "./router/ProtectedRoutes";
 import { LoaderProvider } from "./context/LoaderContext";
+import Profile from "./pages/Profile";
 
 
 function App() {
@@ -54,6 +55,15 @@ function App() {
                 </ProtectedRoutes>
               }
             />
+            <Route
+              path="/profile"
+              element={
+                <ProtectedRoutes>
+                  <Profile />
+                </ProtectedRoutes>
+              }
+            />
+
           </Routes>
         </LoaderProvider>
       </AuthProvider>

@@ -31,9 +31,16 @@ class Media
     #[ORM\OneToMany(targetEntity: Review::class, mappedBy: 'media', orphanRemoval: true)]
     private Collection $reviews;
 
+    /**
+     * @var Collection<int, UserActivity>
+     */
+    #[ORM\OneToMany(targetEntity: UserActivity::class, mappedBy: 'media')]
+    private Collection $userActivities;
+
     public function __construct()
     {
         $this->reviews = new ArrayCollection();
+        $this->userActivities = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -101,6 +108,36 @@ class Media
             // set the owning side to null (unless already changed)
             if ($review->getMedia() === $this) {
                 $review->setMedia(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, UserActivity>
+     */
+    public function getUserActivities(): Collection
+    {
+        return $this->userActivities;
+    }
+
+    public function addUserActivity(UserActivity $userActivity): static
+    {
+        if (!$this->userActivities->contains($userActivity)) {
+            $this->userActivities->add($userActivity);
+            $userActivity->setMedia($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserActivity(UserActivity $userActivity): static
+    {
+        if ($this->userActivities->removeElement($userActivity)) {
+            // set the owning side to null (unless already changed)
+            if ($userActivity->getMedia() === $this) {
+                $userActivity->setMedia(null);
             }
         }
 

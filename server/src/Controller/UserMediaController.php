@@ -8,12 +8,17 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Service\UserMediaService;
 use App\Service\MediaService;
+use App\Service\UserActivityService;
 
 #[Route('/api/user_media')]
 final class UserMediaController extends AbstractController
 {   
 
-    public function __construct(private UserMediaService $userMediaService, private MediaService $mediaService){}
+    public function __construct(
+        private UserMediaService $userMediaService,
+        private MediaService $mediaService,
+        private UserActivityService $userActivityService
+    ){}
 
     #[Route('/{type}/{tmdb_id}', name: 'app_user_media', methods: ['GET'])]
     public function getUserMediaData(string $type, string $tmdb_id): JsonResponse
@@ -84,6 +89,10 @@ final class UserMediaController extends AbstractController
         // changer property is_liked dans user_media + property is_watched
         $this->userMediaService->like($userMedia, $data["isLiked"]);
 
+        if($data["isLiked"] === true) {
+            $this->userActivityService->createMediaActivity("like", $userMedia, $user);
+        }
+
         return $this->json([
             "message" => 'Action réalisée avec succès'
         ]);
@@ -114,6 +123,8 @@ final class UserMediaController extends AbstractController
         // changer property is_watched dans user_media
         $this->userMediaService->watch($userMedia, $data["isWatched"]);
 
+        $this->userActivityService->createMediaActivity("watched", $userMedia, $user);
+
         return $this->json([
             "message" => "Action réalisée avec succès"
         ]);
@@ -143,6 +154,8 @@ final class UserMediaController extends AbstractController
         $userMedia = $this->userMediaService->findOrCreate($user, $media);
 
         $this->userMediaService->rate($userMedia, $data["rate"]);
+        $this->userActivityService->createMediaActivity("rate", $userMedia, $user);
+
 
         return $this->json([
             'message' => 'Media noté avec succès',

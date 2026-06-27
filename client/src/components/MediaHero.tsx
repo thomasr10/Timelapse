@@ -16,14 +16,13 @@ interface Props {
     release_date?: string | undefined,
     runtime?: number | undefined,
     number_of_seasons?: number | undefined,
-    overview: string | undefined,
     type: string | undefined,
     userMedia: UserMedia | null,
     userWatchlists: Watchlist[] | null,
     vote_average?: number | null
 }
 
-export default function MediaHero({ id, poster_path, title, genres, release_date, runtime, overview, number_of_seasons, type, userMedia, userWatchlists, vote_average }: Props) {
+export default function MediaHero({ id, poster_path, title, genres, release_date, runtime, number_of_seasons, type, userMedia, userWatchlists, vote_average }: Props) {
 
     const [isLiked, setIsLiked] = useState(false);
     const [isWatched, setIsWatched] = useState(false);

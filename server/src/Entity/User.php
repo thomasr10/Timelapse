@@ -92,12 +92,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Review::class, mappedBy: 'user', orphanRemoval: true)]
     private Collection $reviews;
 
+    /**
+     * @var Collection<int, UserActivity>
+     */
+    #[ORM\OneToMany(targetEntity: UserActivity::class, mappedBy: 'user')]
+    private Collection $userActivities;
+
     public function __construct()
     {
         $this->watchlists = new ArrayCollection();
         $this->userMedia = new ArrayCollection();
         $this->userFollows = new ArrayCollection();
         $this->reviews = new ArrayCollection();
+        $this->userActivities = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -344,6 +351,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($review->getUser() === $this) {
                 $review->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, UserActivity>
+     */
+    public function getUserActivities(): Collection
+    {
+        return $this->userActivities;
+    }
+
+    public function addUserActivity(UserActivity $userActivity): static
+    {
+        if (!$this->userActivities->contains($userActivity)) {
+            $this->userActivities->add($userActivity);
+            $userActivity->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserActivity(UserActivity $userActivity): static
+    {
+        if ($this->userActivities->removeElement($userActivity)) {
+            // set the owning side to null (unless already changed)
+            if ($userActivity->getUser() === $this) {
+                $userActivity->setUser(null);
             }
         }
 

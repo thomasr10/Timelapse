@@ -23,4 +23,12 @@ export type Review = {
     media: Media,
     user: User,
     user_media: UserMedia
-} 
+}
+
+export type UserRecords = {
+    watchlists: Watchlist[] | null,
+    watched_medias: number,
+    followers: number,
+    favorites: Media[] | null,
+    recent_activity: [] | null,
+}

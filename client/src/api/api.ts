@@ -193,3 +193,27 @@ export const rateMedia = async (tmdb: number, type: string, rate: number) => {
     }
 }
 
+export const getUserRecords = async () => {
+    try {
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/user/records`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            credentials: "include"
+        });
+        
+        const data = await response.json();
+
+        if (!response.ok) {
+            console.error(`Error while fetching user records : ${response.status}`);
+            return data;
+        }
+
+        return data;
+
+    } catch (e) {
+        console.error(e);
+    }    
+}
+

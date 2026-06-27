@@ -86,6 +86,7 @@ final class AuthController extends AbstractController
                 'username' => $user->getUsername(),
                 'display_username' => $user->getDisplayUsername(),
                 'profile_picture' => $user->getProfilePicture(),
+                'created_at' => $user->getCreatedAt()
             ]
         ]);
     }

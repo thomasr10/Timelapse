@@ -20,7 +20,8 @@ export type User = {
     email: string,
     username: string,
     display_username: string,
-    profile_picture: string
+    profile_picture: string,
+    created_at: string
 }
 
 export type AuthContextType = {
