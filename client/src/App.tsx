@@ -9,9 +9,7 @@ import NotFound from "./pages/NotFound";
 import PublicRoutes from "./router/PublicRoutes";
 import MediaPage from "./pages/MediaPage";
 import ProtectedRoutes from "./router/ProtectedRoutes";
-import Loader from "./components/Loader";
 import { LoaderProvider } from "./context/LoaderContext";
-import AddWatchlistModal from "./components/AddWatchlistModal";
 
 
 function App() {

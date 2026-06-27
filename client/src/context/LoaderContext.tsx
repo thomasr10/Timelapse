@@ -1,5 +1,5 @@
 import React, { createContext, useCallback, useContext, useState } from "react";
-import type { LoaderContext } from "../types/loader";
+import type { LoaderContext } from "./loader";
 
 const LoaderContext = createContext<LoaderContext | null>(null);
 

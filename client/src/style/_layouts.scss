@@ -50,11 +50,122 @@
     }
 
     &::-webkit-scrollbar-thumb {
-        background-color: rgba(0, 0, 0, 0.3); 
+        background-color: rgba(0, 0, 0, 0.3);
         border-radius: 10px;
     }
 
     &::-webkit-scrollbar-thumb:hover {
         background-color: rgba(0, 0, 0, 0.5);
+    }
+}
+
+#home-disconnected {
+    h2 {
+        text-align: center;
+        font-family: $inter-bold;
+        font-size: $font-size-xxl;
+        color: $main-text-color;
+
+        @include desktop {
+            font-size: $font-size-xxxl;
+        }
+    }
+
+    .slider-container {
+        margin-top: 3rem;
+        .media-card {
+            pointer-events: none;
+        }
+    }
+}
+
+#backdrop-hero {
+
+    img {
+        width: 100%;
+
+        object-fit: cover;
+        opacity: .3;
+        height: calc(100vh - 3.75rem);
+    }
+
+    // overflow: hidden;
+    height: calc(100vh - 3.75rem);
+
+}
+
+#hero-disconnected {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+    justify-content: center;
+
+    h1 {
+        @include tablet {
+            font-size: 2.5rem;
+        }
+
+        @include desktop {
+            font-size: 3.5rem;
+        }
+
+        span {
+            color: $accent-color;
+        }
+    }
+
+    p {
+        font-family: $inter-regular;
+        color: $secondary-text-color;
+        text-align: center;
+    }
+
+    button {
+        padding: .75rem 1.5rem;
+    }
+}
+
+#join-us {
+    padding: 3rem 0;
+
+    p {
+        font-family: $inter-regular;
+        font-size: $font-size-medium;
+        color: $secondary-text-color;
+        text-align: center;
+        margin-top: 1rem;
+    }
+}
+
+#cta {
+    padding: 3rem;
+    border-radius: 12px;
+    background-color: $accent-color;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    justify-content: center;
+    margin: 3rem 0;
+    
+    #cta-txt {
+        text-align: center;
+        p {
+            margin-top: 1rem;
+            color: $main-text-color;
+            font-family: $inter-regular;
+            font-size: $font-size-medium;
+        }
+    }
+
+    .btn-container {
+        margin: 2rem auto;
+        button {
+            padding: 1rem 2rem;
+        }
     }
 }

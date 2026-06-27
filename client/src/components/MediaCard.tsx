@@ -21,7 +21,7 @@ export default function MediaCard({ id, title, poster_path, genre_ids, genres, m
                 <img src={poster_path} alt={`Affiche du film ${title}`} />
                 <div className="info-container">
                     <p className="title">{title}</p>
-                    <p className="genre">{movieGenres.slice(0,3).join(", ")}</p>
+                    <p className="genre">{movieGenres.slice(0, 3).join(", ")}</p>
                 </div>
             </div>
         </Link>

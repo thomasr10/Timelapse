@@ -1,5 +1,5 @@
 export const formatTmdbRate = (rate: number | null | undefined): string | number => {
-    if (rate === null || rate === undefined) return 'N/A';
+    if (rate === null || rate === undefined || rate === 0) return 'N/A';
     return new Intl.NumberFormat("en-EN", {
         minimumFractionDigits: 1,
         maximumFractionDigits: 1

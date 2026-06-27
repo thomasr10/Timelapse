@@ -1082,6 +1082,11 @@ form {
     }
 }
 
+.white-btn {
+    background-color: #fff;
+    color: $accent-color;
+}
+
 .hero-btn-container {
 
     button {
@@ -1378,4 +1383,45 @@ form {
     font-size: $font-size-large;
     text-align: center;
     font-family: $inter-bold;
+}
+
+#promo-card-container {
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    @include desktop {
+        flex-direction: row;
+        // gap: 0;
+        justify-content: center;
+    }
+
+    .promo-card {
+        padding: 2rem;
+        background-color: $panel-color;
+        border: 1px solid $panel-bordel-color;
+        border-radius: 8px;
+
+
+        svg {
+            stroke-width: 2;
+            color: $accent-color;
+        }
+        
+        .promo-title {
+            text-align: left;
+            font-family: $inter-semibold;
+            color: $main-text-color;
+            font-size: $font-size-large;
+        }
+        
+        .promo-content {
+            text-align: left;
+            font-family: $inter-regular;
+            color: $secondary-text-color;
+            font-size: $font-size-medium;
+            line-height: 1.5;
+        }
+    }
 }

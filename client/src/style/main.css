@@ -295,6 +295,105 @@ h1 {
   background-color: rgba(0, 0, 0, 0.5);
 }
 
+#home-disconnected h2 {
+  text-align: center;
+  font-family: "Inter-Bold";
+  font-size: 2rem;
+  color: #E6ECF5;
+}
+@media (min-width: 1200px) {
+  #home-disconnected h2 {
+    font-size: 3rem;
+  }
+}
+#home-disconnected .slider-container {
+  margin-top: 3rem;
+}
+#home-disconnected .slider-container .media-card {
+  pointer-events: none;
+}
+
+#backdrop-hero img {
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  opacity: 0.3;
+  height: calc(100vh - 3.75rem);
+}
+#backdrop-hero {
+  height: calc(100vh - 3.75rem);
+}
+
+#hero-disconnected {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+  justify-content: center;
+}
+@media (min-width: 768px) {
+  #hero-disconnected h1 {
+    font-size: 2.5rem;
+  }
+}
+@media (min-width: 1200px) {
+  #hero-disconnected h1 {
+    font-size: 3.5rem;
+  }
+}
+#hero-disconnected h1 span {
+  color: #D7263D;
+}
+#hero-disconnected p {
+  font-family: "Inter-Regular";
+  color: #A9B4C6;
+  text-align: center;
+}
+#hero-disconnected button {
+  padding: 0.75rem 1.5rem;
+}
+
+#join-us {
+  padding: 3rem 0;
+}
+#join-us p {
+  font-family: "Inter-Regular";
+  font-size: 1rem;
+  color: #A9B4C6;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+#cta {
+  padding: 3rem;
+  border-radius: 12px;
+  background-color: #D7263D;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  justify-content: center;
+  margin: 3rem 0;
+}
+#cta #cta-txt {
+  text-align: center;
+}
+#cta #cta-txt p {
+  margin-top: 1rem;
+  color: #E6ECF5;
+  font-family: "Inter-Regular";
+  font-size: 1rem;
+}
+#cta .btn-container {
+  margin: 2rem auto;
+}
+#cta .btn-container button {
+  padding: 1rem 2rem;
+}
+
 form {
   max-width: 740px;
   width: 100%;
@@ -1277,6 +1376,11 @@ form .submit-container {
   }
 }
 
+.white-btn {
+  background-color: #fff;
+  color: #D7263D;
+}
+
 .hero-btn-container button {
   padding: 1rem 2rem;
 }
@@ -1545,4 +1649,40 @@ form .submit-container {
   font-size: 1.25rem;
   text-align: center;
   font-family: "Inter-Bold";
+}
+
+#promo-card-container {
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+@media (min-width: 1200px) {
+  #promo-card-container {
+    flex-direction: row;
+    justify-content: center;
+  }
+}
+#promo-card-container .promo-card {
+  padding: 2rem;
+  background-color: #0D1324;
+  border: 1px solid #1A2238;
+  border-radius: 8px;
+}
+#promo-card-container .promo-card svg {
+  stroke-width: 2;
+  color: #D7263D;
+}
+#promo-card-container .promo-card .promo-title {
+  text-align: left;
+  font-family: "Inter-SemiBold";
+  color: #E6ECF5;
+  font-size: 1.25rem;
+}
+#promo-card-container .promo-card .promo-content {
+  text-align: left;
+  font-family: "Inter-Regular";
+  color: #A9B4C6;
+  font-size: 1rem;
+  line-height: 1.5;
 }/*# sourceMappingURL=main.css.map */
