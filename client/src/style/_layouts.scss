@@ -1,5 +1,9 @@
 @use 'variables.scss' as *;
 
+main {
+    padding-bottom: 4rem;
+}
+
 .section-container {
     width: 100%;
     max-width: $mobile-width;

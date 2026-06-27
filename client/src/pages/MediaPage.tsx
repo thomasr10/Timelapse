@@ -131,7 +131,7 @@ export default function MediaPage() {
                 <>
                     {
                         isOpenReviewModal && (
-                            <ReviewModal value={reviewValue} onchange={setReviewValue} onclick={() => postReview(reviewValue)} onclose={() => setIsOpenReviewModal(false)}/>
+                            <ReviewModal value={reviewValue} onchange={setReviewValue} onclick={() => postReview(reviewValue)} onclose={() => setIsOpenReviewModal(false)} />
                         )
                     }
                     {mediaInfos?.backdrop_path
@@ -157,6 +157,44 @@ export default function MediaPage() {
                                 userWatchlists={userWatchlists}
                                 vote_average={mediaInfos?.vote_average}
                             />
+                        </section>
+                        <section id="review-description">
+                            <section className="section-media-description">
+                                <h2 className="media-detail-h2">Description</h2>
+                                <p>{mediaInfos?.overview}</p>
+                            </section>
+                            <section className="section-review">
+                                <div className="flex-row justify-between align-center">
+                                    <h2 className="media-detail-h2">Reviews</h2>
+                                    <button
+                                        className="add-review-btn flex-row align-center"
+                                        onClick={() => setIsOpenReviewModal(true)}
+                                    >
+                                        Ajouter une review
+                                        <CirclePlus className="icon" />
+                                    </button>
+                                </div>
+                                <div className="reviews-container padding-top-24 padding-bot-24 flex-col gap-16">
+                                    {
+                                        reviews !== null ? (
+                                            reviews.map((r: Review, index: number) => (
+                                                <ReviewCard key={index} username={r.user.display_username} profile_picture={r.user.profile_picture} note={r.user_media.rating} date={r.created_at} content={r.content} likes={5.4} />
+                                            ))
+                                        ) :
+                                            <p className="no-review-txt">Aucune review</p>
+
+                                    }
+                                </div>
+                                {
+                                    reviews !== null && (
+                                        <div className="flex-row justify-center mt-24">
+                                            <button className="red-btn main-btn full-btn-resizable" onClick={() => setOffset(prev => prev + 1)}>
+                                                Voir plus
+                                            </button>
+                                        </div>
+                                    )
+                                }
+                            </section>
                         </section>
                         <section className="flex-col gap-32">
                             <section className="section-media-info">
@@ -193,38 +231,6 @@ export default function MediaPage() {
                                     </button>
                                 </div>
                             </section>
-                        </section>
-                        <section className="section-review">
-                            <div className="flex-row justify-between align-center">
-                                <h2 className="media-detail-h2">Reviews</h2>
-                                <button
-                                    className="add-review-btn flex-row align-center"
-                                    onClick={() => setIsOpenReviewModal(true)}
-                                >
-                                    Ajouter une review
-                                    <CirclePlus className="icon" />
-                                </button>
-                            </div>
-                            <div className="reviews-container padding-top-24 padding-bot-24 flex-col gap-16">
-                                {
-                                    reviews !== null ? (
-                                        reviews.map((r: Review, index: number) => (
-                                            <ReviewCard key={index} username={r.user.display_username} profile_picture={r.user.profile_picture} note={r.user_media.rating} date={r.created_at} content={r.content} likes={5.4} />
-                                        ))
-                                    ) :
-                                        <p className="no-review-txt">Aucune review</p>
-
-                                }
-                            </div>
-                            {
-                                reviews !== null && (
-                                    <div className="flex-row justify-center mt-24">
-                                        <button className="red-btn main-btn full-btn-resizable" onClick={() => setOffset(prev => prev + 1)}>
-                                            Voir plus
-                                        </button>
-                                    </div>
-                                )
-                            }
                         </section>
                     </main>
                 </>

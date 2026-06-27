@@ -1,4 +1,4 @@
-import { data, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { fetchTrendingMovies } from "../api/tmdb";
 import { useEffect, useState } from "react";
 import PromoCard from "../components/PromoCard";

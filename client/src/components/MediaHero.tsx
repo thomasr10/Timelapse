@@ -123,7 +123,7 @@ export default function MediaHero({ id, poster_path, title, genres, release_date
                 <div className="infos-container">
                     <div className="main-info">
                         <p className="title">{title}</p>
-                        <p className="description">{overview}</p>
+                        {/* <p className="description">{overview}</p> */}
                     </div>
                     <div className="sub-infos-container">
                         <div className="rate-container">
