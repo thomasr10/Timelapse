@@ -1,11 +1,11 @@
-import { ListPlus } from "lucide-react";
+import { Heart } from "lucide-react";
 import type { RecentActivity } from "../../types/api";
 import { formatDate, formatReviewDate } from "../../utils/formatDate";
 import { useEffect, useState } from "react";
 import type { Media } from "../../pages/HomepageConnected";
 import { fetchMedia } from "../../api/tmdb";
 
-export default function WatchlistActivityCard({ created_at, watchlist, media }: RecentActivity) {
+export default function LikeActivityCard({ created_at, watchlist, media }: RecentActivity) {
 
     const [mediaInfo, setMediaInfo] = useState<Media | null>(null);
 
@@ -16,10 +16,10 @@ export default function WatchlistActivityCard({ created_at, watchlist, media }: 
     }, [])
 
     return (
-        <article className="recent-activity-card watchlist-activity-card">
+        <article className="recent-activity-card like-activity-card">
             <div className="header-activity-card">
                 <div className="icon-container">
-                    <ListPlus className="icon" />
+                    <Heart className="icon" />
                 </div>
                 <div className="action-container">
                     <p className="title">Ajouté dans <span>{watchlist?.title}</span></p>
@@ -37,11 +37,11 @@ export default function WatchlistActivityCard({ created_at, watchlist, media }: 
                     </p>
                     <p className="date">
                         {
-                            media?.type === 'tv' ?
-                                formatDate(mediaInfo?.first_air_date)?.getFullYear() :
-                                formatDate(mediaInfo?.release_date)?.getFullYear()
+                        media?.type === 'tv' ? 
+                            formatDate(mediaInfo?.first_air_date)?.getFullYear() :
+                            formatDate(mediaInfo?.release_date)?.getFullYear()
                         }
-                    </p>                
+                    </p>
                 </div>
             </div>
         </article>

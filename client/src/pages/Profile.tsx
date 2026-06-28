@@ -5,6 +5,7 @@ import { formatUsername } from "../utils/formatText";
 import type { RecentActivity, UserRecords } from "../types/api";
 import { getUserRecords } from "../api/api";
 import WatchlistActivityCard from "../components/UserActivity/WatchlistActivityCard";
+import LikeActivityCard from "../components/UserActivity/LikeActivityCard";
 
 export default function Profile() {
 
@@ -54,9 +55,12 @@ export default function Profile() {
                 {   
                     (userRecords !== null && userRecords?.recent_activity !== null) && (
                         userRecords?.recent_activity.map((r: RecentActivity, index: number)=> (
-                            r.type === 'watchlist' && (
+                            r.type === 'watchlist' ? (
                                 <WatchlistActivityCard key={index} created_at={r.created_at} media={r.media} watchlist={r.watchlist}/>
-                            )
+                            ) :
+                            r.type === 'like' ? (
+                                <LikeActivityCard key={index} created_at={r.created_at} media={r.media} watchlist={r.watchlist}/>
+                            ) : ''
                         ))
 
                     )

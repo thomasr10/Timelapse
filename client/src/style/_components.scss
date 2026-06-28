@@ -1507,7 +1507,10 @@ form {
     .icon {
         color: #1E90FF;
     }
+}
 
+.watchlist-activity-card,
+.like-activity-card {
     .media-container {
 
         display: flex;
@@ -1521,5 +1524,34 @@ form {
             width: 80px;
             height: 120px;
         }
+
+        div {
+            display: flex;
+            flex-direction: column;
+            gap: .25rem;
+
+            .date {
+                color: $secondary-text-color;
+                font-family: $inter-regular;
+                font-size: $font-size-small;
+            }
+        }
+    }
+}
+
+.like-activity-card {
+    .title {
+        span {
+            color: $accent-color;
+        }
+    }
+
+    .icon-container {
+        background-color: #d7263e1f;
+    }
+
+    .icon {
+        color: $accent-color;
+        fill: $accent-color;
     }
 }
