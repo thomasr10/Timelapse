@@ -4,7 +4,9 @@ namespace App\Service;
 
 use App\Entity\User;
 use App\Entity\UserMedia;
+use App\Entity\Media;
 use App\Entity\UserActivity;
+use App\Entity\Watchlist;
 use App\Repository\UserActivityRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -15,11 +17,27 @@ class UserActivityService
         private UserActivityRepository $userActivityRepository
     ){}
 
-    public function createMediaActivity(string $type, UserMedia $userMedia, User $user): void
+    public function createMediaActivity(string $type, UserMedia $userMedia, User $user, Media $media): void
     {
         $userActivity = new UserActivity();
         $userActivity->setType($type);
+        $userActivity->setMedia($media);
         $userActivity->setUserMedia($userMedia);
+        $userActivity->setUser($user);
+        $userActivity->setCreatedAt(new \DateTimeImmutable());
+
+        $this->em->persist($userActivity);
+        $this->em->flush();
+        return;
+    }
+
+    public function createWatchlistActivity(string $type, Watchlist $watchlist, User $user, Media $media, UserMedia $userMedia): void
+    {
+        $userActivity = new UserActivity();
+        $userActivity->setType($type);
+        $userActivity->setMedia($media);
+        $userActivity->setUserMedia($userMedia);
+        $userActivity->setWatchlist($watchlist);
         $userActivity->setUser($user);
         $userActivity->setCreatedAt(new \DateTimeImmutable());
 

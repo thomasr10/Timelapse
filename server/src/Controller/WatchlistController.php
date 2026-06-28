@@ -10,6 +10,7 @@ use App\Service\WatchlistService;
 use App\Service\MediaService;
 use App\Service\UserMediaService;
 use App\Service\WatchlistMediaService;
+use App\Service\UserActivityService;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Serializer\Exception\CircularReferenceException;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
@@ -21,7 +22,8 @@ final class WatchlistController extends AbstractController
         private WatchlistService $watchlistService, 
         private MediaService $mediaService, 
         private WatchlistMediaService $watchlistMediaService, 
-        private userMediaService $userMediaService
+        private UserMediaService $userMediaService,
+        private UserActivityService $userActivityService
     ){}
 
     #[Route('/create', name: 'app_watchlist', methods: ["POST"])]
@@ -123,6 +125,10 @@ final class WatchlistController extends AbstractController
                 'results' => null
             ]);
         }
+
+        // create recent activity
+        $watchlist = $this->watchlistService->findById($data["watchlist_id"]);
+        $this->userActivityService->createWatchlistActivity("watchlist", $watchlist, $user, $media, $userMedia);
 
         return $this->json([
             'message' => 'Media ajouté à la watchlist'

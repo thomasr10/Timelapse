@@ -32,9 +32,8 @@ class WatchlistService
         return $watchlists;
     }
 
-    // public function findWatchlist(int $watchlist_id): ?Watchlist
-    // {
-    //     $watchlist = $this->watchlistRepository->findById($watchlist_id);
-    //     return $watchlist;
-    // }
+    public function findById(int $watchlist_id): ?Watchlist
+    {
+        return $this->watchlistRepository->find($watchlist_id);
+    }
 }

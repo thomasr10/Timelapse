@@ -29,6 +29,12 @@ class UserActivity
     #[ORM\ManyToOne]
     private ?UserFollows $following = null;
 
+    #[ORM\ManyToOne]
+    private ?Watchlist $watchlist = null;
+
+    #[ORM\ManyToOne]
+    private ?Media $media = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -90,6 +96,30 @@ class UserActivity
     public function setFollowing(?UserFollows $following): static
     {
         $this->following = $following;
+
+        return $this;
+    }
+
+    public function getWatchlist(): ?Watchlist
+    {
+        return $this->watchlist;
+    }
+
+    public function setWatchlist(?Watchlist $watchlist): static
+    {
+        $this->watchlist = $watchlist;
+
+        return $this;
+    }
+
+    public function getMedia(): ?Media
+    {
+        return $this->media;
+    }
+
+    public function setMedia(?Media $media): static
+    {
+        $this->media = $media;
 
         return $this;
     }

@@ -63,20 +63,26 @@ final class UserController extends AbstractController
 
         foreach($userRecentActivity as $recentActivity) {
             $userMedia = $recentActivity->getUserMedia();
-            $media = $userMedia->getMedia();
-            
+            $media = $recentActivity->getMedia();
+            $watchlist = $recentActivity->getWatchlist();
+
             $userRecentActivityArray[] = [
                 "id" => $recentActivity->getId(),
                 "type" => $recentActivity->getType(),
                 "created_at" => $recentActivity->getCreatedAt(),
-                "user_media" => [
+                "user_media" => $userMedia ? [
                     "id" => $userMedia->getId(),
                     "rating" => $userMedia->getRating(),
-                    "media" => [
-                        "tmdb" => $media->getTmdbId(),
-                        "type" => $media->getType()
-                    ]
-                ]
+                ] : null,
+                "media" => $media ? [
+                    "tmdb_id" => $media->getTmdbId(),
+                    "type" => $media->getType()
+                ] : null,
+                "watchlist" => $watchlist ? [
+                    "id" => $watchlist->getId(),
+                    "title" => $watchlist->getTitle(),
+                    "description" => $watchlist->getDescription()
+                ] : null
             ];
         }
 
@@ -85,6 +91,7 @@ final class UserController extends AbstractController
             "results" => [
                 "watchlist" => $watchlists,
                 "followers" => count($user->getUserFollows()),
+                "review_count" => count($user->getReviews()),
                 "watched_medias" => $watchedMediaTotal,
                 "favorites_medias" => [],
                 "recent_activity" => $userRecentActivityArray

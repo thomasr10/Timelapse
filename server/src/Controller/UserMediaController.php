@@ -90,7 +90,7 @@ final class UserMediaController extends AbstractController
         $this->userMediaService->like($userMedia, $data["isLiked"]);
 
         if($data["isLiked"] === true) {
-            $this->userActivityService->createMediaActivity("like", $userMedia, $user);
+            $this->userActivityService->createMediaActivity("like", $userMedia, $user, $media);
         }
 
         return $this->json([
