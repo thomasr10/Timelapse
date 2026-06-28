@@ -216,4 +216,3 @@ export const getUserRecords = async () => {
         console.error(e);
     }    
 }
-

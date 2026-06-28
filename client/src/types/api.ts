@@ -1,6 +1,11 @@
 import type { Media } from "../pages/HomepageConnected"
 import type { User } from "./auth"
 
+export type ApiMedia = {
+    tmdb_id: number,
+    type: string
+}
+
 export type UserMedia = {
     id: number | null,
     is_liked: boolean,
@@ -31,4 +36,14 @@ export type UserRecords = {
     followers: number,
     favorites: Media[] | null,
     recent_activity: [] | null,
+    review_count: number | null
+}
+
+export type RecentActivity = {
+    type?: string,
+    created_at: string,
+    user_media?: UserMedia | null,
+    user?: User | null,
+    watchlist?: Watchlist | null,
+    media?: ApiMedia | null
 }

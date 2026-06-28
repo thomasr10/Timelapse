@@ -77,6 +77,7 @@ main {
 
     .slider-container {
         margin-top: 3rem;
+
         .media-card {
             pointer-events: none;
         }
@@ -155,9 +156,10 @@ main {
     gap: 1.5rem;
     justify-content: center;
     margin: 3rem 0;
-    
+
     #cta-txt {
         text-align: center;
+
         p {
             margin-top: 1rem;
             color: $main-text-color;
@@ -168,8 +170,94 @@ main {
 
     .btn-container {
         margin: 2rem auto;
+
         button {
             padding: 1rem 2rem;
         }
+    }
+}
+
+#user-profile {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+
+    @include large-tablet {
+        margin-top: 3rem;
+    }
+
+    img {
+        border-radius: 50%;
+        width: 84px;
+        height: 84px;
+
+        @include desktop {
+            width: 92px;
+            height: 92px;
+        }
+    }
+
+
+    .info-container {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+
+        .username {
+            font-size: $font-size-large;
+            font-family: $inter-bold;
+            color: $main-text-color;
+        }
+
+        p {
+            color: $secondary-text-color;
+            font-family: $inter-regular;
+            font-size: $font-size-small;
+
+            @include desktop {
+                font-size: $font-size-medium;
+            }
+        }
+
+        .user-info {
+            padding: .5rem 1rem;
+            background-color: $panel-color;
+            border: 1px solid $panel-bordel-color;
+            border-radius: 8px;
+            color: $main-text-color;
+            font-size: .88rem;
+            font-family: $inter-bold;
+            width: fit-content;
+
+            span {
+                display: flex;
+                gap: .5rem;
+            }
+
+            .gray-txt {
+                color: $secondary-text-color;
+                font-family: $inter-regular;
+            }
+        }
+    }
+}
+
+.flex-row {
+    display: flex;
+}
+
+.gap-12 {
+    gap: .88rem;
+}
+
+#recent-activity {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1.5rem;
+
+    @include large-tablet {
+        flex-direction: row;
+        margin-top: 2rem;
     }
 }
