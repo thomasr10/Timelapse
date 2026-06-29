@@ -9,11 +9,17 @@ use Symfony\Component\Routing\Attribute\Route;
 use App\Service\MediaService;
 use App\Service\UserMediaService;
 use App\Service\ReviewService;
+use App\Service\UserActivityService;
 
 #[Route('/api/review')]
 final class ReviewController extends AbstractController
 {   
-    public function __construct(private MediaService $mediaService, private ReviewService $reviewService, private UserMediaService $userMediaService){}
+    public function __construct(
+        private MediaService $mediaService, 
+        private ReviewService $reviewService, 
+        private UserMediaService $userMediaService,
+        private UserActivityService $userActivityService
+    ){}
 
     #[Route('/add', name: 'app_review_add', methods: ['POST'])]
     public function add(Request $request): JsonResponse
@@ -34,7 +40,11 @@ final class ReviewController extends AbstractController
         }
 
         $media = $this->mediaService->findOrCreate($data["tmdb"], $data["type"]);
-        $this->reviewService->create($data["content"], $media, $user);
+        $userMedia = $this->userMediaService->findOrCreate($user, $media);
+        $review = $this->reviewService->create($data["content"], $media, $user);
+        
+        // User activity
+        $this->userActivityService->createReviewActivity("review", $review, $user, $media, $userMedia);
 
         return $this->json([
             'message' => 'Review créée avec succès',

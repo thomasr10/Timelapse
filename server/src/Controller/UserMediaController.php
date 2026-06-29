@@ -154,7 +154,7 @@ final class UserMediaController extends AbstractController
         $userMedia = $this->userMediaService->findOrCreate($user, $media);
 
         $this->userMediaService->rate($userMedia, $data["rate"]);
-        $this->userActivityService->createMediaActivity("rate", $userMedia, $user);
+        $this->userActivityService->createMediaActivity("rate", $userMedia, $user, $media   );
 
 
         return $this->json([

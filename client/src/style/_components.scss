@@ -1510,7 +1510,9 @@ form {
 }
 
 .watchlist-activity-card,
-.like-activity-card {
+.like-activity-card,
+.review-activity-card,
+.rate-activity-card {
     .media-container {
 
         display: flex;
@@ -1525,10 +1527,10 @@ form {
             height: 120px;
         }
 
-        div {
+        div:not(.rating-container, .media-title-date) {
             display: flex;
             flex-direction: column;
-            gap: .25rem;
+            gap: .88rem;
 
             .date {
                 color: $secondary-text-color;
@@ -1553,5 +1555,65 @@ form {
     .icon {
         color: $accent-color;
         fill: $accent-color;
+    }
+}
+
+.rate-activity-card {
+    .icon-container {
+        background-color: #ffc1071d;
+    }
+
+    .icon {
+        fill: $rating-color;
+        color: $rating-color;
+    }
+
+    .media-title-date {
+        display: flex;
+        flex-direction: column;
+        gap: .25rem;
+    }
+
+    .media-container {
+        .rating-container {
+            display: flex;
+            gap: .125rem;
+        }
+    }
+}
+
+.review-activity-card {
+
+    .icon-container {
+        background-color: #21c45d24;
+    }
+
+    .icon {
+        color: #21C45D;
+    }
+
+    .content {
+        font-size: $font-size-xs;
+        font-family: $inter-regular;
+        color: $secondary-text-color;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+}
+
+#profile {
+    h2 {
+        color: $main-text-color;
+        font-family: $inter-bold;
+        font-size: $font-size-xl;
+        margin-top: 2rem;
+
+        @include desktop {
+            font-size: $font-size-xxl
+        }
     }
 }

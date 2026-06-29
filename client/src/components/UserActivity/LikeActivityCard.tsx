@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import type { Media } from "../../pages/HomepageConnected";
 import { fetchMedia } from "../../api/tmdb";
 
-export default function LikeActivityCard({ created_at, watchlist, media }: RecentActivity) {
+export default function LikeActivityCard({ created_at, media }: RecentActivity) {
 
     const [mediaInfo, setMediaInfo] = useState<Media | null>(null);
 
@@ -22,7 +22,7 @@ export default function LikeActivityCard({ created_at, watchlist, media }: Recen
                     <Heart className="icon" />
                 </div>
                 <div className="action-container">
-                    <p className="title">Ajouté dans <span>{watchlist?.title}</span></p>
+                    <p className="title">Media liké</p>
                     <p className="date">Il y a {formatReviewDate(created_at)}</p>
                 </div>
             </div>

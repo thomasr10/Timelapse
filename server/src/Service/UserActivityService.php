@@ -5,6 +5,7 @@ namespace App\Service;
 use App\Entity\User;
 use App\Entity\UserMedia;
 use App\Entity\Media;
+use App\Entity\Review;
 use App\Entity\UserActivity;
 use App\Entity\Watchlist;
 use App\Repository\UserActivityRepository;
@@ -46,8 +47,37 @@ class UserActivityService
         return;
     }
 
+    public function createReviewActivity(string $type, Review $review, User $user, Media $media, UserMedia $userMedia): void
+    {
+        $userActivity = new UserActivity();
+        $userActivity->setType($type);
+        $userActivity->setMedia($media);
+        $userActivity->setUserMedia($userMedia);
+        $userActivity->setReview($review);
+        $userActivity->setUser($user);
+        $userActivity->setCreatedAt(new \DateTimeImmutable());
+
+        $this->em->persist($userActivity);
+        $this->em->flush();
+        return;
+    }
+
     public function userRecentActivity(User $user)
     {
-        return $this->userActivityRepository->findByUser($user);
+        $userActivity = $this->userActivityRepository->findByUser($user);
+
+        $unique = [];
+        $seen = [];
+
+        foreach ($userActivity as $entity) {
+            $key = $entity->getType() . '_' . $entity->getUserMedia()->getId();
+
+            if (!isset($seen[$key])) {
+                $seen[$key] = true;
+                $unique[] = $entity;
+            }
+        }
+
+        return array_slice($unique, 0, 3);
     }
 }

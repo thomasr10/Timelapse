@@ -12,7 +12,7 @@ class ReviewService
 {
     public function __construct(private EntityManagerInterface $em, private ReviewRepository $reviewRepository){}
 
-    public function create(string $content, Media $media, User $user): void
+    public function create(string $content, Media $media, User $user): Review
     {
         $review = new Review();
         $review->setContent($content);
@@ -23,7 +23,7 @@ class ReviewService
         $this->em->persist($review);
         $this->em->flush($review);
 
-        return;
+        return $review;
     }
 
     public function getReviews(Media $media, int $offset): array | null

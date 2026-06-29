@@ -6,7 +6,7 @@ import { Dot, Star, CirclePlus, Eye, Heart, EyeOff, StarHalf } from 'lucide-reac
 import { addMovieToWatchlist, handleLike, handleWatch, rateMedia } from "../api/api"
 import type { UserMedia, Watchlist } from "../types/api"
 import AddWatchlistModal from "./AddWatchlistModal"
-import { formatTmdbRate } from "../utils/formatRate"
+import { formatTmdbRate, getStarType } from "../utils/formatRate"
 
 interface Props {
     id?: number
@@ -36,13 +36,6 @@ export default function MediaHero({ id, poster_path, title, genres, release_date
         const { left, width } = e.currentTarget.getBoundingClientRect();
         const x = e.clientX - left;
         setHoverValue(x < width / 2 ? index - 0.5 : index);
-    }
-
-    const getStarType = (index: number, value: number | null): string => {
-        if (!value) return 'empty';
-        if (value >= index) return 'full';
-        if (value >= index - 0.5) return 'half';
-        return 'empty';
     }
     
     const rate = async (rate: number | null) => {

@@ -35,6 +35,9 @@ class UserActivity
     #[ORM\ManyToOne]
     private ?Media $media = null;
 
+    #[ORM\ManyToOne]
+    private ?Review $review = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -120,6 +123,18 @@ class UserActivity
     public function setMedia(?Media $media): static
     {
         $this->media = $media;
+
+        return $this;
+    }
+
+    public function getReview(): ?Review
+    {
+        return $this->review;
+    }
+
+    public function setReview(?Review $review): static
+    {
+        $this->review = $review;
 
         return $this;
     }

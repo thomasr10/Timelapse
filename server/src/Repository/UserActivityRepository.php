@@ -26,7 +26,7 @@ class UserActivityRepository extends ServiceEntityRepository
                ->andWhere('u.user = :user')
                ->setParameter('user', $user)
                ->orderBy('u.id', 'DESC')
-               ->setMaxResults(3)
+               ->setMaxResults(10)
                ->getQuery()
                ->getResult()
            ;

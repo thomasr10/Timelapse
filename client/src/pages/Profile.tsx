@@ -6,6 +6,8 @@ import type { RecentActivity, UserRecords } from "../types/api";
 import { getUserRecords } from "../api/api";
 import WatchlistActivityCard from "../components/UserActivity/WatchlistActivityCard";
 import LikeActivityCard from "../components/UserActivity/LikeActivityCard";
+import RateActivityCard from "../components/UserActivity/RateActivityCard";
+import ReviewActivityCard from "../components/UserActivity/ReviewActivityCard";
 
 export default function Profile() {
 
@@ -19,7 +21,7 @@ export default function Profile() {
     }, [])
 
     return (
-        <main className="section-container">
+        <main id="profile" className="section-container">
             <section id="user-profile">
                 <figure>
                     <img src={user?.profile_picture
@@ -51,20 +53,27 @@ export default function Profile() {
                     </div>
                 </div>
             </section>
-            <section id="recent-activity">
-                {   
-                    (userRecords !== null && userRecords?.recent_activity !== null) && (
-                        userRecords?.recent_activity.map((r: RecentActivity, index: number)=> (
-                            r.type === 'watchlist' ? (
-                                <WatchlistActivityCard key={index} created_at={r.created_at} media={r.media} watchlist={r.watchlist}/>
-                            ) :
-                            r.type === 'like' ? (
-                                <LikeActivityCard key={index} created_at={r.created_at} media={r.media} watchlist={r.watchlist}/>
-                            ) : ''
-                        ))
+            <section>
+                <h2>Activité récente</h2>
+                <section id="recent-activity">
+                    {
+                        (userRecords !== null && userRecords?.recent_activity !== null) && (
+                            userRecords?.recent_activity.map((r: RecentActivity, index: number) => (
+                                r.type === 'watchlist' ? (
+                                    <WatchlistActivityCard key={index} created_at={r.created_at} media={r.media} watchlist={r.watchlist} />
+                                ) :
+                                    r.type === 'like' ? (
+                                        <LikeActivityCard key={index} created_at={r.created_at} media={r.media} />
+                                    ) :
+                                        r.type === 'rate' ?
+                                            <RateActivityCard key={index} created_at={r.created_at} media={r.media} user_media={r.user_media} /> :
+                                            r.type === 'review' ?
+                                                <ReviewActivityCard key={index} created_at={r.created_at} media={r.media} review={r.review} /> : ''
+                            ))
 
-                    )
-                }
+                        )
+                    }
+                </section>
             </section>
         </main>
     )
