@@ -35,4 +35,12 @@ class WatchlistMediaService
         ]);
         
     }
+
+    public function findByWatchlistId(int $watchlist_id)
+    {
+        return $this->connection->fetchAllAssociative(
+            'SELECT `media_id`, `watchlist_id` FROM watchlist_media WHERE watchlist_id = ?',
+            [$watchlist_id]
+        );        
+    }
 }

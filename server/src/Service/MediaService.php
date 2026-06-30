@@ -32,4 +32,9 @@ class MediaService
     {
         return $this->mediaRepository->findByTMDBIdAndType($tmdb, $type);
     }
+
+    public function findById(int $media_id): ?Media
+    {
+        return $this->mediaRepository->find($media_id);
+    }
 }

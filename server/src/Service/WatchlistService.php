@@ -36,4 +36,10 @@ class WatchlistService
     {
         return $this->watchlistRepository->find($watchlist_id);
     }
+
+    public function update(Watchlist $watchlist): void
+    {
+        $watchlist->setUpdatedAt(new \DatetimeImmutable());
+        return;
+    }
 }

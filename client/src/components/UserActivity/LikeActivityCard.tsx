@@ -28,7 +28,7 @@ export default function LikeActivityCard({ created_at, media }: RecentActivity) 
             </div>
             <div className="media-container">
                 <img src={`${import.meta.env.VITE_API_IMAGE_BASE_URL}w500${mediaInfo?.poster_path}`} alt="Affiche du film" />
-                <div>
+                <div className="media-title-date">
                     <p>
                         {
                             media?.type === 'tv' ?

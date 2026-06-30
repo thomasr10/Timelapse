@@ -20,10 +20,10 @@ export default function HeaderConnected() {
             <div className="burger-container">
                 <Menu className="burger-icon" onClick={() => handleBurgerMenu()} />
                 <nav className={`burger-menu ${isOpen ? 'open' : ''}`}>
-                    <Link to={'/community'} className="burger-connected-link"><UsersRound />Communauté</Link>
+                    {/* <Link to={'/community'} className="burger-connected-link"><UsersRound />Communauté</Link>
                     <div className="separator"></div>
-                    <Link to={'/'} className="burger-connected-link"><Bell />Notifications</Link>
-                    <div className="separator"></div>
+                    <Link to={'/'} className="burger-connected-link"><Bell />Notifications</Link> */}
+                    {/* <div className="separator"></div> */}
                     <Link className="burger-connected-link" to={'/profile'}><CircleUserRound />Profil</Link>
 
                 </nav>
@@ -32,8 +32,8 @@ export default function HeaderConnected() {
             <SearchBar className={"search-container"}/>
 
             <div className="header-connected-link">
-                <Link to={'/community'} className="community-icon"><UsersRound /></Link>
-                <Bell />
+                {/* <Link to={'/community'} className="community-icon"><UsersRound /></Link>
+                <Bell /> */}
                 <Link to={'/profile'} className="profile-icon"><CircleUserRound /></Link>
             </div>
         </header>

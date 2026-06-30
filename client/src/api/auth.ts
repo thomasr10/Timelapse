@@ -47,7 +47,10 @@ export const me = async () => {
 
 export const logout = async () => {
 
-    const response = await fetch('http://localhost:8080/api/logout');
+    const response = await fetch('http://localhost:8080/api/logout', {
+        method: 'GET',
+        credentials: "include"
+    });
 
     if (!response.ok) {
         console.error(`Erreur lors de la déconnexion : ${response.status}`);

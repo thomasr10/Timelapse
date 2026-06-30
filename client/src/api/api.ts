@@ -101,13 +101,13 @@ export const addMovieToWatchlist = async (watchlist_id: number, tmdb: number, ty
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({watchlist_id, tmdb, type}),
+            body: JSON.stringify({ watchlist_id, tmdb, type }),
             credentials: "include"
         });
 
         const data = await response.json();
 
-        if(!response.ok) {
+        if (!response.ok) {
             console.error(`Error while adding media to the watchlist : ${response.status}`);
             return data;
         }
@@ -131,7 +131,7 @@ export const fetchReviews = async (type: string, tmdb: number, offset: number) =
 
         const data = await response.json();
 
-        if(!response.ok) {
+        if (!response.ok) {
             console.log(`Error while fetching media reviews : ${response.status}`);
             return data;
         }
@@ -150,10 +150,10 @@ export const registerReview = async (content: string, tmdb: number, type: string
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({content, tmdb, type}),
+            body: JSON.stringify({ content, tmdb, type }),
             credentials: "include"
         });
-        
+
         const data = await response.json();
 
         if (!response.ok) {
@@ -175,10 +175,10 @@ export const rateMedia = async (tmdb: number, type: string, rate: number) => {
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({tmdb, type, rate}),
+            body: JSON.stringify({ tmdb, type, rate }),
             credentials: "include"
         });
-        
+
         const data = await response.json();
 
         if (!response.ok) {
@@ -202,7 +202,7 @@ export const getUserRecords = async () => {
             },
             credentials: "include"
         });
-        
+
         const data = await response.json();
 
         if (!response.ok) {
@@ -214,5 +214,29 @@ export const getUserRecords = async () => {
 
     } catch (e) {
         console.error(e);
-    }    
+    }
+}
+
+export const fetchWatchlistMedia = async (id: number) => {
+    try {
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/watchlist/${id}/media`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            credentials: "include"
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            console.error(`Error while fetching user records : ${response.status}`);
+            return data;
+        }
+
+        return data;
+
+    } catch (e) {
+        console.error(e);
+    }
 }

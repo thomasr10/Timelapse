@@ -18,7 +18,9 @@ export type Watchlist = {
     id: number,
     title: string,
     description: string,
-    medias: Media[]
+    medias: Media[],
+    updated_at: string,
+    count_media: number
 }
 
 export type Review = {

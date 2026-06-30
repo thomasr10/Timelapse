@@ -480,6 +480,19 @@ main {
   }
 }
 
+#users-watchlists section {
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+}
+@media (min-width: 1200px) {
+  #users-watchlists section {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+}
+
 form {
   max-width: 740px;
   width: 100%;
@@ -1860,23 +1873,34 @@ form .submit-container {
   width: 80px;
   height: 120px;
 }
-.watchlist-activity-card .media-container div:not(.rating-container, .media-title-date),
-.like-activity-card .media-container div:not(.rating-container, .media-title-date),
-.review-activity-card .media-container div:not(.rating-container, .media-title-date),
-.rate-activity-card .media-container div:not(.rating-container, .media-title-date) {
+.watchlist-activity-card .media-container .all-infos-container,
+.like-activity-card .media-container .all-infos-container,
+.review-activity-card .media-container .all-infos-container,
+.rate-activity-card .media-container .all-infos-container {
   display: flex;
   flex-direction: column;
   gap: 0.88rem;
 }
-.watchlist-activity-card .media-container div:not(.rating-container, .media-title-date) .date,
-.like-activity-card .media-container div:not(.rating-container, .media-title-date) .date,
-.review-activity-card .media-container div:not(.rating-container, .media-title-date) .date,
-.rate-activity-card .media-container div:not(.rating-container, .media-title-date) .date {
+.watchlist-activity-card .media-container .media-title-date,
+.like-activity-card .media-container .media-title-date,
+.review-activity-card .media-container .media-title-date,
+.rate-activity-card .media-container .media-title-date {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.watchlist-activity-card .media-container .media-title-date .date,
+.like-activity-card .media-container .media-title-date .date,
+.review-activity-card .media-container .media-title-date .date,
+.rate-activity-card .media-container .media-title-date .date {
   color: #A9B4C6;
   font-family: "Inter-Regular";
   font-size: 0.88rem;
 }
 
+.like-activity-card .media-title-date {
+  margin-bottom: 2rem;
+}
 .like-activity-card .title span {
   color: #D7263D;
 }
@@ -1916,8 +1940,8 @@ form .submit-container {
   font-family: "Inter-Regular";
   color: #A9B4C6;
   display: -webkit-box;
-  -webkit-line-clamp: 3;
-  line-clamp: 3;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -1932,4 +1956,49 @@ form .submit-container {
   #profile h2 {
     font-size: 2rem;
   }
+}
+
+.user-watchlist-card {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+  max-width: calc(340px - 2rem);
+  padding: 1rem;
+  background-color: #0D1324;
+  border: 1px solid #1A2238;
+  border-radius: 8px;
+  align-items: center;
+}
+@media (min-width: 576px) {
+  .user-watchlist-card {
+    max-width: calc(576px - 2rem);
+  }
+}
+.user-watchlist-card .watchlist-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.88rem;
+}
+.user-watchlist-card .watchlist-info .sub-info {
+  display: flex;
+  gap: 0.5rem;
+}
+.user-watchlist-card .posters-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.25rem;
+}
+.user-watchlist-card .posters-container img {
+  width: 60px;
+  height: 90px;
+}
+.user-watchlist-card .title {
+  font-family: "Inter-Bold";
+  font-size: 1.25rem;
+  color: #E6ECF5;
+}
+.user-watchlist-card .description {
+  font-family: "Inter-Regular";
+  font-size: 0.88rem;
+  color: #A9B4C6;
 }/*# sourceMappingURL=main.css.map */

@@ -1,4 +1,4 @@
-import { MessageSquarePlus, Star } from "lucide-react";
+import { MessageSquarePlus } from "lucide-react";
 import type { RecentActivity } from "../../types/api";
 import { formatDate, formatReviewDate } from "../../utils/formatDate";
 import { useEffect, useState } from "react";
@@ -28,7 +28,7 @@ export default function ReviewActivityCard({ created_at, review, media }: Recent
             </div>
             <div className="media-container">
                 <img src={`${import.meta.env.VITE_API_IMAGE_BASE_URL}w500${mediaInfo?.poster_path}`} alt="Affiche du film" />
-                <div>
+                <div className="all-infos-container">
                     <div className="media-title-date">
                         <p>
                             {

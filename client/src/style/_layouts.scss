@@ -4,6 +4,8 @@ main {
     padding-bottom: 4rem;
 }
 
+
+
 .section-container {
     width: 100%;
     max-width: $mobile-width;
@@ -259,5 +261,19 @@ main {
     @include large-tablet {
         flex-direction: row;
         margin-top: 2rem;
+    }
+}
+
+#users-watchlists {
+    section {
+        margin-top: 3rem;
+        display: flex;
+        flex-direction: column;
+
+        @include desktop {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
     }
 }

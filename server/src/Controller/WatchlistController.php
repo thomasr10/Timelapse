@@ -92,7 +92,9 @@ final class WatchlistController extends AbstractController
             $watchlistArray[] = [
                 "id" => $watchlist->getId(),
                 "title" => $watchlist->getTitle(),
-                "description" => $watchlist->getDescription()
+                "description" => $watchlist->getDescription(),
+                "updated_at" => $watchlist->getUpdatedAt(),
+                "count_media" => count($watchlist->getMedia())
             ];
         }
 
@@ -118,6 +120,11 @@ final class WatchlistController extends AbstractController
         $media = $this->mediaService->findOrCreate($data["tmdb"], $data["type"]);
         $userMedia = $this->userMediaService->findOrCreate($user, $media);
         $insert = $this->watchlistMediaService->addMedia($media->getId(), $data["watchlist_id"]);
+        
+        // update watchlist
+        $watchlist = $this->watchlistService->find($data["watchlist_id"]);
+        $this->watchlistService->update($watchlist);
+
 
         if(gettype($insert) === 'string') {
             return $this->json([
@@ -153,6 +160,30 @@ final class WatchlistController extends AbstractController
 
         return $this->json([
             'message' => 'Media supprimé de la watchlist'
+        ]);
+    }
+
+    #[Route('/{id}/media', name: "app_watchlist_media_delete", methods: ["GET"])]
+    public function fetchWatchlistMedi(string $id): JsonResponse
+    {
+        $user = $this->getUser();
+
+        $watchlist_id = intval($id);
+
+        $media_id_array = $this->watchlistMediaService->findByWatchlistId($watchlist_id);
+        $media_entity_array = [];
+
+        foreach($media_id_array as $media) {
+            $media = $this->mediaService->findById($media["media_id"]);
+            $media_entity_array[] = [
+                "tmdb_id" => $media->getTmdbId(),
+                "type" => $media->getType()
+            ];
+        }
+
+        return $this->json([
+            'message' => 'Medias récupérés avec succès',
+            'results' => $media_entity_array 
         ]);
     }
 }

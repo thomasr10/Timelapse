@@ -1527,10 +1527,16 @@ form {
             height: 120px;
         }
 
-        div:not(.rating-container, .media-title-date) {
+        .all-infos-container {
             display: flex;
             flex-direction: column;
             gap: .88rem;
+        }
+
+        .media-title-date {
+            display: flex;
+            flex-direction: column;
+            gap: .25rem;
 
             .date {
                 color: $secondary-text-color;
@@ -1542,6 +1548,11 @@ form {
 }
 
 .like-activity-card {
+
+    .media-title-date {
+        margin-bottom: 2rem;
+    }
+
     .title {
         span {
             color: $accent-color;
@@ -1597,8 +1608,8 @@ form {
         font-family: $inter-regular;
         color: $secondary-text-color;
         display: -webkit-box;
-        -webkit-line-clamp: 3;
-        line-clamp: 3;
+        -webkit-line-clamp: 1;
+        line-clamp: 1;
         -webkit-box-orient: vertical;
         overflow: hidden;
     }
@@ -1615,5 +1626,56 @@ form {
         @include desktop {
             font-size: $font-size-xxl
         }
+    }
+}
+
+.user-watchlist-card {
+    display: flex;
+    gap: 1rem;
+    width: 100%;
+    max-width: calc($mobile-width - 2rem);
+    padding: 1rem;
+    background-color: $panel-color;
+    border: 1px solid $panel-bordel-color;
+    border-radius: 8px;
+    align-items: center;
+
+    @include large-mobile {
+        max-width: calc($large-mobile-width - 2rem);
+    }
+
+    .watchlist-info {
+        display: flex;
+        flex-direction: column;
+        gap: .88rem;
+
+        .sub-info {
+            display: flex;
+            gap: .5rem;
+        }
+    }
+
+    .posters-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: .25rem;
+
+        img {
+            width: 60px;
+            height: 90px;
+
+        }
+    }
+
+    .title {
+        font-family: $inter-bold;
+        font-size: $font-size-large;
+        color: $main-text-color;
+    }
+
+    .description {
+        font-family: $inter-regular;
+        font-size: $font-size-small;
+        color: $secondary-text-color;
     }
 }
