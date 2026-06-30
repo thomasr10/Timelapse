@@ -2,7 +2,7 @@ import { Heart, ListPlus, MessageSquare, Star } from "lucide-react";
 import type { RecentActivity } from "../types/api";
 import { formatReviewDate } from "../utils/formatDate";
 
-export default function RecentActivityCard({ type, created_at, user_media, user }: RecentActivity) {
+export default function RecentActivityCard({ type, created_at, user_media }: RecentActivity) {
 
     return (
         <article className="recent-activity-card">

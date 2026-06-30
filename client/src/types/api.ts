@@ -11,6 +11,7 @@ export type UserMedia = {
     is_liked: boolean,
     is_watched: boolean,
     rating: number | null,
+    review?: string | null
     watched_at: string
 }
 

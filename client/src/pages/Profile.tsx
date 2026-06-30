@@ -22,7 +22,7 @@ export default function Profile() {
     const [mediasInfos, setMediasInfos] = useState<Record<number, string[]> | null>(null);
 
     useEffect(() => {
-        getUserRecords().then(data => setUserRecords(data.results));
+        getUserRecords().then(data => {console.log(data); setUserRecords(data.results)});
     }, []);
 
     useEffect(() => {
@@ -148,9 +148,9 @@ export default function Profile() {
             <section id="users-watchlists">
                 <h2>Mes watchlists</h2>
                 <section>
-                    {userWatchlists?.map(w => (
+                    {userWatchlists?.map((w, index) => (
                         <UserWatchlistCard
-                            key={w.id}
+                            key={index}
                             title={w.title}
                             items={w.count_media}
                             updated_at={w.updated_at}
