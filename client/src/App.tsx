@@ -11,6 +11,7 @@ import MediaPage from "./pages/MediaPage";
 import ProtectedRoutes from "./router/ProtectedRoutes";
 import { LoaderProvider } from "./context/LoaderContext";
 import Profile from "./pages/Profile";
+import WatchlistPage from "./pages/WatchlistPage";
 
 
 function App() {
@@ -60,6 +61,14 @@ function App() {
               element={
                 <ProtectedRoutes>
                   <Profile />
+                </ProtectedRoutes>
+              }
+            />
+            <Route
+              path="/watchlist/:id"
+              element={
+                <ProtectedRoutes>
+                  <WatchlistPage />
                 </ProtectedRoutes>
               }
             />

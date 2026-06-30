@@ -277,3 +277,17 @@ main {
         }
     }
 }
+
+.media-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    @include desktop {
+        grid-template-columns: repeat(5, 1fr);
+    }
+
+    .media-card {
+        min-height: fit-content;
+        padding: .25rem 0;
+    }
+}

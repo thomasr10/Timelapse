@@ -555,6 +555,7 @@ form {
     background-color: none;
     min-height: 200px;
     border-radius: 8px;
+    width: fit-content;
 
     @include tablet {
         min-height: 235px;
@@ -1646,13 +1647,27 @@ form {
         max-width: calc($large-mobile-width - 2rem);
     }
 
-    button {
-        background-color: transparent;
-        border: none;
+    .action-container {
         position: absolute;
         top: 50%;
         right: 1rem;
         transform: translateY(-50%);
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+        align-items: center;
+
+        .watchlist-link {
+            color: $main-text-color;
+            font-family: $inter-regular;
+            font-size: $font-size-medium;
+            cursor: pointer;
+        }
+    }
+
+    button {
+        background-color: transparent;
+        border: none;
 
         .icon {
             color: $accent-color;

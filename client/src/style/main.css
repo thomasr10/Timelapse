@@ -493,6 +493,21 @@ main {
   }
 }
 
+.media-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+@media (min-width: 1200px) {
+  .media-container {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+.media-container .media-card {
+  min-height: -moz-fit-content;
+  min-height: fit-content;
+  padding: 0.25rem 0;
+}
+
 form {
   max-width: 740px;
   width: 100%;
@@ -991,6 +1006,8 @@ form .submit-container {
   background-color: none;
   min-height: 200px;
   border-radius: 8px;
+  width: -moz-fit-content;
+  width: fit-content;
 }
 @media (min-width: 768px) {
   .media-card {
@@ -1978,13 +1995,25 @@ form .submit-container {
     max-width: calc(576px - 2rem);
   }
 }
-.user-watchlist-card button {
-  background-color: transparent;
-  border: none;
+.user-watchlist-card .action-container {
   position: absolute;
   top: 50%;
   right: 1rem;
   transform: translateY(-50%);
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: center;
+}
+.user-watchlist-card .action-container .watchlist-link {
+  color: #E6ECF5;
+  font-family: "Inter-Regular";
+  font-size: 1rem;
+  cursor: pointer;
+}
+.user-watchlist-card button {
+  background-color: transparent;
+  border: none;
 }
 .user-watchlist-card button .icon {
   color: #D7263D;

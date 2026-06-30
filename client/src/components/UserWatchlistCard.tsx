@@ -1,4 +1,5 @@
 // import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { deleteWatchlist } from "../api/api";
 import { formatReviewDate } from "../utils/formatDate";
 import { Trash2 } from "lucide-react";
@@ -19,7 +20,6 @@ export default function UserWatchlistCard({ title, poster_paths, updated_at, ite
     }
 
     return (
-        // <Link to={'/#'}>
         <article className="user-watchlist-card">
             <div className="posters-container">
                 {
@@ -36,10 +36,12 @@ export default function UserWatchlistCard({ title, poster_paths, updated_at, ite
                     <p className="description">{items} items</p>
                 </div>
             </div>
-            <button onClick={() => handleDeleteWatchlist(id)}>
-                <Trash2 className="icon" />
-            </button>
+            <div className="action-container">
+                <Link to={`/watchlist/${id}`} className="watchlist-link">Voir</Link>
+                <button onClick={() => handleDeleteWatchlist(id)}>
+                    <Trash2 className="icon" />
+                </button>
+            </div>
         </article>
-        // </Link>
     )
 }

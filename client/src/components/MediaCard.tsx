@@ -4,15 +4,15 @@ interface Props {
     id: number,
     title: string | undefined,
     poster_path: string,
-    genre_ids: number[],
-    genres: Genre[],
+    genre_ids?: number[],
+    genres?: Genre[],
     media_type: string
 }
 
 export default function MediaCard({ id, title, poster_path, genre_ids, genres, media_type }: Props) {
 
     const movieGenres = Array.isArray(genres) && genres.length > 0
-        ? genre_ids.map((id) => genres.find(g => g.id === id)?.name).filter(Boolean)
+        ? genre_ids?.map((id) => genres.find(g => g.id === id)?.name).filter(Boolean)
         : [];
 
     return (
@@ -21,7 +21,7 @@ export default function MediaCard({ id, title, poster_path, genre_ids, genres, m
                 <img src={poster_path} alt={`Affiche du film ${title}`} />
                 <div className="info-container">
                     <p className="title">{title}</p>
-                    <p className="genre">{movieGenres.slice(0, 3).join(", ")}</p>
+                    <p className="genre">{movieGenres?.slice(0, 3).join(", ")}</p>
                 </div>
             </div>
         </Link>
