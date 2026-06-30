@@ -163,12 +163,13 @@ final class WatchlistController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/media', name: "app_watchlist_media_delete", methods: ["GET"])]
-    public function fetchWatchlistMedi(string $id): JsonResponse
+    #[Route('/{id}', name: "app_watchlist_media_delete", methods: ["GET"])]
+    public function fetchWatchlist(string $id): JsonResponse
     {
         $user = $this->getUser();
 
         $watchlist_id = intval($id);
+        $watchlist = $this->watchlistService->findById($id);
 
         $media_id_array = $this->watchlistMediaService->findByWatchlistId($watchlist_id);
         $media_entity_array = [];
@@ -183,7 +184,14 @@ final class WatchlistController extends AbstractController
 
         return $this->json([
             'message' => 'Medias récupérés avec succès',
-            'results' => $media_entity_array 
+            'results' => [
+                "medias" => $media_entity_array,
+                "watchlist" => [
+                    "id" => $watchlist->getId(),
+                    "title" => $watchlist->getTitle(),
+                    "description" => $watchlist->getDescription(),
+                ]
+            ]
         ]);
     }
 
