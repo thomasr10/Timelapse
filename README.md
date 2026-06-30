@@ -54,24 +54,26 @@ VITE_TMDB_TOKEN=your_tmdb_bearer_token
 VITE_API_IMAGE_BASE_URL=https://image.tmdb.org/t/p/
 ```
 
-### 3. Génération des clés JWT
+### 3. Installer les dépendances et initialiser la base de données
+
+```bash
+docker exec -it timelapse-php-1 bash
+cd /var/www/server
+composer install
+php bin/console doctrine:database:create
+php bin/console doctrine:migrations:migrate
+```
+
+### 4. Génération des clés JWT
 
 ```bash
 docker compose run --rm php php bin/console lexik:jwt:generate-keypair
 ```
 
-### 4. Lancer l'application
+### 5. Lancer l'application
 
 ```bash
 docker compose up -d --build
-```
-
-### 5. Installer les dépendances et initialiser la base de données
-
-```bash
-docker exec -it timelapse-php-1 composer install
-docker exec -it timelapse-php-1 php bin/console doctrine:database:create
-docker exec -it timelapse-php-1 php bin/console doctrine:migrations:migrate
 ```
 
 ## Accès à l'application
