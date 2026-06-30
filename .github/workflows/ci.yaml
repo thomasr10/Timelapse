@@ -23,11 +23,7 @@ jobs:
 
       - name: Install backend dependencies
         working-directory: ./server
-        run: composer install --no-interaction --prefer-dist
-
-      - name: Check Symfony cache warmup
-        working-directory: ./server
-        run: php bin/console cache:warmup
+        run: composer install --no-interaction --prefer-dist --no-scripts
 
       - name: Setup Node
         uses: actions/setup-node@v4
