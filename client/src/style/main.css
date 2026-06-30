@@ -1558,11 +1558,12 @@ form .submit-container {
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.4);
-  z-index: 1000000000000000000000000;
+  z-index: 9999;
 }
 
 .add-watchlist-modal,
-.review-modal {
+.review-modal,
+.create-watchlist-modal {
   max-width: 300px;
   width: 100%;
   background-color: #0D1324;
@@ -1572,13 +1573,15 @@ form .submit-container {
 }
 @media (min-width: 576px) {
   .add-watchlist-modal,
-  .review-modal {
+  .review-modal,
+  .create-watchlist-modal {
     max-width: 400px;
   }
 }
 @media (min-width: 768px) {
   .add-watchlist-modal,
-  .review-modal {
+  .review-modal,
+  .create-watchlist-modal {
     max-width: 680px;
   }
 }
@@ -1968,11 +1971,23 @@ form .submit-container {
   border: 1px solid #1A2238;
   border-radius: 8px;
   align-items: center;
+  position: relative;
 }
 @media (min-width: 576px) {
   .user-watchlist-card {
     max-width: calc(576px - 2rem);
   }
+}
+.user-watchlist-card button {
+  background-color: transparent;
+  border: none;
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+  transform: translateY(-50%);
+}
+.user-watchlist-card button .icon {
+  color: #D7263D;
 }
 .user-watchlist-card .watchlist-info {
   display: flex;
@@ -2001,4 +2016,34 @@ form .submit-container {
   font-family: "Inter-Regular";
   font-size: 0.88rem;
   color: #A9B4C6;
+}
+
+.create-watchlist-modal-container {
+  z-index: 999999999999999;
+}
+
+.create-watchlist-modal {
+  z-index: 99999999;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.create-watchlist-modal .title {
+  font-family: "Inter-ExtraBold";
+  font-size: 1.25rem;
+  color: #E6ECF5;
+}
+.create-watchlist-modal label {
+  color: #E6ECF5;
+  font-size: 1rem;
+  font-family: "Inter-Bold";
+}
+.create-watchlist-modal input {
+  padding: 0.5rem;
+}
+.create-watchlist-modal textarea {
+  height: 80px;
+  resize: none;
+  padding: 0.5rem;
+  font-family: "Inter-Regular";
 }/*# sourceMappingURL=main.css.map */

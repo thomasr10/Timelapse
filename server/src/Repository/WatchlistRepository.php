@@ -31,7 +31,7 @@ class WatchlistRepository extends ServiceEntityRepository
                ->getResult()
            ;
        }
-
+       
     //    public function findOneBySomeField($value): ?Watchlist
     //    {
     //        return $this->createQueryBuilder('w')

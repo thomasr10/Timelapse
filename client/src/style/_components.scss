@@ -1175,11 +1175,12 @@ form {
     justify-content: center;
     align-items: center;
     background-color: rgba(0, 0, 0, .4);
-    z-index: 999999999999999999999999;
+    z-index: 9999;
 }
 
 .add-watchlist-modal,
-.review-modal {
+.review-modal,
+.create-watchlist-modal {
     max-width: 300px;
     width: 100%;
     background-color: $panel-color;
@@ -1639,9 +1640,23 @@ form {
     border: 1px solid $panel-bordel-color;
     border-radius: 8px;
     align-items: center;
+    position: relative;
 
     @include large-mobile {
         max-width: calc($large-mobile-width - 2rem);
+    }
+
+    button {
+        background-color: transparent;
+        border: none;
+        position: absolute;
+        top: 50%;
+        right: 1rem;
+        transform: translateY(-50%);
+
+        .icon {
+            color: $accent-color;
+        }
     }
 
     .watchlist-info {
@@ -1677,5 +1692,41 @@ form {
         font-family: $inter-regular;
         font-size: $font-size-small;
         color: $secondary-text-color;
+    }
+
+}
+
+.create-watchlist-modal-container {
+    z-index: 999999999999999;
+
+}
+
+.create-watchlist-modal {
+    z-index: 99999999;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    .title {
+        font-family: $inter-extraBold;
+        font-size: $font-size-large;
+        color: $main-text-color;
+    }
+
+    label {
+        color: $main-text-color;
+        font-size: $font-size-medium;
+        font-family: $inter-bold;
+    }
+
+    input {
+        padding: .5rem;
+    }
+
+    textarea {
+        height: 80px;
+        resize: none;
+        padding: .5rem;
+        font-family: $inter-regular;
     }
 }

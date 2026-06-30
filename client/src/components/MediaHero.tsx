@@ -20,9 +20,10 @@ interface Props {
     userMedia: UserMedia | null,
     userWatchlists: Watchlist[] | null,
     vote_average?: number | null
+    onWatchlistCreated: (watchlist: Watchlist) => void
 }
 
-export default function MediaHero({ id, poster_path, title, genres, release_date, runtime, number_of_seasons, type, userMedia, userWatchlists, vote_average }: Props) {
+export default function MediaHero({ id, poster_path, title, genres, release_date, runtime, number_of_seasons, type, userMedia, userWatchlists, vote_average, onWatchlistCreated }: Props) {
 
     const [isLiked, setIsLiked] = useState(false);
     const [isWatched, setIsWatched] = useState(false);
@@ -37,13 +38,13 @@ export default function MediaHero({ id, poster_path, title, genres, release_date
         const x = e.clientX - left;
         setHoverValue(x < width / 2 ? index - 0.5 : index);
     }
-    
+
     const rate = async (rate: number | null) => {
         if (!type || !id || rate === null) return;
         setRating(hoverValue);
         setIsWatched(true);
-        rateMedia(Number(id), type, rate);        
-    } 
+        rateMedia(Number(id), type, rate);
+    }
 
     // Watchlists modal
     const [addModalIsOpen, setAddModalIsOpen] = useState(false);
@@ -105,7 +106,7 @@ export default function MediaHero({ id, poster_path, title, genres, release_date
         <>
             {
                 addModalIsOpen && (
-                    <AddWatchlistModal watchlists={userWatchlists} onSelect={setSelectedId} selectedId={selectedId} onClose={() => onAddModalClose()} onValidate={() => handleAddMovie()} />
+                    <AddWatchlistModal watchlists={userWatchlists} onSelect={setSelectedId} selectedId={selectedId} onClose={() => onAddModalClose()} onValidate={() => handleAddMovie()} onWatchlistCreated={onWatchlistCreated}/>
                 )
             }
             < section className="media-hero">

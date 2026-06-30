@@ -155,6 +155,7 @@ export default function Profile() {
                             items={w.count_media}
                             updated_at={w.updated_at}
                             poster_paths={mediasInfos?.[w.id] ?? []}
+                            id={w.id}
                         />
                     ))}
                 </section>

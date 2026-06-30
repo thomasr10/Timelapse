@@ -37,6 +37,13 @@ class WatchlistService
         return $this->watchlistRepository->find($watchlist_id);
     }
 
+    public function delete(Watchlist $watchlist): void
+    {
+        $this->em->remove($watchlist);
+        $this->em->flush();
+        return;
+    }
+
     public function update(Watchlist $watchlist): void
     {
         $watchlist->setUpdatedAt(new \DatetimeImmutable());

@@ -125,6 +125,10 @@ export default function MediaPage() {
             })
     }
 
+    const handleNewWatchlist = (newWatchlist: Watchlist) => {
+        setUserWatchlists(prev => prev ? [...prev, newWatchlist] : [newWatchlist])
+    }
+
     return (
         <>
             {loadingCount > 0 ? <Loader /> : (
@@ -155,6 +159,7 @@ export default function MediaPage() {
                                 userMedia={userMedia}
                                 userWatchlists={userWatchlists}
                                 vote_average={mediaInfos?.vote_average}
+                                onWatchlistCreated={handleNewWatchlist}
                             />
                         </section>
                         <section id="review-description">

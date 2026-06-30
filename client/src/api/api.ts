@@ -240,3 +240,53 @@ export const fetchWatchlistMedia = async (id: number) => {
         console.error(e);
     }
 }
+
+export const createWatchlist = async (title: string, description: string, isPublic: boolean) => {
+    try {
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/watchlist/create`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({title, description, isPublic}),
+            credentials: "include"
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            console.error(`Error while creating watchlist : ${response.status}`);
+            return data;
+        }
+
+        return data;
+
+    } catch (e) {
+        console.error(e);
+    }
+}
+
+export const deleteWatchlist = async (id: number) => {
+    try {
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/watchlist/delete`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({id}),
+            credentials: "include"
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            console.error(`Error while deleting watchlist : ${response.status}`);
+            return data;
+        }
+
+        return data;
+
+    } catch (e) {
+        console.error(e);
+    }
+}

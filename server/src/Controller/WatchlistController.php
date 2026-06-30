@@ -40,7 +40,7 @@ final class WatchlistController extends AbstractController
 
         $data = json_decode($request->getContent(), true);
 
-        if(!isset($data["title"], $data["description"], $data["isPublic"])) {
+        if(!isset($data["title"], $data["isPublic"])) {
             return $this->json([
                 'message' => 'Données manquantes'
             ], 400);
@@ -184,6 +184,32 @@ final class WatchlistController extends AbstractController
         return $this->json([
             'message' => 'Medias récupérés avec succès',
             'results' => $media_entity_array 
+        ]);
+    }
+
+    #[Route('/delete', name: 'app_delete_watchlist', methods: ['DELETE'])]
+    public function deleteWatchlist(Request $request): JsonResponse
+    {
+        $user = $this->getUser();
+
+        $data = json_decode($request->getContent(), true);
+
+        if(!isset($data["id"])) {
+            return $this->json([
+                "message" => "Données manquantes",
+                "results" => null
+            ], 400);
+        }
+
+        $id = intval($data["id"]);
+
+        $watchlist = $this->watchlistService->findById($id);
+        $this->watchlistService->delete($watchlist);
+    
+
+        return $this->json([
+            "message" => "Watchlist supprimé",
+            "results" => null
         ]);
     }
 }
