@@ -3,7 +3,7 @@ import { useAuth } from "../context/AuthContext";
 import { formatDate } from "../utils/formatDate";
 import { formatUsername } from "../utils/formatText";
 import type { ApiMedia, RecentActivity, UserRecords, Watchlist } from "../types/api";
-import { fetchUserWatchlists, fetchWatchlistMedia, getUserRecords } from "../api/api";
+import { fetchUserWatchlists, fetchWatchlist, getUserRecords } from "../api/api";
 import WatchlistActivityCard from "../components/UserActivity/WatchlistActivityCard";
 import LikeActivityCard from "../components/UserActivity/LikeActivityCard";
 import RateActivityCard from "../components/UserActivity/RateActivityCard";
@@ -34,9 +34,9 @@ export default function Profile() {
 
         const loadMedias = async () => {
             const promises = userWatchlists.map(w =>
-                fetchWatchlistMedia(w.id).then(res => ({
+                fetchWatchlist(w.id).then(res => ({
                     watchlistId: w.id,
-                    medias: res.results
+                    medias: res.results.medias
                 }))
             );
 

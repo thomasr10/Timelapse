@@ -1,8 +1,8 @@
 import { useParams } from "react-router-dom";
 import type { Media } from "./HomepageConnected";
 import { useEffect, useState } from "react";
-import { fetchWatchlistMedia } from "../api/api";
-import type { ApiMedia } from "../types/api";
+import { fetchWatchlist } from "../api/api";
+import type { Watchlist, ApiMedia } from "../types/api";
 import { fetchMedia } from "../api/tmdb";
 import MediaCard from "../components/MediaCard";
 
@@ -12,10 +12,14 @@ export default function WatchlistPage() {
 
     const [mediasId, setMediasId] = useState<ApiMedia[] | []>([]);
     const [mediaArray, setMediaArray] = useState<Media[]>([]);
+    const [watchlist, setWatchlist] = useState<Watchlist | null>(null);
 
     useEffect(() => {
-        fetchWatchlistMedia(Number(id))
-            .then(data => setMediasId(data.results));
+        fetchWatchlist(Number(id))
+            .then(data => {
+                setMediasId(data.results.medias); 
+                setWatchlist(data.results.watchlist);
+            });
     }, []);
 
     useEffect(() => {
@@ -43,7 +47,7 @@ export default function WatchlistPage() {
     return (
         <main>
             <section id="watchlist-page" className="section-container">
-                <h1>{ }</h1>
+                <h1>{watchlist?.title}</h1>
                 <div className="media-container">
                     {
                         mediaArray.map((m: Media, index: number) => (

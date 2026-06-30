@@ -281,6 +281,8 @@ main {
 .media-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    margin-top: 2rem;
+    row-gap: 1.25rem;
 
     @include desktop {
         grid-template-columns: repeat(5, 1fr);

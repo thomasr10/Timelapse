@@ -217,9 +217,9 @@ export const getUserRecords = async () => {
     }
 }
 
-export const fetchWatchlistMedia = async (id: number) => {
+export const fetchWatchlist = async (id: number) => {
     try {
-        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/watchlist/${id}/media`, {
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/watchlist/${id}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"
