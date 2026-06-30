@@ -9,10 +9,12 @@ interface Props {
     poster_paths: string[] | [],
     updated_at: string,
     items: number,
-    id: number
+    id: number,
+    currentUserId: number | undefined,
+    userProfileId: number | undefined
 }
 
-export default function UserWatchlistCard({ title, poster_paths, updated_at, items, id }: Props) {
+export default function UserWatchlistCard({ title, poster_paths, updated_at, items, id, currentUserId, userProfileId }: Props) {
 
     const handleDeleteWatchlist = (id: number) => {
         deleteWatchlist(id)
@@ -38,9 +40,12 @@ export default function UserWatchlistCard({ title, poster_paths, updated_at, ite
             </div>
             <div className="action-container">
                 <Link to={`/watchlist/${id}`} className="watchlist-link">Voir</Link>
-                <button onClick={() => handleDeleteWatchlist(id)}>
-                    <Trash2 className="icon" />
-                </button>
+                {
+                    userProfileId === currentUserId ?
+                        <button onClick={() => handleDeleteWatchlist(id)}>
+                            <Trash2 className="icon" />
+                        </button> : ''
+                }
             </div>
         </article>
     )

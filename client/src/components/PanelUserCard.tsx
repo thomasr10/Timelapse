@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { formatDate } from "../utils/formatDate";
 import type { User } from "../types/auth";
 import { formatUsername } from "../utils/formatText";
 

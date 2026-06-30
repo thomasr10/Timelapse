@@ -27,7 +27,7 @@ class AuthService
         $user->setEmail($data['email']);
         $user->setPassword($this->userPasswordHasher->hashPassword($user, $data['password']));
         $user->setRoles(['ROLE_USER']);
-        $user->setProfilePicture('/img/user-profile-1.png');
+        $user->setProfilePicture('');
         $user->setCreatedAt(new \DateTimeImmutable());
 
         $errors = $this->validator->validate($user);

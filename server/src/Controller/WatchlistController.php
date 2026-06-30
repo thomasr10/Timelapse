@@ -11,6 +11,7 @@ use App\Service\MediaService;
 use App\Service\UserMediaService;
 use App\Service\WatchlistMediaService;
 use App\Service\UserActivityService;
+use App\Service\UserService;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Serializer\Exception\CircularReferenceException;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
@@ -23,7 +24,8 @@ final class WatchlistController extends AbstractController
         private MediaService $mediaService, 
         private WatchlistMediaService $watchlistMediaService, 
         private UserMediaService $userMediaService,
-        private UserActivityService $userActivityService
+        private UserActivityService $userActivityService,
+        private UserService $userService
     ){}
 
     #[Route('/create', name: 'app_watchlist', methods: ["POST"])]
@@ -65,17 +67,10 @@ final class WatchlistController extends AbstractController
         ]);
     }
 
-    #[Route('/all', name: "app_watchlist_all", methods: ["GET"])]
-    public function getAllWatchlistOfUser(SerializerInterface $serializer): JsonResponse
+    #[Route('/user/{id}', name: "app_watchlist_all", methods: ["GET"])]
+    public function getAllWatchlistOfUser(string $id): JsonResponse
     {   
-        $user = $this->getUser();
-
-        if (!$user) {
-            return $this->json([
-                'message' => 'Utilisateur non trouvé',
-                'results' => null
-            ], 400);
-        }
+        $user = $this->userService->findById(intval($id));
 
         $watchlists = $this->watchlistService->getAllWatchlistOfUser($user);
 
@@ -94,7 +89,8 @@ final class WatchlistController extends AbstractController
                 "title" => $watchlist->getTitle(),
                 "description" => $watchlist->getDescription(),
                 "updated_at" => $watchlist->getUpdatedAt(),
-                "count_media" => count($watchlist->getMedia())
+                "count_media" => count($watchlist->getMedia()),
+                "is_public" => $watchlist->isPublic()
             ];
         }
 

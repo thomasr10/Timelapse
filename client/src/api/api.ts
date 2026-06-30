@@ -72,9 +72,9 @@ export const fetchUserMediaData = async (tmdb: number, type: string) => {
 }
 
 // Récupérer watchlist
-export const fetchUserWatchlists = async () => {
+export const fetchUserWatchlists = async (id: number | undefined) => {
     try {
-        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/watchlist/all`, {
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/watchlist/user/${id}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"
@@ -193,9 +193,9 @@ export const rateMedia = async (tmdb: number, type: string, rate: number) => {
     }
 }
 
-export const getUserRecords = async () => {
+export const getUserRecords = async (id: number | undefined) => {
     try {
-        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/user/records`, {
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/user/${id}/records`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"
@@ -248,7 +248,7 @@ export const createWatchlist = async (title: string, description: string, isPubl
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({title, description, isPublic}),
+            body: JSON.stringify({ title, description, isPublic }),
             credentials: "include"
         });
 
@@ -273,7 +273,7 @@ export const deleteWatchlist = async (id: number) => {
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({id}),
+            body: JSON.stringify({ id }),
             credentials: "include"
         });
 
@@ -293,7 +293,31 @@ export const deleteWatchlist = async (id: number) => {
 
 export const fetchUserByName = async (search: string) => {
     try {
-        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/user/${search}`, {
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/user/search/${search}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            credentials: "include"
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            console.error(`Error while fetching user : ${response.status}`);
+            return data;
+        }
+
+        return data;
+
+    } catch (e) {
+        console.error(e);
+    }
+}
+
+export const fetchUserByUsername = async (username: string) => {
+    try {
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/user/username/${username}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"

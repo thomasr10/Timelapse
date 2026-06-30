@@ -16,17 +16,10 @@ final class UserController extends AbstractController
         private UserService $userService
     ){}
 
-    #[Route('/records', name: 'app_user_records', methods: ['GET'])]
-    public function userRecords(): JsonResponse
+    #[Route('/{id}/records', name: 'app_user_records', methods: ['GET'])]
+    public function userRecords(string $id): JsonResponse
     {
-        $user = $this->getUser();
-
-        if(!$user) {
-            return $this->json([
-                'message' => 'Utilisateur introuvable',
-                'results' => null
-            ]);
-        }
+        $user = $this->userService->findById(intval($id));
 
         // Get user's watchlists
         $watchlists = [];
@@ -107,7 +100,27 @@ final class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/{search}', name: 'app_user_search', methods: ['GET'])]
+    #[Route('/username/{username}', name: 'app_user', methods: ['GET'])]
+    public function searchUserByUsername(string $username): JsonResponse
+    {
+        if(!isset($username)) {
+            return $this->json(["message" => "Valeur manquante lors de la recherche", "results" => null], 400);
+        }
+
+        $user = $this->userService->searchByUsername($username);
+
+        return $this->json([
+            "message" => "Utilisateurs récupérés avec succès",
+            "results" => $user ? [
+                "id" => $user->getId(),
+                "username" => $user->getUsername(),
+                "display_username" => $user->getDisplayUserName(),
+                "profile_picture" => $user->getProfilePicture()
+            ] : null
+        ]);
+    }
+
+    #[Route('/search/{search}', name: 'app_user_search', methods: ['GET'])]
     public function searchUser(string $search): JsonResponse
     {
         if(!isset($search)) {

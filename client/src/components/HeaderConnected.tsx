@@ -2,10 +2,13 @@ import { Link } from "react-router-dom";
 import { CircleUserRound, Menu } from 'lucide-react';
 import { useState } from "react";
 import SearchBar from "./SearchBar";
+import { useAuth } from "../context/AuthContext";
 
 export default function HeaderConnected() {
     
     const [isOpen, setIsOpen] = useState(false);
+
+    const { user } = useAuth();
 
     const handleBurgerMenu = () => {
         isOpen ? setIsOpen(false) : setIsOpen(true);
@@ -24,7 +27,7 @@ export default function HeaderConnected() {
                     <div className="separator"></div>
                     <Link to={'/'} className="burger-connected-link"><Bell />Notifications</Link> */}
                     {/* <div className="separator"></div> */}
-                    <Link className="burger-connected-link" to={'/profile'}><CircleUserRound />Profil</Link>
+                    <Link className="burger-connected-link" to={`/${user?.username}`}><CircleUserRound />Profil</Link>
 
                 </nav>
             </div>
@@ -34,7 +37,7 @@ export default function HeaderConnected() {
             <div className="header-connected-link">
                 {/* <Link to={'/community'} className="community-icon"><UsersRound /></Link>
                 <Bell /> */}
-                <Link to={'/profile'} className="profile-icon"><CircleUserRound /></Link>
+                <Link to={`/${user?.username}`} className="profile-icon"><CircleUserRound /></Link>
             </div>
         </header>
     )

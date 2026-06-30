@@ -12,6 +12,7 @@ import { fetchReviews, fetchUserMediaData, fetchUserWatchlists, registerReview }
 import { CirclePlus } from "lucide-react";
 import ReviewCard from "../components/ReviewCard";
 import ReviewModal from "../components/ReviewModal";
+import { useAuth } from "../context/AuthContext";
 
 interface FullInfoMedia {
     id: number,
@@ -50,10 +51,12 @@ export default function MediaPage() {
 
     const { startFetch, endFetch, loadingCount } = useLoader();
 
+    const { user } = useAuth();
+
 
     // Récupérer les watchlists du user
     useEffect(() => {
-        fetchUserWatchlists()
+        fetchUserWatchlists(user?.id)
             .then((data) => setUserWatchlists(data.results));
     }, []);
 
