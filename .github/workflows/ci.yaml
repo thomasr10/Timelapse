@@ -25,6 +25,10 @@ jobs:
         working-directory: ./server
         run: composer install --no-interaction --prefer-dist --no-scripts
 
+      - name: Run backend tests
+        working-directory: ./server
+        run: vendor/bin/phpunit
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
@@ -33,6 +37,14 @@ jobs:
       - name: Install frontend dependencies
         working-directory: ./client
         run: npm install
+
+      - name: Install frontend dependencies
+        working-directory: ./client
+        run: npm install
+
+      - name: Run frontend tests
+        working-directory: ./client
+        run: npx vitest run
 
       - name: Build frontend
         working-directory: ./client
