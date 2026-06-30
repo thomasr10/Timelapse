@@ -1649,13 +1649,17 @@ form {
 
     .action-container {
         position: absolute;
-        top: 50%;
-        right: 1rem;
-        transform: translateY(-50%);
+        bottom: .88rem;
+        right: .88rem;
         display: flex;
         flex-direction: row;
         gap: 1rem;
         align-items: center;
+
+        @include desktop {
+            bottom: 50%;
+            transform: translateY(50%);
+        }
 
         .watchlist-link {
             color: $main-text-color;
