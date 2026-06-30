@@ -1,16 +1,18 @@
 import type React from "react"
 import type { Media } from "../pages/HomepageConnected"
 import PanelResults from "./PanelResults"
+import type { User } from "../types/auth"
 
 interface Props {
     categorie: string,
     setCategorie: React.Dispatch<React.SetStateAction<string>>,
-    medias: Media[] | undefined,
+    medias?: Media[] | undefined,
+    users?: User[] | undefined,
     onSelect: () => void,
     inputRef: React.RefObject<HTMLInputElement | null>
 }
 
-export default function SearchFilterPanel({ categorie, setCategorie, medias, onSelect, inputRef }: Props) {
+export default function SearchFilterPanel({ categorie, setCategorie, medias, onSelect, inputRef, users }: Props) {
 
     return (
         <div className="search-panel">
@@ -49,7 +51,7 @@ export default function SearchFilterPanel({ categorie, setCategorie, medias, onS
                         Utilisateurs
                     </button>
                 </div>
-                <PanelResults medias={medias} categorie={categorie} onSelect={onSelect} inputRef={inputRef}/>
+                <PanelResults medias={medias} users={users} categorie={categorie} onSelect={onSelect} inputRef={inputRef}/>
             </div>
         </div>
     )

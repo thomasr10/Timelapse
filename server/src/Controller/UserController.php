@@ -6,11 +6,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Attribute\Route;
 use App\Service\UserActivityService;
+use App\Service\UserService;
 
 #[Route('/api/user')]
 final class UserController extends AbstractController
 {
-    public function __construct(private UserActivityService $userActivityService){}
+    public function __construct(
+        private UserActivityService $userActivityService,
+        private UserService $userService
+    ){}
 
     #[Route('/records', name: 'app_user_records', methods: ['GET'])]
     public function userRecords(): JsonResponse
@@ -100,6 +104,32 @@ final class UserController extends AbstractController
                 "favorites_medias" => [],
                 "recent_activity" => $userRecentActivityArray
             ],
+        ]);
+    }
+
+    #[Route('/{search}', name: 'app_user_search', methods: ['GET'])]
+    public function searchUser(string $search): JsonResponse
+    {
+        if(!isset($search)) {
+            return $this->json(["message" => "Valeur manquante lors de la recherche", "results" => null], 400);
+        }
+
+        $users = $this->userService->searchByInputValue($search);
+
+        $userArray = [];
+
+        foreach($users as $user) {
+            $userArray[] = [
+                "id" => $user->getId(),
+                "username" => $user->getUsername(),
+                "display_name" => $user->getDisplayUserName(),
+                "profile_picture" => $user->getProfilePicture()
+            ];
+        }
+
+        return $this->json([
+            "message" => "Utilisateurs récupérés avec succès",
+            "results" => $userArray
         ]);
     }
 }

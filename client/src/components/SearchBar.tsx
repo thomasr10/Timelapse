@@ -4,6 +4,8 @@ import SearchFilterPanel from "./SearchFilterPanel";
 import { fetchCastByName, fetchMovieByTitle, fetchSerieByTitle } from "../api/tmdb";
 import type { Media } from "../pages/HomepageConnected";
 import type { CastMember } from "../types/tmdb";
+import { fetchUserByName } from "../api/api";
+import type{ User } from "../types/auth";
 
 export default function SearchBar({ className }: { className: string }) {
 
@@ -12,6 +14,7 @@ export default function SearchBar({ className }: { className: string }) {
     const [categorie, setCategorie] = useState("movie");
     const [medias, setMedias] = useState<Media[] | undefined>([]);
     const inputRef = useRef<HTMLInputElement>(null);
+    const [users, setUsers] = useState<User[] | undefined>([])
 
     useEffect(() => {
         const handleClickOutside = (e: MouseEvent) => {
@@ -32,6 +35,7 @@ export default function SearchBar({ className }: { className: string }) {
         if (value.length < 3) {
             if (value === "") {
                 setMedias([]);
+                setUsers([]);
             }
 
             return;
@@ -54,6 +58,12 @@ export default function SearchBar({ className }: { className: string }) {
                 .then(data => {
                     const sortByPopularity = data.results.sort((a: CastMember, b: CastMember) => b.popularity - a.popularity);
                     setMedias(sortByPopularity);
+                })
+        } else if (categorie === "users") {
+            await fetchUserByName(value)
+                .then(data => {
+                    console.log(data)
+                    setUsers(data.results)
                 })
         }
     }
@@ -81,6 +91,7 @@ export default function SearchBar({ className }: { className: string }) {
                 <SearchFilterPanel
                     categorie={categorie}
                     setCategorie={setCategorie}
+                    users={users}
                     medias={medias}
                     onSelect={() => setFocused(false)}
                     inputRef={inputRef}

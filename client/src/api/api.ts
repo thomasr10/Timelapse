@@ -290,3 +290,27 @@ export const deleteWatchlist = async (id: number) => {
         console.error(e);
     }
 }
+
+export const fetchUserByName = async (search: string) => {
+    try {
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/user/${search}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            credentials: "include"
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            console.error(`Error while fetching user : ${response.status}`);
+            return data;
+        }
+
+        return data;
+
+    } catch (e) {
+        console.error(e);
+    }
+}
