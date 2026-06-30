@@ -1,0 +1,43 @@
+# .github/workflows/ci.yml
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: pdo, pdo_mysql, zip
+
+      - name: Install backend dependencies
+        working-directory: ./server
+        run: composer install --no-interaction --prefer-dist
+
+      - name: Check Symfony cache warmup
+        working-directory: ./server
+        run: php bin/console cache:warmup
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install frontend dependencies
+        working-directory: ./client
+        run: npm install
+
+      - name: Build frontend
+        working-directory: ./client
+        run: npm run build
