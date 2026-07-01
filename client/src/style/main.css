@@ -1,34 +1,42 @@
 @font-face {
   font-family: "Inter-Regular";
-  src: url("/fonts/Inter-Regular.ttf");
+  src: url("/fonts/Inter-Regular.woff2") format("woff2"), url("/fonts/Inter-Regular.woff") format("woff");
+  font-display: swap;
 }
 @font-face {
   font-family: "Inter-SemiBold";
-  src: url("/fonts/Inter-SemiBold.ttf");
+  src: url("/fonts/Inter-SemiBold.woff2") format("woff2"), url("/fonts/Inter-SemiBold.woff") format("woff");
+  font-display: swap;
 }
 @font-face {
   font-family: "Inter-Bold";
-  src: url("/fonts/Inter-Bold.ttf");
+  src: url("/fonts/Inter-Bold.woff2") format("woff2"), url("/fonts/Inter-Bold.woff") format("woff");
+  font-display: swap;
 }
 @font-face {
   font-family: "Inter-ExtraBold";
-  src: url("/fonts/Inter-ExtraBold.ttf");
+  src: url("/fonts/Inter-ExtraBold.woff2") format("woff2"), url("/fonts/Inter-ExtraBold.woff") format("woff");
+  font-display: swap;
 }
 @font-face {
   font-family: "Sora-Bold";
-  src: url("/fonts/Sora-Bold.ttf");
+  src: url("/fonts/Sora-Bold.woff2") format("woff2"), url("/fonts/Sora-Bold.woff") format("woff");
+  font-display: swap;
 }
 @font-face {
   font-family: "Sora-SemiBold";
-  src: url("/fonts/Sora-SemiBold.ttf");
+  src: url("/fonts/Sora-SemiBold.woff2") format("woff2"), url("/fonts/Sora-SemiBold.woff") format("woff");
+  font-display: swap;
 }
 @font-face {
   font-family: "Sora-ExtraBold";
-  src: url("/fonts/Sora-ExtraBold.ttf");
+  src: url("/fonts/Sora-ExtraBold.woff2") format("woff2"), url("/fonts/Sora-ExtraBold.woff") format("woff");
+  font-display: swap;
 }
 @font-face {
   font-family: "Sora-Regular";
-  src: url("/fonts/Sora-Regular.ttf");
+  src: url("/fonts/Sora-Regular.woff2") format("woff2"), url("/fonts/Sora-Regular.woff") format("woff");
+  font-display: swap;
 }
 html,
 body,

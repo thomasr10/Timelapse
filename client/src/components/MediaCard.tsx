@@ -18,7 +18,7 @@ export default function MediaCard({ id, title, poster_path, genre_ids, genres, m
     return (
         <Link to={`/media/${media_type}/${id}`}>
             <div className="media-card" id={id.toString()}>
-                <img src={poster_path} alt={`Affiche du film ${title}`} />
+                <img src={poster_path} alt={`Affiche du film ${title}`} loading="lazy"/>
                 <div className="info-container">
                     <p className="title">{title}</p>
                     <p className="genre">{movieGenres?.slice(0, 3).join(", ")}</p>

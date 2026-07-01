@@ -43,6 +43,7 @@ export default function PanelMediaCard({ media, categorie, onSelect, inputRef }:
                             objectFit: "cover"
                         } : {}
                     }
+                    loading="lazy"
                 />
                 <div className="infos">
                     <p className="title">

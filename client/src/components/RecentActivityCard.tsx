@@ -30,14 +30,14 @@ export default function RecentActivityCard({ type, created_at, user_media }: Rec
                     type === 'rate' ? user_media?.rating :
                         type === 'watchlist' ?
                             <div>
-                                <img src={''} alt="Affiche de film" />
+                                <img src={''} alt="Affiche de film" loading="lazy"/>
                                 <p>function gettitle()</p>
                             </div> :
                             type === 'review' ?
                                 <p>{user_media?.review}</p> :
                                 type === 'like' ?
                                     <div>
-                                        <img src={''} alt="Affiche de film" />
+                                        <img src={''} alt="Affiche de film" loading="lazy"/>
                                         <p>function gettitle()</p>
                                     </div> : ''
                 }

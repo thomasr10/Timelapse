@@ -32,7 +32,7 @@ export default function HomepageDisconnected() {
                 <section id="hero">
 
                     <figure id="backdrop-hero">
-                        <img src={`${import.meta.env.VITE_API_IMAGE_BASE_URL}original${backdropPath}`} alt="Image d'un film" />
+                        <img src={`${import.meta.env.VITE_API_IMAGE_BASE_URL}original${backdropPath}`} alt="Image d'un film" loading="lazy"/>
                     </figure>
                     <section id="hero-disconnected" className="section-container">
                         <h1>Rejoignez la plus grande communauté de <span>passionés</span> de cinéma.</h1>

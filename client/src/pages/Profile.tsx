@@ -113,6 +113,7 @@ export default function Profile() {
                                 `https://ui-avatars.com/api/?name=${encodeURIComponent(userProfile?.username)}&background=111726&color=A9B4C6`
                         }
                         alt="Photo de profil de l'utilisateur"
+                        loading="lazy"
                     />
                 </figure>
 

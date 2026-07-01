@@ -27,7 +27,7 @@ export default function WatchlistActivityCard({ created_at, watchlist, media }: 
                 </div>
             </div>
             <div className="media-container">
-                <img src={`${import.meta.env.VITE_API_IMAGE_BASE_URL}w500${mediaInfo?.poster_path}`} alt="Affiche du film" />
+                <img src={`${import.meta.env.VITE_API_IMAGE_BASE_URL}w500${mediaInfo?.poster_path}`} alt="Affiche du film" loading="lazy"/>
                 <div>
                     <p>
                         {

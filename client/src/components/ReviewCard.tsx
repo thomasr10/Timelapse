@@ -22,6 +22,7 @@ export default function ReviewCard({ profile_picture, username, date, content, n
                             `https://ui-avatars.com/api/?name=${encodeURIComponent(username)}&background=111726&color=A9B4C6`
                         }
                         alt="Photo de profil de l'utilisateur"
+                        loading="lazy"
                     />
                     <div className="flex-col gap-4">
                         <p className="username">{username}</p>

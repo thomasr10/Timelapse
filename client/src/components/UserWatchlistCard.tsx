@@ -26,7 +26,7 @@ export default function UserWatchlistCard({ title, poster_paths, updated_at, ite
             <div className="posters-container">
                 {
                     poster_paths.map((img: string) => (
-                        <img src={`${import.meta.env.VITE_API_IMAGE_BASE_URL}w300/${img}`} alt="Affiche de film" />
+                        <img src={`${import.meta.env.VITE_API_IMAGE_BASE_URL}w300/${img}`} alt="Affiche de film" loading="lazy"/>
                     ))
                 }
             </div>

@@ -40,6 +40,7 @@ export default function PanelUserCard({ user, categorie, onSelect, inputRef }: P
                             objectFit: "cover"
                         } : {}
                     }
+                    loading="lazy"
                 />
                 <div className="infos">
                     <p className="title">{user.display_username}</p>

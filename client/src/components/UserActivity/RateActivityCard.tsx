@@ -28,7 +28,7 @@ export default function RateActivityCard({ created_at, user_media, media }: Rece
                 </div>
             </div>
             <div className="media-container">
-                <img src={`${import.meta.env.VITE_API_IMAGE_BASE_URL}w500${mediaInfo?.poster_path}`} alt="Affiche du film" />
+                <img src={`${import.meta.env.VITE_API_IMAGE_BASE_URL}w500${mediaInfo?.poster_path}`} alt="Affiche du film" loading="lazy"/>
                 <div className="all-infos-container">
                     <div className="media-title-date">
                         <p>

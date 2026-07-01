@@ -111,7 +111,7 @@ export default function MediaHero({ id, poster_path, title, genres, release_date
             }
             < section className="media-hero">
                 <figure>
-                    <img src={`${import.meta.env.VITE_API_IMAGE_BASE_URL}w500${poster_path}`} alt={`Affiche du film ${title}`} />
+                    <img src={`${import.meta.env.VITE_API_IMAGE_BASE_URL}w500${poster_path}`} alt={`Affiche du film ${title}`} loading="lazy"/>
                 </figure>
                 <div className="infos-container">
                     <div className="main-info">

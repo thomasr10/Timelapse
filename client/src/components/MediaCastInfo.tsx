@@ -17,6 +17,7 @@ export default function MediaCastInfo({ id, name, profile_path, character }: Pro
                         `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=111726&color=A9B4C6`
                     }
                     alt={`Photo de ${name}`}
+                    loading="lazy"
             />
             <div className="name-container">
                 <p className="name">{name}</p>
