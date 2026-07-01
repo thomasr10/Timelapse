@@ -68,7 +68,6 @@ export default function HomepageConnected() {
         startFetch();
         fetchUpcomingMovies()
             .then((data) => {
-                console.log(data.results)
                 data.results.forEach((movie: Media) => {
                     movie.media_type = 'movie';
                 })

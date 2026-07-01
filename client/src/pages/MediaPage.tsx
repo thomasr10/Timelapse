@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { fetchMedia, fetchMediaCredits } from "../api/tmdb";
 import type { CastMember, CrewMember, Genre } from "../types/tmdb";
 import MediaHero from "../components/MediaHero";
@@ -53,6 +53,9 @@ export default function MediaPage() {
 
     const { user } = useAuth();
 
+    // const navigate = useNavigate();
+
+
 
     // Récupérer les watchlists du user
     useEffect(() => {
@@ -68,7 +71,7 @@ export default function MediaPage() {
                 .then((data) => { setReviews(data.results) });
         } else {
             fetchReviews(type, Number(id), offset)
-                .then((data) => { setReviews(prev => prev + data.results) });
+                .then((data) => { setReviews(prev => prev ? [...prev, data.results] : data.results) });
         }
     }, []);
 
@@ -122,9 +125,9 @@ export default function MediaPage() {
     const postReview = async (review: string) => {
         if (!review || !id || !type) return;
         registerReview(review, Number(id), type)
-            .then(() => {
+            .then((data) => {
                 setIsOpenReviewModal(false);
-                window.location.reload();
+                setReviews(prev => prev ? [...prev, data.results] : [data.results]);
             })
     }
 

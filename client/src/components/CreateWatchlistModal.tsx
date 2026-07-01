@@ -5,7 +5,6 @@ import type { Watchlist } from "../types/api";
 interface Props {
     onClose: () => void,
     onWatchlistCreated: (watchlist: Watchlist) => void
-
 }
 
 export default function CreateWatchlistModal({ onClose, onWatchlistCreated }: Props) {
@@ -16,7 +15,8 @@ export default function CreateWatchlistModal({ onClose, onWatchlistCreated }: Pr
 
     const onValidate = () => {
         createWatchlist(title, description, isPublic)
-            .then(data => onWatchlistCreated(data.results))
+            .then(data =>{ console.log(data);
+             onWatchlistCreated(data.results)})
         onClose();
     }
 

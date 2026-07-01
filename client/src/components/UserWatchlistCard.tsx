@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { deleteWatchlist } from "../api/api";
 import { formatReviewDate } from "../utils/formatDate";
 import { Trash2 } from "lucide-react";
+import type { Watchlist } from "../types/api";
 
 interface Props {
     title: string,
@@ -11,14 +12,17 @@ interface Props {
     items: number,
     id: number,
     currentUserId: number | undefined,
-    userProfileId: number | undefined
+    userProfileId: number | undefined,
+    userWatchlists?: Watchlist[],
+    onDelete?: (w: Watchlist[] | null) => void
 }
 
-export default function UserWatchlistCard({ title, poster_paths, updated_at, items, id, currentUserId, userProfileId }: Props) {
+export default function UserWatchlistCard({ title, poster_paths, updated_at, items, id, currentUserId, userProfileId, onDelete, userWatchlists }: Props) {
 
     const handleDeleteWatchlist = (id: number) => {
-        deleteWatchlist(id)
-        window.location.reload();
+        deleteWatchlist(id);
+        if (!userWatchlists || !onDelete) return;
+        onDelete(userWatchlists?.filter((w: Watchlist) => w.id !== id))
     }
 
     return (

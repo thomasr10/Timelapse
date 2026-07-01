@@ -34,7 +34,6 @@ export default function Profile() {
                 if(data.results === null) {
                     navigate('/');
                 }
-                console.log(data)
                 setUserProfile(data.results)
             });
     }, [username])
@@ -97,7 +96,7 @@ export default function Profile() {
 
     const handleLogout = () => {
         logout()
-        window.location.reload()
+        navigate(0);
     }
 
 
@@ -184,6 +183,8 @@ export default function Profile() {
                                 id={w.id}
                                 userProfileId={userProfile?.id}
                                 currentUserId={user?.id}
+                                userWatchlists={userWatchlists}
+                                onDelete={setUserWatchlists}
                             /> : w.is_public ?
                                 <UserWatchlistCard
                                     key={w.id}

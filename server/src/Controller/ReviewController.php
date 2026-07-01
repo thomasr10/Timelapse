@@ -48,7 +48,22 @@ final class ReviewController extends AbstractController
 
         return $this->json([
             'message' => 'Review créée avec succès',
-            'results' => null
+            'results' => [
+                "id" => $review->getId(),
+                "content" => $review->getContent(),
+                "created_at" => $review->getCreatedAt(),
+                "user_media" => [
+                    "rating" => $userMedia->getRating()
+                ],
+                "media" => [
+                    "tmdb_id" => $review->getMedia()->getTmdbId(),
+                    "type" => $review->getMedia()->getType()
+                ],
+                "user" => [
+                    "id" => $review->getUser()->getId(),
+                    "username" => $review->getUser()->getUsername()
+                ]
+            ]
         ]);
     }
 

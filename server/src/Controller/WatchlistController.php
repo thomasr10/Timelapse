@@ -53,6 +53,7 @@ final class WatchlistController extends AbstractController
         return $this->json([
             'message' => 'Watchlist créé avec succès',
             'results' => [
+                "id" => $watchlist->getId(),
                 "title" => $watchlist->getTitle(),
                 "description" => $watchlist->getDescription(),
                 "is_public" => $watchlist->isPublic(),
@@ -118,7 +119,7 @@ final class WatchlistController extends AbstractController
         $insert = $this->watchlistMediaService->addMedia($media->getId(), $data["watchlist_id"]);
         
         // update watchlist
-        $watchlist = $this->watchlistService->find($data["watchlist_id"]);
+        $watchlist = $this->watchlistService->findByID($data["watchlist_id"]);
         $this->watchlistService->update($watchlist);
 
 

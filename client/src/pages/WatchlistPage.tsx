@@ -39,10 +39,6 @@ export default function WatchlistPage() {
 
     }, [mediasId])
 
-    useEffect(() => {
-        console.log(mediaArray);
-    }, [mediaArray])
-
 
     return (
         <main>

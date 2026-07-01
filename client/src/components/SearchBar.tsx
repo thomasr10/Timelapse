@@ -61,10 +61,7 @@ export default function SearchBar({ className }: { className: string }) {
                 })
         } else if (categorie === "users") {
             await fetchUserByName(value)
-                .then(data => {
-                    console.log(data)
-                    setUsers(data.results)
-                })
+                .then(data => setUsers(data.results))
         }
     }
 

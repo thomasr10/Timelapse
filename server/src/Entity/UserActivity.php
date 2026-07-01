@@ -30,6 +30,7 @@ class UserActivity
     private ?UserFollows $following = null;
 
     #[ORM\ManyToOne]
+    #[ORM\JoinColumn(onDelete: 'SET NULL')]
     private ?Watchlist $watchlist = null;
 
     #[ORM\ManyToOne]
