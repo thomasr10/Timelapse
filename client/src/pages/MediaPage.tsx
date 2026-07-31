@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom"
+import { useParams } from "react-router-dom"
 import { fetchMedia, fetchMediaCredits } from "../api/tmdb";
 import type { CastMember, CrewMember, Genre } from "../types/tmdb";
 import MediaHero from "../components/MediaHero";
@@ -50,12 +50,7 @@ export default function MediaPage() {
     const [reviewValue, setReviewValue] = useState("");
 
     const { startFetch, endFetch, loadingCount } = useLoader();
-
     const { user } = useAuth();
-
-    // const navigate = useNavigate();
-
-
 
     // Récupérer les watchlists du user
     useEffect(() => {
