@@ -80,6 +80,23 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             return;
         }
 
+        public function unfollow(User $user_unfollower, User $user_to_unfollow): void
+        {
+            $exists = $this->connection->fetchOne(
+                'SELECT 1 FROM user_follows WHERE follower_id = ? AND following_id = ?',
+                [$user_unfollower->getId(), $user_to_unfollow->getId()]
+            );
+
+            if (!$exists) return;
+
+            $this->connection->delete('user_follows', [
+                'follower_id' => $user_unfollower->getId(),
+                'following_id' => $user_to_unfollow->getId(),
+            ]);
+
+            return;
+        }
+
         public function is_following(User $user, User $profile_user): bool
         {
             $exists = $this->connection->fetchOne(

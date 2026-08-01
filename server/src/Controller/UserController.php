@@ -147,6 +147,7 @@ final class UserController extends AbstractController
         ]);
     }
     
+    // follow user
     #[Route('/follow', methods: ['POST'], name: 'app_user_follow')]
     public function follow(Request $request): JsonResponse
     {
@@ -160,24 +161,56 @@ final class UserController extends AbstractController
         }
 
         $data = json_decode($request->getContent(), true);
-        $userToFollow = $this->userService->findById($data['id']);
+        $user_to_follow = $this->userService->findById($data['id']);
 
-        if (!$userToFollow) {
+        if (!$user_to_follow) {
             return $this->json([
                 'message' => 'Utilisateur à suivre non trouvé'
             ], 400);
         }
 
-        $this->userService->follow($user, $userToFollow);
+        $this->userService->follow($user, $user_to_follow);
 
         return $this->json([
-            'message' => 'Vous avez suivi' . ' ' . $userToFollow->getUsername(),
+            'message' => 'Vous avez suivi' . ' ' . $user_to_follow->getUsername(),
             'results' => null
         ]);
         
     }
 
-    #[Route('/follow/{userId}', name: 'app_user_follows', methods: ['GET'])]
+    // unfollow user
+    #[Route('/unfollow', methods: ['DELETE'], name: 'app_user_unfollow')]
+    public function unfollow(Request $request): JsonResponse
+    {
+        $user = $this->getUser();
+
+        if (!$user) {
+            return $this->json([
+                'message' => 'Utilisateur non trouvé',
+                'results' => null
+            ], 400);
+        }
+
+        $data = json_decode($request->getContent(), true);
+        $user_to_unfollow = $this->userService->findById($data['id']);
+
+        if (!$user_to_unfollow) {
+            return $this->json([
+                'message' => 'Utilisateur à suivre non trouvé'
+            ], 400);
+        }
+
+        $this->userService->unfollow($user, $user_to_unfollow);
+
+        return $this->json([
+            'message' => 'Vous avez arrêté de suivre' . ' ' . $user_to_unfollow->getUsername(),
+            'results' => null
+        ]);
+        
+    }
+
+    // check if a user is following another user
+    #[Route('/is_following/{userId}', name: 'app_user_follows', methods: ['GET'])]
     public function isFollowing(string $userId): JsonResponse
     {
         $user = $this->getUser();

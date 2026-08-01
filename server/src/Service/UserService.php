@@ -26,9 +26,15 @@ class userService
         return $this->userRepository->find($id);
     }
 
-    public function follow($userFollower, $userToFollow): void
+    public function follow($user_follower, $user_to_follow): void
     {
-        $this->userRepository->follow($userFollower, $userToFollow);
+        $this->userRepository->follow($user_follower, $user_to_follow);
+        return;
+    }
+
+    public function unfollow($user_unfollower, $user_to_unfollow): void
+    {
+        $this->userRepository->unfollow($user_unfollower, $user_to_unfollow);
         return;
     }
 

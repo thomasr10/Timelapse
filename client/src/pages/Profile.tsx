@@ -3,7 +3,7 @@ import { useAuth } from "../context/AuthContext";
 import { formatDate } from "../utils/formatDate";
 import { formatUsername } from "../utils/formatText";
 import type { ApiMedia, RecentActivity, UserRecords, Watchlist } from "../types/api";
-import { fetchUserByUsername, fetchUserWatchlists, fetchWatchlist, follow, getUserRecords, isFollowing } from "../api/api";
+import { fetchUserByUsername, fetchUserWatchlists, fetchWatchlist, follow, getUserRecords, isFollowing, unfollow } from "../api/api";
 import WatchlistActivityCard from "../components/UserActivity/WatchlistActivityCard";
 import LikeActivityCard from "../components/UserActivity/LikeActivityCard";
 import RateActivityCard from "../components/UserActivity/RateActivityCard";
@@ -116,13 +116,14 @@ export default function Profile() {
     // follow
     const handleFollow = () => {
         if (!userProfile) return;
-        follow(userProfile?.id)
+        follow(userProfile.id)
             .then(() => setIsFollowed(true));
     }
 
     const handleUnfollow = () => {
-        console.log('Unfollow');
-        
+        if (!userProfile) return;
+        unfollow(userProfile.id)
+            .then(() => setIsFollowed(false));     
     }
 
     return (
