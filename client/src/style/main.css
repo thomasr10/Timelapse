@@ -1877,6 +1877,16 @@ form .submit-container {
   color: #A9B4C6;
 }
 
+.follow-activity-card .title span {
+  color: #9B5DE5;
+}
+.follow-activity-card .icon-container {
+  background-color: #1c1129;
+}
+.follow-activity-card .icon {
+  color: #9B5DE5;
+}
+
 .watchlist-activity-card .title span {
   color: #1E90FF;
 }
@@ -1888,6 +1898,7 @@ form .submit-container {
 }
 
 .watchlist-activity-card .media-container,
+.follow-activity-card .media-container,
 .like-activity-card .media-container,
 .review-activity-card .media-container,
 .rate-activity-card .media-container {
@@ -1899,6 +1910,7 @@ form .submit-container {
   align-items: center;
 }
 .watchlist-activity-card .media-container img,
+.follow-activity-card .media-container img,
 .like-activity-card .media-container img,
 .review-activity-card .media-container img,
 .rate-activity-card .media-container img {
@@ -1906,6 +1918,7 @@ form .submit-container {
   height: 120px;
 }
 .watchlist-activity-card .media-container .all-infos-container,
+.follow-activity-card .media-container .all-infos-container,
 .like-activity-card .media-container .all-infos-container,
 .review-activity-card .media-container .all-infos-container,
 .rate-activity-card .media-container .all-infos-container {
@@ -1914,6 +1927,7 @@ form .submit-container {
   gap: 0.88rem;
 }
 .watchlist-activity-card .media-container .media-title-date,
+.follow-activity-card .media-container .media-title-date,
 .like-activity-card .media-container .media-title-date,
 .review-activity-card .media-container .media-title-date,
 .rate-activity-card .media-container .media-title-date {
@@ -1922,6 +1936,7 @@ form .submit-container {
   gap: 0.25rem;
 }
 .watchlist-activity-card .media-container .media-title-date .date,
+.follow-activity-card .media-container .media-title-date .date,
 .like-activity-card .media-container .media-title-date .date,
 .review-activity-card .media-container .media-title-date .date,
 .rate-activity-card .media-container .media-title-date .date {

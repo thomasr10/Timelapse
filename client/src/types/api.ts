@@ -47,7 +47,7 @@ export type RecentActivity = {
     type?: string,
     created_at: string,
     user_media?: UserMedia | null,
-    user?: User | null,
+    user_followed?: User | null,
     watchlist?: Watchlist | null,
     media?: ApiMedia | null,
     review?: Review | null

@@ -65,6 +65,7 @@ final class UserController extends AbstractController
             $media = $recentActivity->getMedia();
             $watchlist = $recentActivity->getWatchlist();
             $review = $recentActivity->getReview();
+            $user_followed = $recentActivity->getFollowing();
 
             $userRecentActivityArray[] = [
                 "id" => $recentActivity->getId(),
@@ -85,6 +86,10 @@ final class UserController extends AbstractController
                 ] : null,
                 "review" => $review ? [
                     "content" => $review->getContent()
+                ] : null,
+                "user_followed" => $user_followed ? [
+                    "username" => $user_followed->getFollowing()->getUsername(),
+                    "profile_picture" => $user_followed->getFollowing()->getProfilePicture()
                 ] : null
             ];
         }

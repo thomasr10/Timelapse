@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
 use App\Service\UserFollowsService;
 use App\Service\UserService;
+use App\Service\UserActivityService;
 
 #[Route('/api')]
 class UserFollowsController extends AbstractController
@@ -15,7 +16,8 @@ class UserFollowsController extends AbstractController
     
     public function __construct(
         private UserFollowsService $userFollowsService,
-        private UserService $userService
+        private UserService $userService,
+        private UserActivityService $userActivityService
     ){}
 
     // follow user
@@ -40,8 +42,8 @@ class UserFollowsController extends AbstractController
             ], 400);
         }
 
-        $this->userFollowsService->follow($user, $user_to_follow);
-        // $this->userActivityService->
+        $user_follows = $this->userFollowsService->follow($user, $user_to_follow);
+        $this->userActivityService->createFollowActivity('follow', $user, $user_follows);
 
         return $this->json([
             'message' => 'Vous avez suivi' . ' ' . $user_to_follow->getUsername(),

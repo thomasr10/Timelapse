@@ -14,6 +14,7 @@ import { logout } from "../api/auth";
 import { useNavigate, useParams } from "react-router-dom";
 import type { User } from "../types/auth";
 import { Check, PlusCircle } from "lucide-react";
+import FollowActivityCard from "../components/UserActivity/FollowActivityCard";
 
 export default function Profile() {
 
@@ -204,6 +205,8 @@ export default function Profile() {
                             <RateActivityCard key={index} created_at={r.created_at} media={r.media} user_media={r.user_media} />
                         ) : r.type === 'review' ? (
                             <ReviewActivityCard key={index} created_at={r.created_at} media={r.media} review={r.review} />
+                        ) : r.type === 'follow' ? (
+                            <FollowActivityCard key={index} created_at={r.created_at} user_followed={r.user_followed}/>
                         ) : null
                     ))}
                 </section>

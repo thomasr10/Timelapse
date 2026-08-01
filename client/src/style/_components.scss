@@ -1495,6 +1495,22 @@ form {
     }
 }
 
+.follow-activity-card {
+    .title {
+        span {
+            color: #9B5DE5;
+        }
+    }
+
+    .icon-container {
+        background-color: #1c1129;
+    }
+
+    .icon {
+        color: #9B5DE5;
+    }
+}
+
 .watchlist-activity-card {
 
     .title {
@@ -1513,6 +1529,7 @@ form {
 }
 
 .watchlist-activity-card,
+.follow-activity-card,
 .like-activity-card,
 .review-activity-card,
 .rate-activity-card {

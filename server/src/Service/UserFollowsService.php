@@ -14,7 +14,7 @@ class UserFollowsService
         private EntityManagerInterface $em    
     ){}
 
-        public function follow($user_follower, $user_to_follow): void
+        public function follow($user_follower, $user_to_follow)
     {   
         $is_existing = $this->userFollowsRepository->findOneByFollowerAndFollowing($user_follower, $user_to_follow);
 
@@ -28,7 +28,7 @@ class UserFollowsService
         $this->em->persist($user_follows);
         $this->em->flush();
 
-        return;
+        return $user_follows;
     }
 
     public function unfollow($user_unfollower, $user_to_unfollow): void
