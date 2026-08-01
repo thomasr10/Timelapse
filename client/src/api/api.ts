@@ -341,7 +341,7 @@ export const fetchUserByUsername = async (username: string) => {
 
 export const follow = async (id: Number) => {
     try {
-        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/user/follow`, {
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/follow`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -366,7 +366,7 @@ export const follow = async (id: Number) => {
 
 export const isFollowing = async (userProfileId: Number) => {
     try {
-        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/user/is_following/${userProfileId}`, {
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/is_following/${userProfileId}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"
@@ -390,7 +390,7 @@ export const isFollowing = async (userProfileId: Number) => {
 
 export const unfollow = async (id: Number) => {
     try {
-        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/user/unfollow`, {
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/unfollow`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json"

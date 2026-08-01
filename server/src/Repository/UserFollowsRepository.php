@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\UserFollows;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -31,13 +32,15 @@ class UserFollowsRepository extends ServiceEntityRepository
     //        ;
     //    }
 
-    //    public function findOneBySomeField($value): ?UserFollows
-    //    {
-    //        return $this->createQueryBuilder('u')
-    //            ->andWhere('u.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+        public function findOneByFollowerAndFollowing(User $user_follower, User $user_followed): ?UserFollows
+       {
+           return $this->createQueryBuilder('u')
+               ->andWhere('u.follower = :user_follower')
+               ->setParameter('user_follower', $user_follower)
+               ->andWhere('u.following = :user_followed')
+               ->setParameter('user_followed', $user_followed)
+               ->getQuery()
+               ->getOneOrNullResult()
+           ;
+       }
 }

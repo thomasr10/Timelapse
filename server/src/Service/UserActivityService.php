@@ -62,7 +62,7 @@ class UserActivityService
         return;
     }
 
-    public function userRecentActivity(User $user)
+    public function userRecentActivity(User $user): array
     {
         $userActivity = $this->userActivityRepository->findByUser($user);
 
@@ -79,5 +79,20 @@ class UserActivityService
         }
 
         return array_slice($unique, 0, 3);
+    }
+
+    public function createFollowActivity(string $type, User $user_follower, User $user_followed): void
+    {
+        $userActivity = new UserActivity();
+        $userActivity->setType($type);
+        $userActivity->setMedia(null);
+        $userActivity->setUserMedia(null);
+        $userActivity->setReview(null);
+        $userActivity->setUser($user);
+        $userActivity->setCreatedAt(new \DateTimeImmutable());
+
+        $this->em->persist($userActivity);
+        $this->em->flush();
+        return;
     }
 }
