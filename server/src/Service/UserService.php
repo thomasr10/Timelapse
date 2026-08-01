@@ -25,4 +25,15 @@ class userService
     {
         return $this->userRepository->find($id);
     }
+
+    public function follow($userFollower, $userToFollow): void
+    {
+        $this->userRepository->follow($userFollower, $userToFollow);
+        return;
+    }
+
+    public function is_following(User $user, User $profile_user): bool
+    {
+        return $this->userRepository->is_following($user, $profile_user);
+    }
 }

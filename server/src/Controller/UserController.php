@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
 use App\Service\UserActivityService;
 use App\Service\UserService;
@@ -144,5 +145,57 @@ final class UserController extends AbstractController
             "message" => "Utilisateurs récupérés avec succès",
             "results" => $userArray
         ]);
+    }
+    
+    #[Route('/follow', methods: ['POST'], name: 'app_user_follow')]
+    public function follow(Request $request): JsonResponse
+    {
+        $user = $this->getUser();
+
+        if (!$user) {
+            return $this->json([
+                'message' => 'Utilisateur non trouvé',
+                'results' => null
+            ], 400);
+        }
+
+        $data = json_decode($request->getContent(), true);
+        $userToFollow = $this->userService->findById($data['id']);
+
+        if (!$userToFollow) {
+            return $this->json([
+                'message' => 'Utilisateur à suivre non trouvé'
+            ], 400);
+        }
+
+        $this->userService->follow($user, $userToFollow);
+
+        return $this->json([
+            'message' => 'Vous avez suivi' . ' ' . $userToFollow->getUsername(),
+            'results' => null
+        ]);
+        
+    }
+
+    #[Route('/follow/{userId}', name: 'app_user_follows', methods: ['GET'])]
+    public function isFollowing(string $userId): JsonResponse
+    {
+        $user = $this->getUser();
+
+        if (!$user) {
+            return $this->json([
+                'message' => 'Utilisateur non trouvé',
+                'results' => null
+            ], 400);
+        }
+        
+        $profile_user = $this->userService->findById(intval($userId));
+        $is_following = $this->userService->is_following($user, $profile_user);
+
+        return $this->json([
+            'message' => 'Requête exécutée avec succès',
+            'results' => $is_following
+        ]);
+        
     }
 }

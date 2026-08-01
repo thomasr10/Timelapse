@@ -1263,6 +1263,7 @@ form .submit-container {
 
 .blue-btn {
   background-color: #111726;
+  color: #E6ECF5;
 }
 .blue-btn:hover {
   cursor: pointer;
@@ -2091,4 +2092,10 @@ form .submit-container {
   resize: none;
   padding: 0.5rem;
   font-family: "Inter-Regular";
+}
+
+.icon-btn {
+  width: 0.88rem;
+  height: 0.88rem;
+  stroke-width: 3;
 }/*# sourceMappingURL=main.css.map */

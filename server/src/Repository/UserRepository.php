@@ -8,13 +8,17 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
+use Doctrine\DBAL\Connection;
 
 /**
  * @extends ServiceEntityRepository<User>
  */
 class UserRepository extends ServiceEntityRepository implements PasswordUpgraderInterface
 {
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(
+        ManagerRegistry $registry,
+        private Connection $connection
+    )
     {
         parent::__construct($registry, User::class);
     }
@@ -55,6 +59,35 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
                 ->setParameter('username', $username)
                 ->getQuery()
                 ->getOneOrNullResult();
+        }
+
+        public function follow(User $follower, User $userToFollow): void
+        {
+            $exists = $this->connection->fetchOne(
+                'SELECT 1 FROM user_follows WHERE follower_id = ? AND following_id = ?',
+                [$follower->getId(), $userToFollow->getId()]
+            );
+
+            if ($exists) return;
+
+            if (!$exists) {
+                $this->connection->insert('user_follows', [
+                    'follower_id' => $follower->getId(),
+                    'following_id' => $userToFollow->getId(),
+                ]);
+            }
+
+            return;
+        }
+
+        public function is_following(User $user, User $profile_user): bool
+        {
+            $exists = $this->connection->fetchOne(
+                'SELECT 1 FROM user_follows WHERE follower_id = ? AND following_id = ?',
+                [$user->getId(), $profile_user->getId()]
+            );
+
+            return $exists ? true : false;
         }
 
 }

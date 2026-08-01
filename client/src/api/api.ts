@@ -338,3 +338,52 @@ export const fetchUserByUsername = async (username: string) => {
         console.error(e);
     }
 }
+
+export const follow = async (id: Number) => {
+    try {
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/user/follow`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            credentials: "include",
+            body: JSON.stringify({ id })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            console.error(`Error while executing the request : ${response.status}`);
+            return data;
+        }
+
+        return data;
+
+    } catch (e) {
+        console.error(e);
+    }
+}
+
+export const isFollowing = async (userProfileId: Number) => {
+    try {
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/user/follow/${userProfileId}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            credentials: "include"
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            console.error(`Error while executing the request : ${response.status}`);
+            return data;
+        }
+
+        return data;
+
+    } catch (e) {
+        console.error(e);
+    }
+}

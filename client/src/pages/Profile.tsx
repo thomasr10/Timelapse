@@ -3,7 +3,7 @@ import { useAuth } from "../context/AuthContext";
 import { formatDate } from "../utils/formatDate";
 import { formatUsername } from "../utils/formatText";
 import type { ApiMedia, RecentActivity, UserRecords, Watchlist } from "../types/api";
-import { fetchUserByUsername, fetchUserWatchlists, fetchWatchlist, getUserRecords } from "../api/api";
+import { fetchUserByUsername, fetchUserWatchlists, fetchWatchlist, follow, getUserRecords, isFollowing } from "../api/api";
 import WatchlistActivityCard from "../components/UserActivity/WatchlistActivityCard";
 import LikeActivityCard from "../components/UserActivity/LikeActivityCard";
 import RateActivityCard from "../components/UserActivity/RateActivityCard";
@@ -13,6 +13,7 @@ import UserWatchlistCard from "../components/UserWatchlistCard";
 import { logout } from "../api/auth";
 import { useNavigate, useParams } from "react-router-dom";
 import type { User } from "../types/auth";
+import { Check, PlusCircle } from "lucide-react";
 
 export default function Profile() {
 
@@ -24,20 +25,31 @@ export default function Profile() {
     const [medias, setMedias] = useState<Record<number, ApiMedia[]> | null>(null);
     const [mediasInfos, setMediasInfos] = useState<Record<number, string[]> | null>(null);
     const [userProfile, setUserProfile] = useState<User | null>(null);
+    const [isFollowed, setIsFollowed] = useState(false);
 
     const navigate = useNavigate();
 
+    // fetch user data
     useEffect(() => {
         if (!username) return;
         fetchUserByUsername(username)
             .then(data => {
-                if(data.results === null) {
+                if (data.results === null) {
                     navigate('/');
                 }
                 setUserProfile(data.results)
             });
-    }, [username])
+    }, [username]);
 
+    useEffect(() => {
+        if (!userProfile) return;
+        isFollowing(userProfile.id)
+            .then(data => {
+                setIsFollowed(data.results);
+            });
+    }, [userProfile, user])
+
+    // fetch user activity
     useEffect(() => {
         if (!userProfile) return;
         getUserRecords(userProfile?.id).then(data => setUserRecords(data.results));
@@ -94,11 +106,24 @@ export default function Profile() {
         loadMediasInfos();
     }, [medias]);
 
+
+    // déconnexion
     const handleLogout = () => {
         logout()
         navigate(0);
     }
 
+    // follow
+    const handleFollow = () => {
+        if (!userProfile) return;
+        follow(userProfile?.id)
+            .then(() => setIsFollowed(true));
+    }
+
+    const handleUnfollow = () => {
+        console.log('Unfollow');
+        
+    }
 
     return (
         <main id="profile" className="section-container">
@@ -123,10 +148,23 @@ export default function Profile() {
                             user?.id === userProfile?.id ?
                                 <button
                                     className="small-btn red-btn btn"
-                                    onClick={() => handleLogout()}
-                                >Déconnexion
+                                    onClick={() => handleLogout()}>
+                                    Déconnexion
                                 </button>
-                                : ""
+                                :
+                                !isFollowed ?
+                                    <button
+                                        className="small-btn red-btn btn"
+                                        onClick={() => handleFollow()}>
+                                        Suivre
+                                        <PlusCircle className="icon-btn"/>
+                                    </button> :
+                                    <button
+                                        className="small-btn blue-btn btn"
+                                        onClick={() => handleUnfollow()}>
+                                        Suivi
+                                        <Check className="icon-btn"/>
+                                    </button>
                         }
                     </div>
 
