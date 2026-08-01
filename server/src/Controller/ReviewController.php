@@ -28,7 +28,7 @@ final class ReviewController extends AbstractController
         if (!$user) {
             return $this->json([
                 'message' => 'Utilisateur non trouvé'
-            ]);
+            ], 400);
         }
 
         $data = json_decode($request->getContent(), true);

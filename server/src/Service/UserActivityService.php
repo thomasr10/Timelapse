@@ -105,4 +105,47 @@ class UserActivityService
         $this->em->flush();
         return;
     }
+
+    public function findFollowingActivity(User $user): array
+    {
+        $recent_activities = $this->userActivityRepository->findFollowingActivity($user);
+        $recent_activities_array = [];
+        
+        foreach($recent_activities as $activity) {
+            $userMedia = $activity->getUserMedia();
+            $media = $activity->getMedia();
+            $watchlist = $activity->getWatchlist();
+            $review = $activity->getReview();
+            $user_followed = $activity->getFollowing();
+
+            $recent_activities_array[] = [
+                "id" => $activity->getId(),
+                "type" => $activity->getType(),
+                "created_at" => $activity->getCreatedAt(),
+                "user_media" => $userMedia ? [
+                    "id" => $userMedia->getId(),
+                    "rating" => $userMedia->getRating(),
+                ] : null,
+                "media" => $media ? [
+                    "tmdb_id" => $media->getTmdbId(),
+                    "type" => $media->getType()
+                ] : null,
+                "watchlist" => $watchlist ? [
+                    "id" => $watchlist->getId(),
+                    "title" => $watchlist->getTitle(),
+                    "description" => $watchlist->getDescription()
+                ] : null,
+                "review" => $review ? [
+                    "content" => $review->getContent()
+                ] : null,
+                "user_followed" => $user_followed ? [
+                    "username" => $user_followed->getFollowing()->getUsername(),
+                    "profile_picture" => $user_followed->getFollowing()->getProfilePicture()
+                ] : null
+            ];
+        }
+
+        return $recent_activities_array;
+
+    }
 }

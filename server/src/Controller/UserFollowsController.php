@@ -11,7 +11,7 @@ use App\Service\UserService;
 use App\Service\UserActivityService;
 
 #[Route('/api')]
-class UserFollowsController extends AbstractController
+final class UserFollowsController extends AbstractController
 {
     
     public function __construct(

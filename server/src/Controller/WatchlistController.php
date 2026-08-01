@@ -37,7 +37,7 @@ final class WatchlistController extends AbstractController
             return $this->json([
                 'message' => 'Utilisateur non trouvé',
                 'results' => null
-            ], 404);
+            ], 400);
         }
 
         $data = json_decode($request->getContent(), true);

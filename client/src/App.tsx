@@ -12,6 +12,7 @@ import ProtectedRoutes from "./router/ProtectedRoutes";
 import { LoaderProvider } from "./context/LoaderContext";
 import Profile from "./pages/Profile";
 import WatchlistPage from "./pages/WatchlistPage";
+import CommunityPage from "./pages/CommunityPage";
 
 
 function App() {
@@ -69,6 +70,14 @@ function App() {
               element={
                 <ProtectedRoutes>
                   <WatchlistPage />
+                </ProtectedRoutes>
+              }
+            />
+            <Route
+              path="/community"
+              element={
+                <ProtectedRoutes>
+                  <CommunityPage />
                 </ProtectedRoutes>
               }
             />

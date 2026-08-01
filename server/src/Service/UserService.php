@@ -5,7 +5,7 @@ namespace App\Service;
 use App\Repository\UserRepository;
 use App\Entity\User;
 
-class userService
+class UserService
 {
     public function __construct(private UserRepository $userRepository){}
     
