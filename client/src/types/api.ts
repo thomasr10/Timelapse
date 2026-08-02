@@ -46,6 +46,7 @@ export type UserRecords = {
 export type RecentActivity = {
     type?: string,
     created_at: string,
+    user?: User | null,
     user_media?: UserMedia | null,
     user_followed?: User | null,
     watchlist?: Watchlist | null,

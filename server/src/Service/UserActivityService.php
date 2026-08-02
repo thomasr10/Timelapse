@@ -120,6 +120,10 @@ class UserActivityService
 
             $recent_activities_array[] = [
                 "id" => $activity->getId(),
+                "user" => [
+                    "username" => $activity->getUser()->getUsername(),
+                    "profile_picture" => $activity->getUser()->getProfilePicture()
+                ],
                 "type" => $activity->getType(),
                 "created_at" => $activity->getCreatedAt(),
                 "user_media" => $userMedia ? [

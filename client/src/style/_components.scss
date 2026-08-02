@@ -1773,3 +1773,86 @@ form {
     height: .88rem;
     stroke-width: 3;
 }
+
+.community-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    background-color: $panel-color;
+    padding: 1rem;
+    border-radius: 8px;
+    
+
+    .activity-info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .user-info {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+
+            img {
+                border-radius: 50%;
+            }
+        }
+
+        .username {
+            color: $main-text-color;
+            font-size: $font-size-medium;
+            font-family: $inter-semibold;
+        }
+
+        .date {
+            color: $secondary-text-color;
+            font-size: $font-size-small;
+            font-family: $inter-regular;
+        }
+    }
+
+    .content {
+        
+        img {
+            width: 60px;
+            
+            @include desktop {
+                width: 80px;
+            }
+        }
+        
+        .info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            
+            .title {
+                color: $main-text-color;
+                font-family: $inter-bold;
+                font-size: $font-size-medium;
+
+                @include desktop {
+                    font-size: $font-size-large;
+                }
+            }
+            
+            .action {
+                font-size: $font-size-small;
+                color: $secondary-text-color;
+                font-family: $inter-regular;
+                line-height: 1.4;
+            }
+        }
+
+    }
+}
+
+.media-content {
+    display: flex;
+    gap: 1rem;
+
+    .watchlist-name {
+        font-family: $inter-bold;
+        color: #1E90FF;
+    }
+}

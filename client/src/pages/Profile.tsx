@@ -214,10 +214,10 @@ export default function Profile() {
             <section id="users-watchlists">
                 <h2>Mes watchlists</h2>
                 <section>
-                    {userWatchlists?.map((w) => (
+                    {userWatchlists?.map((w, index) => (
                         user?.id === userProfile?.id ?
                             <UserWatchlistCard
-                                key={w.id}
+                                key={index}
                                 title={w.title}
                                 items={w.count_media}
                                 updated_at={w.updated_at}
@@ -229,7 +229,7 @@ export default function Profile() {
                                 onDelete={setUserWatchlists}
                             /> : w.is_public ?
                                 <UserWatchlistCard
-                                    key={w.id}
+                                    key={index}
                                     title={w.title}
                                     items={w.count_media}
                                     updated_at={w.updated_at}
