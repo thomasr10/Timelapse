@@ -1780,7 +1780,7 @@ form {
     gap: 1.25rem;
     background-color: $panel-color;
     padding: 1rem;
-    border-radius: 8px;
+    border-radius: 12px;
     
 
     .activity-info {
@@ -1795,6 +1795,7 @@ form {
 
             img {
                 border-radius: 50%;
+                width: 32px;
             }
         }
 
@@ -1815,16 +1816,17 @@ form {
         
         img {
             width: 60px;
-            
-            @include desktop {
-                width: 80px;
-            }
         }
         
         .info {
             display: flex;
             flex-direction: column;
             gap: 1.5rem;
+
+            .user-follow {
+                color: #9B5DE5;
+                font-family: $inter-bold;
+            }
             
             .title {
                 color: $main-text-color;
@@ -1843,13 +1845,17 @@ form {
                 line-height: 1.4;
             }
         }
-
     }
 }
 
 .media-content {
     display: flex;
     gap: 1rem;
+
+    .like {
+        font-family: $inter-bold;
+        color: $accent-color;
+    }
 
     .watchlist-name {
         font-family: $inter-bold;

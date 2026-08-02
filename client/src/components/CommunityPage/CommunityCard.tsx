@@ -1,9 +1,11 @@
-import { useEffect } from "react";
 import type { RecentActivity } from "../../types/api";
 import { formatReviewDate } from "../../utils/formatDate";
 import { formatUsername } from "../../utils/formatText";
 import ReviewContent from "./ReviewContent";
 import WatchlistContent from "./WatchlistContent";
+import LikeContent from "./LikeContent";
+import RateContent from "./RateContent";
+import FollowContent from "./FollowContent";
 
 export default function CommunityCard({
     user_followed,
@@ -40,7 +42,14 @@ export default function CommunityCard({
                     type === 'watchlist' ?
                         <WatchlistContent watchlist={watchlist} media={media} /> :
                     type === 'review' ?
-                        <ReviewContent review={review} media={media}/> : ''
+                        <ReviewContent review={review} media={media}/> : 
+                    type === 'like' ?
+                        <LikeContent media={media} /> :
+                    type === 'rate' ?
+                        <RateContent media={media} user_media={user_media} /> : 
+                    type === 'follow' ?
+                        <FollowContent user_followed={user_followed}/> :
+                    ''
 
                 }
             </div>

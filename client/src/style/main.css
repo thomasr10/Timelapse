@@ -2125,7 +2125,7 @@ form .submit-container {
   gap: 1.25rem;
   background-color: #0D1324;
   padding: 1rem;
-  border-radius: 8px;
+  border-radius: 12px;
 }
 .community-card .activity-info {
   display: flex;
@@ -2139,6 +2139,7 @@ form .submit-container {
 }
 .community-card .activity-info .user-info img {
   border-radius: 50%;
+  width: 32px;
 }
 .community-card .activity-info .username {
   color: #E6ECF5;
@@ -2153,15 +2154,14 @@ form .submit-container {
 .community-card .content img {
   width: 60px;
 }
-@media (min-width: 1200px) {
-  .community-card .content img {
-    width: 80px;
-  }
-}
 .community-card .content .info {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+}
+.community-card .content .info .user-follow {
+  color: #9B5DE5;
+  font-family: "Inter-Bold";
 }
 .community-card .content .info .title {
   color: #E6ECF5;
@@ -2183,6 +2183,10 @@ form .submit-container {
 .media-content {
   display: flex;
   gap: 1rem;
+}
+.media-content .like {
+  font-family: "Inter-Bold";
+  color: #A61C2A;
 }
 .media-content .watchlist-name {
   font-family: "Inter-Bold";
