@@ -96,6 +96,7 @@ final class AuthController extends AbstractController
     {
         $response = new JsonResponse(['message' => 'Utilisateur déconnecté avec succès']);
         $response->headers->clearCookie('token');
+        $response->headers->clearCookie('csrf_token', '/');
         return $response;
     }
 }

@@ -1,7 +1,9 @@
+import { fetchWithCsrf } from "./csrf";
+
 export const handleLike = async (isLiked: boolean, tmdb: number, type: string) => {
 
     try {
-        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/user_media/like`, {
+        const response = await fetchWithCsrf(`${import.meta.env.VITE_API_BASE_URL}/user_media/like`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -26,7 +28,7 @@ export const handleLike = async (isLiked: boolean, tmdb: number, type: string) =
 export const handleWatch = async (isWatched: boolean, tmdb: number, type: string) => {
 
     try {
-        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/user_media/watch`, {
+        const response = await fetchWithCsrf(`${import.meta.env.VITE_API_BASE_URL}/user_media/watch`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -50,7 +52,7 @@ export const handleWatch = async (isWatched: boolean, tmdb: number, type: string
 
 export const fetchUserMediaData = async (tmdb: number, type: string) => {
     try {
-        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/user_media/${type}/${tmdb}`, {
+        const response = await fetchWithCsrf(`${import.meta.env.VITE_API_BASE_URL}/user_media/${type}/${tmdb}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"
@@ -74,7 +76,7 @@ export const fetchUserMediaData = async (tmdb: number, type: string) => {
 // Récupérer watchlist
 export const fetchUserWatchlists = async (id: number | undefined) => {
     try {
-        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/watchlist/user/${id}`, {
+        const response = await fetchWithCsrf(`${import.meta.env.VITE_API_BASE_URL}/watchlist/user/${id}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"
@@ -96,7 +98,7 @@ export const fetchUserWatchlists = async (id: number | undefined) => {
 
 export const addMovieToWatchlist = async (watchlist_id: number, tmdb: number, type: string) => {
     try {
-        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/watchlist/media/add`, {
+        const response = await fetchWithCsrf(`${import.meta.env.VITE_API_BASE_URL}/watchlist/media/add`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -121,7 +123,7 @@ export const addMovieToWatchlist = async (watchlist_id: number, tmdb: number, ty
 
 export const fetchReviews = async (type: string, tmdb: number, offset: number) => {
     try {
-        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/review/${type}/${tmdb}/${offset}`, {
+        const response = await fetchWithCsrf(`${import.meta.env.VITE_API_BASE_URL}/review/${type}/${tmdb}/${offset}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"
@@ -145,7 +147,7 @@ export const fetchReviews = async (type: string, tmdb: number, offset: number) =
 
 export const registerReview = async (content: string, tmdb: number, type: string) => {
     try {
-        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/review/add`, {
+        const response = await fetchWithCsrf(`${import.meta.env.VITE_API_BASE_URL}/review/add`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -170,7 +172,7 @@ export const registerReview = async (content: string, tmdb: number, type: string
 
 export const rateMedia = async (tmdb: number, type: string, rate: number) => {
     try {
-        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/user_media/rate`, {
+        const response = await fetchWithCsrf(`${import.meta.env.VITE_API_BASE_URL}/user_media/rate`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -195,7 +197,7 @@ export const rateMedia = async (tmdb: number, type: string, rate: number) => {
 
 export const getUserRecords = async (id: number | undefined) => {
     try {
-        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/user/${id}/records`, {
+        const response = await fetchWithCsrf(`${import.meta.env.VITE_API_BASE_URL}/user/${id}/records`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"
@@ -219,7 +221,7 @@ export const getUserRecords = async (id: number | undefined) => {
 
 export const fetchWatchlist = async (id: number) => {
     try {
-        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/watchlist/${id}`, {
+        const response = await fetchWithCsrf(`${import.meta.env.VITE_API_BASE_URL}/watchlist/${id}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"
@@ -243,7 +245,7 @@ export const fetchWatchlist = async (id: number) => {
 
 export const createWatchlist = async (title: string, description: string, isPublic: boolean) => {
     try {
-        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/watchlist/create`, {
+        const response = await fetchWithCsrf(`${import.meta.env.VITE_API_BASE_URL}/watchlist/create`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -268,7 +270,7 @@ export const createWatchlist = async (title: string, description: string, isPubl
 
 export const deleteWatchlist = async (id: number) => {
     try {
-        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/watchlist/delete`, {
+        const response = await fetchWithCsrf(`${import.meta.env.VITE_API_BASE_URL}/watchlist/delete`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json"
@@ -293,7 +295,7 @@ export const deleteWatchlist = async (id: number) => {
 
 export const fetchUserByName = async (search: string) => {
     try {
-        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/user/search/${search}`, {
+        const response = await fetchWithCsrf(`${import.meta.env.VITE_API_BASE_URL}/user/search/${search}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"
@@ -317,7 +319,7 @@ export const fetchUserByName = async (search: string) => {
 
 export const fetchUserByUsername = async (username: string) => {
     try {
-        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/user/username/${username}`, {
+        const response = await fetchWithCsrf(`${import.meta.env.VITE_API_BASE_URL}/user/username/${username}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"
@@ -341,7 +343,7 @@ export const fetchUserByUsername = async (username: string) => {
 
 export const follow = async (id: Number) => {
     try {
-        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/follow`, {
+        const response = await fetchWithCsrf(`${import.meta.env.VITE_API_BASE_URL}/follow`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -366,7 +368,7 @@ export const follow = async (id: Number) => {
 
 export const isFollowing = async (userProfileId: Number) => {
     try {
-        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/is_following/${userProfileId}`, {
+        const response = await fetchWithCsrf(`${import.meta.env.VITE_API_BASE_URL}/is_following/${userProfileId}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"
@@ -390,7 +392,7 @@ export const isFollowing = async (userProfileId: Number) => {
 
 export const unfollow = async (id: Number) => {
     try {
-        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/unfollow`, {
+        const response = await fetchWithCsrf(`${import.meta.env.VITE_API_BASE_URL}/unfollow`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json"
@@ -416,7 +418,7 @@ export const unfollow = async (id: Number) => {
 // get followed users' recent activities
 export const followedUserActivities = async () => {
     try {
-        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/user/activity/followed_users`, {
+        const response = await fetchWithCsrf(`${import.meta.env.VITE_API_BASE_URL}/user/activity/followed_users`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"
