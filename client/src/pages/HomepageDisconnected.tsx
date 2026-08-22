@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { fetchTrendingMovies } from "../api/tmdb";
 import { useEffect, useState } from "react";
 import PromoCard from "../components/PromoCard";
@@ -67,6 +67,9 @@ export default function HomepageDisconnected() {
                         </div>
                     </div>
                 </section>
+                <div className="flex-row align-center">
+                    <Link className="redirect-link center" to='/rgpd/mentions-legales'>Mentions légales</Link>
+                </div>
             </main>
         </>
     )

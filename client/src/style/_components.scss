@@ -843,6 +843,11 @@ form {
     cursor: pointer;
 }
 
+.txt-btn {
+    border: none;
+    background-color: transparent;
+}
+
 .main-btn {
     border: none;
     padding: .5rem 1rem;
@@ -1861,4 +1866,22 @@ form {
         font-family: $inter-bold;
         color: #1E90FF;
     }
+}
+
+#legal-notice {
+    color: $main-text-color;
+    p {
+        font-family: $inter-regular;
+    }
+
+    h2 {
+        font-size: $font-size-large;
+        font-family: $inter-semibold;
+    }
+}
+
+.redirect-link {
+    color: $secondary-text-color;
+    font-family: $inter-regular;
+    font-size: $font-size-xs;
 }

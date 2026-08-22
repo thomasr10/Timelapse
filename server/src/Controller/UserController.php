@@ -153,4 +153,48 @@ final class UserController extends AbstractController
         ]);
     }
 
+    #[Route('/delete-account', name: 'app_delete_account', methods: ['DELETE'])]
+    public function deleteAccount(): JsonResponse
+    {
+        $user = $this->getUser();
+        
+        if (!$user) {
+            return $this->json([
+                'message' => 'Utilisateur non trouvé',
+                'results' => null
+            ], 400);
+        }
+
+        $this->userService->deleteAccount($user);
+
+        return $this->json([
+            'message' => 'User deleted successfully',
+            'results' => null
+        ]);
+    }
+
+    #[Route('/update-account', name: 'app_update_user', methods: ['PUT'])]
+    public function updateAccount(Request $request): JsonResponse
+    {
+        $user = $this->getUser();
+        
+        if (!$user) {
+            return $this->json([
+                'message' => 'Utilisateur non trouvé',
+                'results' => null
+            ], 400);
+        }
+
+        $data = json_decode($request->getContent(), true);
+        $password = (!isset($data['password'])) ? null : $data['password'];
+        $updated_user = $this->userService->updateUser($user, $data['email'], $data['display_username'], $password);
+
+        return $this->json([
+            'message' => 'User updated successfully',
+            'results' => [
+                'display_username' => $updated_user->getDisplayUsername(),
+                'email' => $updated_user->getEmail()
+            ]
+        ]);
+    }
 }

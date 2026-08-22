@@ -1,9 +1,7 @@
 import { getCsrfToken } from '../utils/csrf';
 
 export function fetchWithCsrf(url: string, options: RequestInit = {}) {
-  const csrfToken = getCsrfToken();
-  console.log(csrfToken);
-  
+  const csrfToken = getCsrfToken();  
 
   return fetch(url, {
     ...options,

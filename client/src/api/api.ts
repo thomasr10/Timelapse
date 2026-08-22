@@ -439,3 +439,52 @@ export const followedUserActivities = async () => {
         console.error(e);
     }     
 }
+
+export const deleteAccount = async () => {
+    try {
+        const response = await fetchWithCsrf(`${import.meta.env.VITE_API_BASE_URL}/user/delete-account`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            credentials: "include",
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            console.error(`Error while executing the request : ${response.status}`);
+            return data;
+        }
+
+        return data;
+
+    } catch (e) {
+        console.error(e);
+    }
+}
+
+export const updateUser = async (email: string | undefined, display_username: string | undefined, password?: string | undefined) => {
+    try {
+        const response = await fetchWithCsrf(`${import.meta.env.VITE_API_BASE_URL}/user/update-account`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            credentials: "include",
+            body: JSON.stringify({ email, display_username, password})
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            console.error(`Error while executing the request : ${response.status}`);
+            return data;
+        }
+
+        return data;
+
+    } catch (e) {
+        console.error(e);
+    }
+}

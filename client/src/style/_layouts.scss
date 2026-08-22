@@ -294,3 +294,41 @@ main {
         padding: .25rem 0;
     }
 }
+
+#user-profile-form {
+    label {
+        color: $main-text-color;
+        font-family: $inter-bold;
+    }
+
+    input:not(.btn) {
+        font-family: $inter-regular;
+        padding: .5rem;
+        color: $secondary-color;
+        border-radius: 8px;
+    }
+}
+
+#user-settings {
+    .txt-btn {
+        color: $accent-color;
+        font-family: $inter-regular;
+    }
+
+    .modal {
+        background-color: $panel-color;
+        padding: 2rem;
+        color: $main-text-color;
+        border-radius: 12px;
+        border: 1px solid $panel-bordel-color;
+
+        .title {
+            font-family: $inter-bold;
+        }
+        
+        p {
+            font-family: $inter-regular;
+            text-align: center;
+        }
+    }
+}

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\EventListener;
+namespace App\Listener;
 
 use Lexik\Bundle\JWTAuthenticationBundle\Event\AuthenticationSuccessEvent;
 use Symfony\Component\HttpFoundation\Cookie;

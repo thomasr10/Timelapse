@@ -13,6 +13,7 @@ import { LoaderProvider } from "./context/LoaderContext";
 import Profile from "./pages/Profile";
 import WatchlistPage from "./pages/WatchlistPage";
 import CommunityPage from "./pages/CommunityPage";
+import LegalNotice from "./pages/LegalNotice";
 
 
 function App() {
@@ -58,6 +59,12 @@ function App() {
               }
             />
             <Route
+              path="/rgpd/mentions-legales"
+              element={
+                <LegalNotice />
+              }
+            />
+            <Route
               path="/:username"
               element={
                 <ProtectedRoutes>
@@ -81,7 +88,6 @@ function App() {
                 </ProtectedRoutes>
               }
             />
-
           </Routes>
         </LoaderProvider>
       </AuthProvider>

@@ -10,7 +10,6 @@ export default function CommunityPage() {
     useEffect(() => {
         followedUserActivities()
             .then(data => {
-                console.log(data);
                 setUserActivities(data.results);
             })
     }, [])

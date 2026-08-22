@@ -29,17 +29,13 @@ class CsrfProtectionSubscriber implements EventSubscriberInterface
         }
 
         // exclure la route de login, pas de csrf_token disponible avant connexion
-        if ($request->getPathInfo() === '/api/login_check') { 
-            return;
-        }
+        if ($request->getPathInfo() === '/api/login_check') return;
+
+        if ($request->getPathInfo() === '/api/register') return;
 
         $headerToken = $request->headers->get('X-CSRF-Token');
         $cookieToken = $request->cookies->get('csrf_token');
-// dump([
-//     'header' => $headerToken,
-//     'cookie' => $cookieToken,
-//     'all_cookies' => $request->cookies->all(),
-// ]);
+
         if (!$headerToken || !$cookieToken || !hash_equals($cookieToken, $headerToken)) {
             $event->setResponse(new JsonResponse(['error' => 'Invalid CSRF token'], 403));
         }

@@ -1,7 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { me, logout } from "../api/auth";
 import type { User, AuthContextType } from "../types/auth";
-import { useNavigate } from "react-router-dom";
 import type { ReactNode } from 'react';
 
 const AuthContext = createContext< AuthContextType | null >(null);
@@ -11,7 +10,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const [user, setUser] = useState<User | null>(null);
     const [isAuth, setIsAuth] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
-    const navigate = useNavigate();
 
     const refreshUser = async() => {
         try {
@@ -30,7 +28,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                         setUser(null);
                         setIsAuth(false);
                         logout();
-                        navigate('/');
                         return;
                     }
                     setUser(data.user);

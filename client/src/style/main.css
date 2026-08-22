@@ -523,6 +523,36 @@ main {
   padding: 0.25rem 0;
 }
 
+#user-profile-form label {
+  color: #E6ECF5;
+  font-family: "Inter-Bold";
+}
+#user-profile-form input:not(.btn) {
+  font-family: "Inter-Regular";
+  padding: 0.5rem;
+  color: #111726;
+  border-radius: 8px;
+}
+
+#user-settings .txt-btn {
+  color: #A61C2A;
+  font-family: "Inter-Regular";
+}
+#user-settings .modal {
+  background-color: #0D1324;
+  padding: 2rem;
+  color: #E6ECF5;
+  border-radius: 12px;
+  border: 1px solid #1A2238;
+}
+#user-settings .modal .title {
+  font-family: "Inter-Bold";
+}
+#user-settings .modal p {
+  font-family: "Inter-Regular";
+  text-align: center;
+}
+
 form {
   max-width: 740px;
   width: 100%;
@@ -1280,6 +1310,11 @@ form .submit-container {
 .grey-btn {
   color: #0A0F1F;
   cursor: pointer;
+}
+
+.txt-btn {
+  border: none;
+  background-color: transparent;
 }
 
 .main-btn {
@@ -2191,4 +2226,21 @@ form .submit-container {
 .media-content .watchlist-name {
   font-family: "Inter-Bold";
   color: #1E90FF;
+}
+
+#legal-notice {
+  color: #E6ECF5;
+}
+#legal-notice p {
+  font-family: "Inter-Regular";
+}
+#legal-notice h2 {
+  font-size: 1.25rem;
+  font-family: "Inter-SemiBold";
+}
+
+.redirect-link {
+  color: #A9B4C6;
+  font-family: "Inter-Regular";
+  font-size: 0.75rem;
 }/*# sourceMappingURL=main.css.map */
