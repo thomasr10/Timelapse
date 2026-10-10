@@ -12,7 +12,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 
-#[CoversClass(MediaService::class)]
+#[CoversClass(UserMediaService::class)]
 class UserMediaServiceTest extends TestCase
 {
     public function testFindOrCreateReturnsExisting(): void

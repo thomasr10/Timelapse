@@ -1,4 +1,3 @@
-// src/utils/__tests__/formatStatus.test.ts
 import { describe, it, expect } from 'vitest';
 import { formatStatus } from '../formatStatus';
 
