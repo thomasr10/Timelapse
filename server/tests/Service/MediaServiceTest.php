@@ -1,5 +1,4 @@
 <?php
-// tests/Service/MediaServiceTest.php
 
 namespace App\Tests\Service;
 
