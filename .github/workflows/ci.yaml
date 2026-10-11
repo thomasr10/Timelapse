@@ -74,7 +74,7 @@ jobs:
 
       - name: Audit backend dependencies
         working-directory: ./server
-        run: composer audit
+        run: composer audit --locked
 
       - name: Setup Node
         uses: actions/setup-node@v4
