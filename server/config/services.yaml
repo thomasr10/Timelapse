@@ -9,3 +9,9 @@ services:
     App\Listener\AuthenticationSuccessListener:
         tags:
             - { name: kernel.event_listener, event: lexik_jwt_authentication.on_authentication_success, method: onAuthenticationSuccessResponse }
+    App\Service\TmdbService:
+        arguments:
+            $tmdbBaseUrl: '%env(TMDB_BASE_URL)%'
+            $tmdbApiKey: '%env(TMDB_API_KEY)%'
+            $tmdbRegion: '%env(API_REGION_PARAM)%'
+            $tmdbLanguage: '%env(API_LANGUAGE_PARAM)%'
