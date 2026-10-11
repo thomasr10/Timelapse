@@ -24,10 +24,6 @@ jobs:
         working-directory: ./server
         run: composer install --no-interaction --prefer-dist --no-scripts
 
-      - name: Audit backend dependencies
-        working-directory: ./server
-        run: composer audit
-
       - name: Create .env file
         working-directory: ./server
         run: echo "APP_ENV=test" > .env
@@ -47,10 +43,6 @@ jobs:
         working-directory: ./client
         run: npm ci
 
-      - name: Audit frontend dependencies
-        working-directory: ./client
-        run: npm audit --audit-level=high
-
       - name: Run frontend tests
         working-directory: ./client
         run: npx vitest run
@@ -69,3 +61,26 @@ jobs:
 
       - name: Run Semgrep
         run: semgrep scan --config p/php --config p/typescript --config p/react --error
+  dependency-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+
+      - name: Audit backend dependencies
+        working-directory: ./server
+        run: composer audit --locked
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Audit frontend dependencies
+        working-directory: ./client
+        run: npm audit --audit-level=high
