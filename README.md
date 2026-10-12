@@ -36,21 +36,23 @@ MYSQL_USER=timelapse_user
 MYSQL_PASSWORD=your_password
 ```
 
-Créer un fichier `server/.env.local` (ou adapter `server/.env`) avec a minima :
+Créer un fichier `server/.env.env` :
 
 ```env
 DATABASE_URL="mysql://timelapse_user:your_password@database:3306/timelapse?serverVersion=8.0"
 JWT_SECRET_KEY=%kernel.project_dir%/config/jwt/private.pem
 JWT_PUBLIC_KEY=%kernel.project_dir%/config/jwt/public.pem
 JWT_PASSPHRASE=your_jwt_passphrase
+TMDB_API_KEY=YOUR_TMDB_API_KEY
+TMDB_BASE_URL=TMDB_API_BASE_URL
+API_REGION_PARAM=YOUR_REGION
+API_LANGUAGE_PARAM=YOUR_LANGUAGE
 ```
 
 Créer un fichier `client/.env` avec :
 
 ```env
 VITE_API_BASE_URL=http://localhost:8080/api
-VITE_TMDB_BASE_URL=https://api.themoviedb.org/3
-VITE_TMDB_TOKEN=your_tmdb_bearer_token
 VITE_API_IMAGE_BASE_URL=https://image.tmdb.org/t/p/
 ```
 
