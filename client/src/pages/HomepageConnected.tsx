@@ -52,14 +52,14 @@ export default function HomepageConnected() {
                 setTVGenres(data);
             })
             .finally(() => endFetch());
-    }, [])
+    }, []);
 
     // FETCH MOVIES
     useEffect(() => {
         startFetch();
         fetchTrendingMovies()
-            .then((data) => {
-                setTrendingMovies(data.results);
+            .then((data) => {                                
+                setTrendingMovies(data.results.results);
             })
             .finally(() => endFetch());
     }, []);
@@ -68,13 +68,13 @@ export default function HomepageConnected() {
         startFetch();
         fetchUpcomingMovies()
             .then((data) => {
-                data.results.forEach((movie: Media) => {
+                data.results.results.forEach((movie: Media) => {
                     movie.media_type = 'movie';
                 })
                 // filtre pour ne pas avoir un meme film dans les 2 sliders + enlever les film
                 // qui vont ressortir
                 const trendingIds = trendingMovies.map(t => t.id);
-                setUpcomingMovies(data.results.filter((m: Media) => !trendingIds.includes(m.id) && m.release_date?.startsWith(new Date().getFullYear().toString())));
+                setUpcomingMovies(data.results.results.filter((m: Media) => !trendingIds.includes(m.id) && m.release_date?.startsWith(new Date().getFullYear().toString())));
             })
             .finally(() => endFetch());
     }, [trendingMovies]);
@@ -83,24 +83,24 @@ export default function HomepageConnected() {
         startFetch();
         fetchTrendingSeries()
             .then(data => {
-                setTrendingSeries(data.results);
+                setTrendingSeries(data.results.results);
             })
             .finally(() => endFetch());
     }, []);
 
     useEffect(() => {
         startFetch();
-        fetchAiringSeries(1)
+        fetchAiringSeries()
             .then(data => {
-                data.results.forEach((serie: Media) => {
+                data.results.results.forEach((serie: Media) => {
                     serie.media_type = 'tv';
                 });
 
                 const trendingIds = trendingSeries.map(m => m.id);
-                setAiringSeries(data.results.filter((m: Media) => !trendingIds.includes(m.id)));
+                setAiringSeries(data.results.results.filter((m: Media) => !trendingIds.includes(m.id)));
             })
             .finally(() => endFetch());
-    }, [trendingSeries])
+    }, [trendingSeries]);
 
     return (
         loadingCount > 0 ? <Loader /> :

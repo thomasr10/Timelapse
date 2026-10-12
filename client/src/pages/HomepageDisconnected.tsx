@@ -21,8 +21,8 @@ export default function HomepageDisconnected() {
     useEffect(() => {
         fetchTrendingMovies()
             .then((data) => {
-                setBackdropPath(data.results[0].backdrop_path);
-                setTrendingMovies(data.results)
+                setBackdropPath(data.results.results[0].backdrop_path);
+                setTrendingMovies(data.results.results)
             })
     }, [])
 

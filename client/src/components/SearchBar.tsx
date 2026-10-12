@@ -5,7 +5,7 @@ import { fetchCastByName, fetchMovieByTitle, fetchSerieByTitle } from "../api/tm
 import type { Media } from "../pages/HomepageConnected";
 import type { CastMember } from "../types/tmdb";
 import { fetchUserByName } from "../api/api";
-import type{ User } from "../types/auth";
+import type { User } from "../types/auth";
 
 export default function SearchBar({ className }: { className: string }) {
 
@@ -42,23 +42,30 @@ export default function SearchBar({ className }: { className: string }) {
         }
 
         if (categorie === "movie") {
-            await fetchMovieByTitle(value)
-                .then(data => {
-                    const sortByPopularity = data.results.sort((a: Media, b: Media) => b.popularity - a.popularity);
-                    setMedias(sortByPopularity);
-                })
+            setTimeout(async() => {
+                await fetchMovieByTitle(value)
+                    .then(data => {                        
+                        const sortByPopularity = data.results.results.sort((a: Media, b: Media) => b.popularity - a.popularity);
+                        setMedias(sortByPopularity);
+                    });
+
+            }, 1000);
         } else if (categorie === "tv") {
-            await fetchSerieByTitle(value)
-                .then(data => {
-                    const sortByPopularity = data.results.sort((a: Media, b: Media) => b.popularity - a.popularity);
-                    setMedias(sortByPopularity);
-                })
+            setTimeout(async() => {
+                await fetchSerieByTitle(value)
+                    .then(data => {
+                        const sortByPopularity = data.results.results.sort((a: Media, b: Media) => b.popularity - a.popularity);
+                        setMedias(sortByPopularity);
+                    });
+            }, 1000);
         } else if (categorie === "cast") {
-            await fetchCastByName(value)
-                .then(data => {
-                    const sortByPopularity = data.results.sort((a: CastMember, b: CastMember) => b.popularity - a.popularity);
-                    setMedias(sortByPopularity);
-                })
+            setTimeout(async() => {
+                await fetchCastByName(value)
+                    .then(data => {
+                        const sortByPopularity = data.results.results.sort((a: CastMember, b: CastMember) => b.popularity - a.popularity);
+                        setMedias(sortByPopularity);
+                    });
+            }, 1000);
         } else if (categorie === "users") {
             await fetchUserByName(value)
                 .then(data => setUsers(data.results))

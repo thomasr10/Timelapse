@@ -3,11 +3,10 @@ import type { Genre } from "../types/tmdb";
 export const fetchUpcomingMovies = async () => {
 
     try {
-        const response = await fetch(`${import.meta.env.VITE_TMDB_BASE_URL}/movie/upcoming?${import.meta.env.VITE_API_REGION_PARAM}&${import.meta.env.VITE_API_LANGUAGE_PARAM}&sort_by=popularity.desc&page=1`, {
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/upcoming-movies`, {
             method: 'GET',
             headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${import.meta.env.VITE_TMDB_API_KEY}`
+                'Content-Type': 'application/json'
             }
         });
 
@@ -30,11 +29,10 @@ let cacheMovieGenre: Genre[] | null = null;
 export const fetchMovieGenres = async () => {
 
     try {
-        const response = await fetch(`${import.meta.env.VITE_TMDB_BASE_URL}/genre/movie/list?${import.meta.env.VITE_API_LANGUAGE_PARAM}`, {
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/movie/genres`, {
             method: 'GET',
             headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${import.meta.env.VITE_TMDB_API_KEY}`
+                'Content-Type': 'application/json'
             }
         });
 
@@ -43,9 +41,9 @@ export const fetchMovieGenres = async () => {
         }
 
         const data = await response.json();
-        cacheTVGenres = data.genres;
+        cacheMovieGenre = data.results.genres;
 
-        return cacheTVGenres;
+        return cacheMovieGenre;
 
     } catch (e) {
         console.error(e);
@@ -57,11 +55,10 @@ let cacheTVGenres: Genre[] | null = null;
 
 export const fetchTVGenre = async () => {
     try {
-        const response = await fetch(`${import.meta.env.VITE_TMDB_BASE_URL}/genre/tv/list?${import.meta.env.VITE_API_LANGUAGE_PARAM}`, {
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/tv/genres`, {
             method: 'GET',
             headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${import.meta.env.VITE_TMDB_API_KEY}`
+                'Content-Type': 'application/json'
             }
         });
 
@@ -70,9 +67,9 @@ export const fetchTVGenre = async () => {
         }
 
         const data = await response.json();
-        cacheMovieGenre = data.genres;
+        cacheTVGenres = data.results.genres;
 
-        return cacheMovieGenre;
+        return cacheTVGenres;
 
     } catch (e) {
         console.error(e);
@@ -83,11 +80,10 @@ export const fetchTVGenre = async () => {
 export const fetchMedia = async (type: string, id: number) => {
 
     try {
-        const response = await fetch(`${import.meta.env.VITE_TMDB_BASE_URL}/${type}/${id}?${import.meta.env.VITE_API_LANGUAGE_PARAM}&${import.meta.env.VITE_API_REGION_PARAM}`, {
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/details/${type}/${id}`, {
             method: 'GET',
             headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${import.meta.env.VITE_TMDB_API_KEY}`
+                'Content-Type': 'application/json'
             }
         });
 
@@ -97,7 +93,7 @@ export const fetchMedia = async (type: string, id: number) => {
 
         const data = await response.json();
 
-        return data;
+        return data.results;
     } catch (e) {
         console.error(e);
         return {};
@@ -107,11 +103,10 @@ export const fetchMedia = async (type: string, id: number) => {
 export const fetchMediaCredits = async (type: string, id: number) => {
 
     try {
-        const response = await fetch(`${import.meta.env.VITE_TMDB_BASE_URL}/${type}/${id}/credits?${import.meta.env.VITE_API_LANGUAGE_PARAM}&${import.meta.env.VITE_API_REGION_PARAM}`, {
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/credits/${type}/${id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${import.meta.env.VITE_TMDB_API_KEY}`
             }
         });
 
@@ -121,7 +116,8 @@ export const fetchMediaCredits = async (type: string, id: number) => {
 
         const data = await response.json();
 
-        return data;
+        return data.results;
+
     } catch (e) {
         console.error(e);
         return {};
@@ -130,11 +126,10 @@ export const fetchMediaCredits = async (type: string, id: number) => {
 
 export const fetchTrendingMovies = async () => {
     try {
-        const response = await fetch(`${import.meta.env.VITE_TMDB_BASE_URL}/trending/movie/week?${import.meta.env.VITE_API_LANGUAGE_PARAM}`, {
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/movie/trending`, {
             method: 'GET',
             headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${import.meta.env.VITE_TMDB_API_KEY}`
+                'Content-Type': 'application/json'
             }
         });
 
@@ -152,11 +147,10 @@ export const fetchTrendingMovies = async () => {
 
 export const fetchTrendingSeries = async () => {
     try {
-        const response = await fetch(`${import.meta.env.VITE_TMDB_BASE_URL}/trending/tv/week?${import.meta.env.VITE_API_LANGUAGE_PARAM}`, {
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/tv/trending`, {
             method: 'GET',
             headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${import.meta.env.VITE_TMDB_API_KEY}`
+                'Content-Type': 'application/json'
             }
         });
 
@@ -172,13 +166,12 @@ export const fetchTrendingSeries = async () => {
     }
 }
 
-export const fetchAiringSeries = async (page: number) => {
+export const fetchAiringSeries = async () => {
     try {
-        const response = await fetch(`${import.meta.env.VITE_TMDB_BASE_URL}/discover/tv?${import.meta.env.VITE_API_LANGUAGE_PARAM}&sort_by=popularity.desc&with_status=0&page=${page}`, {
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/tv/airing`, {
             method: 'GET',
             headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${import.meta.env.VITE_TMDB_API_KEY}`
+                'Content-Type': 'application/json'
             }
         });
 
@@ -197,11 +190,10 @@ export const fetchAiringSeries = async (page: number) => {
 export const fetchMovieByTitle = async (value: string) => {
 
     try {
-        const response = await fetch(`${import.meta.env.VITE_TMDB_BASE_URL}/search/movie?query=${value}&${import.meta.env.VITE_API_LANGUAGE_PARAM}`, {
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/movie/${value}`, {
             method: 'GET',
             headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${import.meta.env.VITE_TMDB_API_KEY}`
+                'Content-Type': 'application/json'
             }
         });
 
@@ -209,7 +201,7 @@ export const fetchMovieByTitle = async (value: string) => {
             console.error(`Error while fetching data from API - status : ${response.status}`);
         }
 
-        const data = await response.json();
+        const data = await response.json();        
         return data;
 
     } catch (e) {
@@ -220,11 +212,10 @@ export const fetchMovieByTitle = async (value: string) => {
 export const fetchSerieByTitle = async (value: string) => {
 
     try {
-        const response = await fetch(`${import.meta.env.VITE_TMDB_BASE_URL}/search/tv?query=${value}&${import.meta.env.VITE_API_LANGUAGE_PARAM}`, {
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/tv/${value}`, {
             method: 'GET',
             headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${import.meta.env.VITE_TMDB_API_KEY}`
+                'Content-Type': 'application/json'
             }
         });
 
@@ -243,11 +234,10 @@ export const fetchSerieByTitle = async (value: string) => {
 export const fetchCastByName = async (value: string) => {
 
     try {
-        const response = await fetch(`${import.meta.env.VITE_TMDB_BASE_URL}/search/person?query=${value}&${import.meta.env.VITE_API_LANGUAGE_PARAM}`, {
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/cast/${value}`, {
             method: 'GET',
             headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${import.meta.env.VITE_TMDB_API_KEY}`
+                'Content-Type': 'application/json'
             }
         });
 
