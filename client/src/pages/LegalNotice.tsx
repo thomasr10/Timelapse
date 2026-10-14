@@ -11,7 +11,7 @@ export default function LegalNotice() {
                     au sein de l'école IPSSI.
                 </p>
                 <p className="mt-12">
-                    Contact : <strong>[adresse email de contact]</strong>
+                    Contact : <strong>t.rivoire1@ecole-ipssi.net</strong>
                 </p>
             </section>
 
