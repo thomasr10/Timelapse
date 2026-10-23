@@ -7,7 +7,8 @@ export const fetchUpcomingMovies = async () => {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
+            credentials: "include",
         });
 
         if (!response.ok) {
@@ -33,7 +34,8 @@ export const fetchMovieGenres = async () => {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
+            credentials: "include",
         });
 
         if (!response.ok) {
@@ -59,7 +61,8 @@ export const fetchTVGenre = async () => {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
+            credentials: "include",
         });
 
         if (!response.ok) {
@@ -84,7 +87,8 @@ export const fetchMedia = async (type: string, id: number) => {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
+            credentials: "include",
         });
 
         if (!response.ok) {
@@ -107,7 +111,8 @@ export const fetchMediaCredits = async (type: string, id: number) => {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-            }
+            },
+            credentials: "include",
         });
 
         if (!response.ok) {
@@ -130,7 +135,8 @@ export const fetchTrendingMovies = async () => {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
+            credentials: "include",
         });
 
         if (!response.ok) {
@@ -151,7 +157,8 @@ export const fetchTrendingSeries = async () => {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
+            credentials: "include",
         });
 
         if (!response.ok) {
@@ -172,7 +179,8 @@ export const fetchAiringSeries = async () => {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
+            credentials: "include",
         });
 
         if (!response.ok) {
@@ -194,7 +202,8 @@ export const fetchMovieByTitle = async (value: string) => {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
+            credentials: "include",
         });
 
         if (!response.ok) {
@@ -216,7 +225,8 @@ export const fetchSerieByTitle = async (value: string) => {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
+            credentials: "include",
         });
 
         if (!response.ok) {
@@ -238,7 +248,8 @@ export const fetchCastByName = async (value: string) => {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
+            credentials: "include",
         });
 
         if (!response.ok) {
