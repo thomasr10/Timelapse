@@ -114,6 +114,22 @@ final class WatchlistController extends AbstractController
             ], 400);
         }
 
+        $watchlist = $this->watchlistService->findById($data["watchlist_id"]);
+        
+        if (!$watchlist) {
+            return $this->json([
+                "message" => "Watchlist non trouvée",
+                "results" => null
+            ], 404);
+        }
+
+        if ($watchlist->getUser() !== $this->getUser()) {
+            return $this->json([
+                "message" => "Action non autorisé",
+                "results" => null
+            ]);
+        }
+
         $media = $this->mediaService->findOrCreate($data["tmdb"], $data["type"]);
         $userMedia = $this->userMediaService->findOrCreate($user, $media);
         $insert = $this->watchlistMediaService->addMedia($media->getId(), $data["watchlist_id"]);
@@ -152,6 +168,22 @@ final class WatchlistController extends AbstractController
             ], 400);
         }
 
+        $watchlist = $this->watchlistService->findById($data["watchlist_id"]);
+        
+        if (!$watchlist) {
+            return $this->json([
+                "message" => "Watchlist non trouvée",
+                "results" => null
+            ], 404);
+        }
+
+        if ($watchlist->getUser() !== $this->getUser()) {
+            return $this->json([
+                "message" => "Action non autorisé",
+                "results" => null
+            ]);
+        }
+
         $media = $this->mediaService->findOrCreate($data["tmdb"], $data["type"]);
         $this->watchlistMediaService->deleteMedia($media->getId(), $data["watchlist_id"]);
 
@@ -160,7 +192,7 @@ final class WatchlistController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: "app_watchlist_media_delete", methods: ["GET"])]
+    #[Route('/{id}', name: "app_watchlist_media", methods: ["GET"])]
     public function fetchWatchlist(string $id): JsonResponse
     {
         $user = $this->getUser();
@@ -209,6 +241,21 @@ final class WatchlistController extends AbstractController
         $id = intval($data["id"]);
 
         $watchlist = $this->watchlistService->findById($id);
+
+        if (!$watchlist) {
+            return $this->json([
+                "message" => "Watchlist non trouvée",
+                "results" => null
+            ], 404);
+        }
+
+        if ($watchlist->getUser() !== $this->getUser()) {
+            return $this->json([
+                "message" => "Action non autorisé",
+                "results" => null
+            ]);
+        }
+
         $this->watchlistService->delete($watchlist);
     
 
