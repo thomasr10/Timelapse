@@ -3,7 +3,7 @@ export default function LegalNotice() {
         <main id="legal-notice" className="section-container">
             <h1>Mentions légales</h1>
 
-            <section className="mt-32">
+            <section className="flex-col gap-16 mt-32">
                 <h2>Éditeur du site</h2>
                 <p className="mt-12">
                     Timelapse est un projet académique développé et édité par <strong>Thomas RIVOIRE</strong>,
@@ -15,7 +15,7 @@ export default function LegalNotice() {
                 </p>
             </section>
 
-            <section className="mt-32">
+            <section className="flex-col gap-16 mt-32">
                 <h2>Hébergement</h2>
                 <p className="mt-12">
                     Ce projet est un exercice académique et n'est pas déployé publiquement.
@@ -24,7 +24,7 @@ export default function LegalNotice() {
                 </p>
             </section>
 
-            <section className="mt-32">
+            <section className="flex-col gap-16 mt-32">
                 <h2>Propriété intellectuelle</h2>
                 <p className="mt-12">
                     L'ensemble des éléments de l'application (interface, charte graphique, code source)
@@ -34,7 +34,7 @@ export default function LegalNotice() {
                 </p>
             </section>
 
-            <section className="mt-32">
+            <section className="flex-col gap-16 mt-32">
                 <h2>Données personnelles</h2>
                 <p className="mt-12">
                     Dans le cadre de son utilisation, Timelapse collecte certaines données personnelles
@@ -55,27 +55,27 @@ export default function LegalNotice() {
                 </p>
             </section>
 
-            <section className="mt-32">
+            <section className="flex-col gap-16 mt-32">
                 <h2>Cookies</h2>
                 <p className="mt-12">
                     L'application utilise des cookies strictement nécessaires à son fonctionnement :
                 </p>
-                <ul className="mt-12">
-                    <li>
+                <ul className="mt-12 flex-col gap-12">
+                    <p>
                         un cookie d'authentification (httpOnly), contenant le token JWT permettant de
                         maintenir la session de l'utilisateur connecté ;
-                    </li>
-                    <li>
+                    </p>
+                    <p>
                         un cookie technique contenant un jeton CSRF, destiné à protéger l'application
                         contre les attaques de type Cross-Site Request Forgery.
-                    </li>
+                    </p>
                 </ul>
                 <p className="mt-12">
                     Aucun cookie de suivi publicitaire ou statistique n'est utilisé par l'application.
                 </p>
             </section>
 
-            <section className="mt-32">
+            <section className="flex-col gap-16 mt-32">
                 <h2>Services tiers</h2>
                 <p className="mt-12">
                     Timelapse s'appuie sur l'API <strong>The Movie Database (TMDB)</strong> pour
@@ -84,7 +84,7 @@ export default function LegalNotice() {
                 </p>
             </section>
 
-            <section className="mt-32">
+            <section className="flex-col gap-16 mt-32">
                 <h2>Responsabilité</h2>
                 <p className="mt-12">
                     Timelapse est un projet réalisé dans un cadre strictement académique et pédagogique.
@@ -94,7 +94,7 @@ export default function LegalNotice() {
                 </p>
             </section>
 
-            <section className="mt-32">
+            <section className="flex-col gap-16 mt-32">
                 <h2>Contact</h2>
                 <p className="mt-12">
                     Pour toute question relative à ces mentions légales ou à l'utilisation de vos
