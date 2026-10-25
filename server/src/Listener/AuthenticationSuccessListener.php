@@ -9,7 +9,6 @@ class AuthenticationSuccessListener
 {
     public function onAuthenticationSuccessResponse(AuthenticationSuccessEvent $event): void
     {
-        $data = $event->getData();
         $response = $event->getResponse();
 
         $csrfToken = bin2hex(random_bytes(32));
@@ -18,7 +17,7 @@ class AuthenticationSuccessListener
             ->withValue($csrfToken)
             ->withHttpOnly(false) 
             ->withSecure(false)
-            ->withSameSite('lax')
+            ->withSameSite(Cookie::SAMESITE_STRICT)
             ->withPath('/')
             ->withExpires(time() + 3600);
         $response->headers->setCookie($csrfCookie);

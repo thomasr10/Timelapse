@@ -34,7 +34,10 @@ export default function MediaHero({ id, poster_path, title, genres, release_date
     const [rating, setRating] = useState<number | null>(null);
 
     const handleRatingHover = (e: React.MouseEvent<HTMLDivElement>, index: number): void => {
+        // position de la div de l'étoile
         const { left, width } = e.currentTarget.getBoundingClientRect();
+
+        // position de la souris dans l'étoile
         const x = e.clientX - left;
         setHoverValue(x < width / 2 ? index - 0.5 : index);
     }
@@ -106,12 +109,12 @@ export default function MediaHero({ id, poster_path, title, genres, release_date
         <>
             {
                 addModalIsOpen && (
-                    <AddWatchlistModal watchlists={userWatchlists} onSelect={setSelectedId} selectedId={selectedId} onClose={() => onAddModalClose()} onValidate={() => handleAddMovie()} onWatchlistCreated={onWatchlistCreated}/>
+                    <AddWatchlistModal watchlists={userWatchlists} onSelect={setSelectedId} selectedId={selectedId} onClose={() => onAddModalClose()} onValidate={() => handleAddMovie()} onWatchlistCreated={onWatchlistCreated} />
                 )
             }
             < section className="media-hero">
                 <figure>
-                    <img src={`${import.meta.env.VITE_API_IMAGE_BASE_URL}w500${poster_path}`} alt={`Affiche du film ${title}`} loading="lazy"/>
+                    <img src={`${import.meta.env.VITE_API_IMAGE_BASE_URL}w500${poster_path}`} alt={`Affiche du film ${title}`} loading="lazy" />
                 </figure>
                 <div className="infos-container">
                     <div className="main-info">
