@@ -32,7 +32,7 @@ export default function Login() {
                 setError(data.message);
                 console.error(`Erreur lors de la connexion: ${response.status} => ${data.message}`);
             } else {
-                await refreshUser();
+                refreshUser();
                 navigate('/');
             }
 
