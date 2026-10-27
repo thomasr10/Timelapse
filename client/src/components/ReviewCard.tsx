@@ -1,4 +1,4 @@
-import { Star, ThumbsUp } from "lucide-react"
+import { Star } from "lucide-react"
 import { formatReviewDate } from "../utils/formatDate"
 
 interface Props {
@@ -10,7 +10,7 @@ interface Props {
     likes: number
 }
 
-export default function ReviewCard({ profile_picture, username, date, content, note, likes }: Props) {
+export default function ReviewCard({ profile_picture, username, date, content, note }: Props) {
 
     return (
         <div className="review flex-col gap-16">
