@@ -191,7 +191,7 @@ export default function MediaPage() {
 
                                     }
                                 </div>
-                                {
+                                {/* {
                                     reviews !== null && (
                                         <div className="flex-row justify-center mt-24">
                                             <button className="red-btn main-btn full-btn-resizable" onClick={() => setOffset(prev => prev + 1)}>
@@ -199,7 +199,7 @@ export default function MediaPage() {
                                             </button>
                                         </div>
                                     )
-                                }
+                                } */}
                             </section>
                         </section>
                         <section className="flex-col gap-32">

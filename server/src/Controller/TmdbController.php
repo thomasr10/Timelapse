@@ -112,7 +112,7 @@ final class TmdbController extends AbstractController
         ]);
     } 
 
-    #[Route('/tv/{search}', name: 'app_search_movie')]
+    #[Route('/tv/{search}', name: 'app_search_tv')]
     public function searchTv(string $search): JsonResponse
     {
         $series = $this->tmdbService->searchTv($search);

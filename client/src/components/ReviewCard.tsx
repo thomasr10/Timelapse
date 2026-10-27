@@ -39,7 +39,6 @@ export default function ReviewCard({ profile_picture, username, date, content, n
                 </div>
             </div>
             <p className="content">{content}</p>
-            <p className="likes flex-row gap-4 align-center"><ThumbsUp className="icon" />{likes}</p>
         </div>
     )
 } 
